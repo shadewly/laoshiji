@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2012 The Netty Project
  *
@@ -13,31 +14,26 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package io.netty.example.echo;
+package io.netty.example.discard;
 
-import io.netty.channel.ChannelHandler.Sharable;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
- * Handler implementation for the echo server.
+ * Handles a server-side channel.
  */
-@Sharable
-public class EchoServerHandler extends ChannelHandlerAdapter {
+public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println("============>"+msg);
-        ctx.write(msg);
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
+    public void messageReceived(ChannelHandlerContext ctx, Object msg) {
+        System.out.println("DiscardServerHandler->messageReceived:"+msg);
+        // discard
+        ctx.fireChannelRead("this is server msg!");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        System.out.println("DiscardServerHandler->exceptionCaught");
         // Close the connection when an exception is raised.
         cause.printStackTrace();
         ctx.close();
