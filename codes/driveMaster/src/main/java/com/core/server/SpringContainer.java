@@ -10,7 +10,7 @@ public class SpringContainer implements ApplicationContextAware {
 
 	public static void init() {
 		applicationContext = new ClassPathXmlApplicationContext(
-				"classpath*:spring/spring-core.xml");
+				new String[] { "classpath*:spring/spring-core.xml", "classpath*:spring/spring-jdbc.xml"});
 		
 	}
 
