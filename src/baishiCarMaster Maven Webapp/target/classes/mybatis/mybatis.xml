@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 全局启用或禁用延迟加载�?当禁用时，所有关联对象都会即时加载�?默认：true -->
+		<setting name="lazyLoadingEnabled" value="true" />
+
+		<!-- 当启用时，有延迟加载属�?的对象在被调用时将会完全加载任意属�?。否则，每种属�?将会按需要加�?-->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.snowwolf.sys.models.vo.TitleVo" alias="titleVo" />
+		<typeAlias type="com.snowwolf.sys.models.vo.ControlItemVo" alias="controlItemVo" />
+		<typeAlias type="com.snowwolf.sys.models.vo.MenuVo" alias="menuVo" />
+		<typeAlias type="com.snowwolf.sys.models.vo.DbConfElementVo" alias="dbConfElementVo" />	
+		<typeAlias type="com.snowwolf.sys.models.TMenu" alias="menu" /><!--设置别名 -->
+		<typeAlias type="com.snowwolf.sys.models.TDbConfElement" alias="dbConfElement" />
+		
+	</typeAliases>
+
+</configuration>

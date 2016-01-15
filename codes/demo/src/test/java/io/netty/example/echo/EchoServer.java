@@ -79,4 +79,8 @@ public final class EchoServer {
             workerGroup.shutdownGracefully();
         }
     }
+
+    public static <T> ChannelOption<T> valueOf(String name) {
+        return  (ChannelOption<T>) ChannelOption.valueOf(name);
+    }
 }
