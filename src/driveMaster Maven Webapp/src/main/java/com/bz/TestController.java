@@ -1,5 +1,8 @@
 package com.bz;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,9 @@ public class TestController {
 	public void createmenu(HttpServletResponse response, Integer fatherId) {
 		try {
 
-			JsonUtil.writeJson(response, "5555");
+			Map<String ,Object> aa=new HashMap<String,Object>();
+			aa.put("bb", "5555");
+			JsonUtil.writeJson(response, aa);
 		} catch (Exception e) {
 
 			e.printStackTrace();
