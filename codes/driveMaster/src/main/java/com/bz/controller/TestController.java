@@ -15,7 +15,7 @@ import com.core.util.JsonUtil;
 @Controller
 @RequestMapping("/test")
 public class TestController {
-//	@Autowired
+	@Autowired
 	private TestServiceI testService;
 
 	@RequestMapping(params = "aa")
@@ -30,6 +30,7 @@ public class TestController {
 			Map<String, Object> aa = new HashMap<String, Object>();
 			aa.put("bb", "5555");
 			System.out.println("----->"+Thread.currentThread().getName());
+			testService.aa();
 			JsonUtil.writeJson(response, aa);
 		} catch (Exception e) {
 
