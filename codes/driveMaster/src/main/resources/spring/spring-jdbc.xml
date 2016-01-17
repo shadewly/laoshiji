@@ -15,10 +15,10 @@
 	<!-- 配置DataSource数据源 start -->
 	<bean id="driveMasterDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="${car_master.driverclass}"></property>
-		<property name="jdbcUrl" value="${car_master.jdbcurl}"></property>
-		<property name="user" value="${car_master.user}"></property>
-		<property name="password" value="${car_master.password}"></property>
+		<property name="driverClass" value="${drive_master.driverclass}"></property>
+		<property name="jdbcUrl" value="${drive_master.jdbcurl}"></property>
+		<property name="user" value="${drive_master.user}"></property>
+		<property name="password" value="${drive_master.password}"></property>
 		<property name="acquireIncrement" value="5"></property>  <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目2 -->
 		<property name="initialPoolSize" value="10"></property>  <!-- 初始化时创建的连接数，必须在minPoolSize和maxPoolSize之间 -->
 		<property name="minPoolSize" value="5"></property>
