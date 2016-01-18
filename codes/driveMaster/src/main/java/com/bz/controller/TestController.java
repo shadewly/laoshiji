@@ -28,9 +28,9 @@ public class TestController {
 		try {
 
 			Map<String, Object> aa = new HashMap<String, Object>();
-			aa.put("bb", "5555");
+			aa.put("bb", testService.aa());
 			System.out.println("----->"+Thread.currentThread().getName());
-			testService.aa();
+			
 			JsonUtil.writeJson(response, aa);
 		} catch (Exception e) {
 

@@ -26,10 +26,10 @@ public class TestServiceImpl implements TestServiceI {
 	protected TestDao testDao;
 
 	@Override
-	public void aa() throws Exception {
+	public List<Test> aa() throws Exception {
 		List<Test> list=testDao.selectTest();
 		System.out.println(list.size());
-		
+		return list;
 	}
 
 
