@@ -1,11 +1,14 @@
 package com.bz.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bz.dao.TestDao;
+import com.bz.model.Test;
 import com.bz.service.TestServiceI;
 
 /**
@@ -23,9 +26,10 @@ public class TestServiceImpl implements TestServiceI {
 	protected TestDao testDao;
 
 	@Override
-	public void aa() throws Exception {
-		testDao.selectTest();
-		
+	public List<Test> aa() throws Exception {
+		List<Test> list=testDao.selectTest();
+		System.out.println(list.size());
+		return list;
 	}
 
 

@@ -1,6 +1,9 @@
 package com.bz.service;
 
 import java.io.IOException;
+import java.util.List;
+
+import com.bz.model.Test;
 
 /**
  * 目录服务接口
@@ -16,7 +19,7 @@ public interface TestServiceI{
 	 * @return
 	 * @throws IOException
 	 */
-	public void aa() throws Exception;
+	public List<Test> aa() throws Exception;
 
 
 
