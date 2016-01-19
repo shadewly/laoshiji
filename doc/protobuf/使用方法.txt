@@ -1,0 +1,2 @@
+cmd «–ªªµΩE:\laoshiji2\doc\protobuf\proto
+ ‰»Î√¸¡Óprotoc  --java_out=./src ./Test.proto
