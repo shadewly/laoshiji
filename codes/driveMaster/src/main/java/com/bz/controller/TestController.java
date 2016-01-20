@@ -57,7 +57,7 @@ public class TestController {
 
 			byte[] buffer=testModel.toByteArray();
 			
-//			response.setContentType("text/json");
+			response.setContentType("application/octet-stream");
 			response.setCharacterEncoding("utf-8");		
 		
 			response.getWriter().print(buffer);
