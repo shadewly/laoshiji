@@ -1,0 +1,15 @@
+2016-01-21 16:11:37,815 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
+******************** Welcome to CAS ********************
+CAS Version: 4.1.4
+Java Home: D:\worktools\Java\jdk1.8.0_45\jre
+Java Vendor: Oracle Corporation
+Java Version: 1.8.0_45
+OS Architecture: amd64
+OS Name: Windows 7
+OS Version: 6.1
+*******************************************************
+
+2016-01-21 16:11:40,912 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
+2016-01-21 16:11:41,425 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
+2016-01-21 16:11:41,431 INFO [org.jasig.cas.CasEnvironmentContextListener] - [Apache Tomcat/8.0.22] has loaded the CAS application context
+2016-01-21 16:11:42,905 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Shutting down Quartz Scheduler
