@@ -1,22 +1,16 @@
 package com.core.server;
 
+import com.core.handler.DispatcherServletChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-
-import java.net.InetSocketAddress;
-
-import com.core.handler.DispatcherServletChannelInitializer;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.mock.web.MockServletConfig;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
-import org.springframework.web.util.WebAppRootListener;
+
+import java.net.InetSocketAddress;
 
 public class MasterServer {
     private WebApplicationContext applicationContext;
@@ -27,10 +21,7 @@ public class MasterServer {
 
     private void initSpring() {
         XmlWebApplicationContext applicationContext = new XmlWebApplicationContext();
-        applicationContext.setConfigLocations("classpath*:spring/spring-mvc.xml", "classpath*:spring/spring-core.xml", "classpath*:spring/spring-jdbc.xml");
-        MockServletContext servletContext = new MockServletContext();
-        MockServletConfig servletConfig = new MockServletConfig(servletContext);
-        applicationContext.setServletConfig(servletConfig);
+        applicationContext.setConfigLocations("classpath*:spring/spring-core.xml");
         applicationContext.refresh();
         this.applicationContext = applicationContext;
     }
