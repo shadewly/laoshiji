@@ -1,0 +1,8 @@
+解压，进入根目录输入
+
+mvn clean package -Dmaven.test.skip=true
+以上是编译后的结果。
+
+本文的需求只需要两个文件，分别是
+
+cas-server-webapp\target下的cas.war，这是CAS Server的war包。
