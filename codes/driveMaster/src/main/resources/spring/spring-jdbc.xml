@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="   
-          http://www.springframework.org/schema/beans   
-          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd   
-          http://www.springframework.org/schema/tx   
-          http://www.springframework.org/schema/tx/spring-tx-4.2.xsd  
-          http://www.springframework.org/schema/context   
-          http://www.springframework.org/schema/context/spring-context-4.2.xsd   
-          http://www.springframework.org/schema/aop   
-          http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-	<!-- 配置DataSource数据源 start -->
-	<bean id="driveMasterDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="${drive_master.driverclass}"></property>
-		<property name="jdbcUrl" value="${drive_master.jdbcurl}"></property>
-		<property name="user" value="${drive_master.user}"></property>
-		<property name="password" value="${drive_master.password}"></property>
-		<property name="acquireIncrement" value="5"></property>  <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目2 -->
-		<property name="initialPoolSize" value="10"></property>  <!-- 初始化时创建的连接数，必须在minPoolSize和maxPoolSize之间 -->
-		<property name="minPoolSize" value="5"></property>
-		<property name="maxPoolSize" value="20"></property>
-		<!-- 最大空闲时间，超过空闲时间的连接将被丢弃 [需要注意：mysql默认的连接时长为8小时(28800）【可在my.ini中添加 wait_timeout=30(单位秒)设置连接超时】,这里设置c3p0的超时必须<28800] -->
-		<property name="maxIdleTime" value="300"></property>
-		<property name="idleConnectionTestPeriod" value="60"></property> <!-- 每60秒检查连接池中的空闲连接 -->
-		<property name="maxStatements" value="20"></property>  <!-- jdbc的标准参数 用以控制数据源内加载的PreparedStatement数量，但由于预缓存的Statement属 于单个Connection而不是整个连接 -->
-	</bean>
+    <!-- 配置DataSource数据源 start -->
+    <bean id="driveMasterDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="${drive_master.driverclass}"></property>
+        <property name="jdbcUrl" value="${drive_master.jdbcurl}"></property>
+        <property name="user" value="${drive_master.user}"></property>
+        <property name="password" value="${drive_master.password}"></property>
+        <property name="acquireIncrement" value="5"></property>
+        <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目2 -->
+        <property name="initialPoolSize" value="10"></property>
+        <!-- 初始化时创建的连接数，必须在minPoolSize和maxPoolSize之间 -->
+        <property name="minPoolSize" value="5"></property>
+        <property name="maxPoolSize" value="20"></property>
+        <!-- 最大空闲时间，超过空闲时间的连接将被丢弃 [需要注意：mysql默认的连接时长为8小时(28800）【可在my.ini中添加 wait_timeout=30(单位秒)设置连接超时】,这里设置c3p0的超时必须<28800] -->
+        <property name="maxIdleTime" value="300"></property>
+        <property name="idleConnectionTestPeriod" value="60"></property>
+        <!-- 每60秒检查连接池中的空闲连接 -->
+        <property name="maxStatements" value="20"></property>
+        <!-- jdbc的标准参数 用以控制数据源内加载的PreparedStatement数量，但由于预缓存的Statement属 于单个Connection而不是整个连接 -->
+    </bean>
 
-	<!-- 配置DataSource数据源 end -->
+    <!-- 配置DataSource数据源 end -->
 
-	<!-- 配置SqlSessionFactoryBean -->
-	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="driveMasterDataSource" />
-		<property name="configLocation" value="classpath:mybatis/mybatis.xml" />
-		<!-- mapper和resultmap配置路径 -->
-		<property name="mapperLocations">
-			<list>
-				<value>classpath:com/bz/dao/*.xml</value>
-				<!-- 表示在com.hoo.resultmap包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
-				<!-- <value>classpath:com/hoo/resultmap/**/*-resultmap.xml</value> <value>classpath:com/hoo/entity/*-resultmap.xml</value> 
-					<value>classpath:com/hoo/mapper/**/*-mapper.xml</value> -->
-			</list>
-		</property>
-	</bean>
+    <!-- 配置SqlSessionFactoryBean -->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="driveMasterDataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
+        <!-- mapper和resultmap配置路径 -->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/bz/dao/*.xml</value>
+                <!-- 表示在com.hoo.resultmap包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
+                <!-- <value>classpath:com/hoo/resultmap/**/*-resultmap.xml</value> <value>classpath:com/hoo/entity/*-resultmap.xml</value>
+                    <value>classpath:com/hoo/mapper/**/*-mapper.xml</value> -->
+            </list>
+        </property>
+    </bean>
 
-	<!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
-	<bean id="sqlSessionTemplate"
-		class="com.core.mybatis.CustomSqlSessionTemplate">
-		<constructor-arg ref="sessionFactory" />
-		<property name="targetSqlSessionFactorys">
-			<map>
-				<entry value-ref="sessionFactory" key="driveMaster" />
-			</map>
-		</property>
-	</bean>
+    <!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
+    <bean id="sqlSessionTemplate"
+          class="com.core.mybatis.CustomSqlSessionTemplate">
+        <constructor-arg ref="sessionFactory"/>
+        <property name="targetSqlSessionFactorys">
+            <map>
+                <entry value-ref="sessionFactory" key="driveMaster"/>
+            </map>
+        </property>
+    </bean>
 
-	<!-- 通过扫描的模式，扫描目录在com/hoo/mapper目录下，所有的mapper都继承SqlMapper接口的接口， 这样一个bean就可以了 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com" />
-		<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate" />
-		<property name="markerInterface" value="com.core.mybatis.SqlMapper" />
-	</bean>
-
+    <!-- 通过扫描的模式，扫描目录在com/hoo/mapper目录下，所有的mapper都继承SqlMapper接口的接口， 这样一个bean就可以了 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com"/>
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+        <property name="markerInterface" value="com.core.mybatis.SqlMapper"/>
+    </bean>
 </beans>

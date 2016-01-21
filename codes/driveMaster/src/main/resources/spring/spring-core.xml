@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+
+
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<!-- 加载property文件 -->
-	<context:property-placeholder location="classpath:properties/*.properties" />
-	<!-- <bean class="org.springframework.beans.factory.annotation. AutowiredAnnotationBeanPostProcessor"/> 
-		<context:component-scan base-package="com.bz"> <context:exclude-filter type="annotation" 
-		expression="org.springframework.stereotype.Controller" /> </context:component-scan> -->
+    <!-- 加载property文件 -->
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+    <!--扫描spring 管理的bean-->
+    <context:component-scan base-package="com"/>
 
+    <import resource="mongodb-context.xml"/>
+    <import resource="spring-jdbc.xml"/>
+    <import resource="spring-mvc.xml"/>
 </beans>
