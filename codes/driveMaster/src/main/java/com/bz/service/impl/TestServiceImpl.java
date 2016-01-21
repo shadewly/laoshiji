@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bz.dao.TestDao;
-import com.bz.model.Test;
+import com.bz.model.TestModel;
 import com.bz.service.TestServiceI;
 
 /**
@@ -26,8 +26,8 @@ public class TestServiceImpl implements TestServiceI {
 	protected TestDao testDao;
 
 	@Override
-	public List<Test> aa() throws Exception {
-		List<Test> list=testDao.selectTest();
+	public List<TestModel> aa() throws Exception {
+		List<TestModel> list=testDao.selectTest();
 		System.out.println(list.size());
 		return list;
 	}
