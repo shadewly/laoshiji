@@ -131,7 +131,7 @@
 	<bean id="dbAuthHandler"
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
-      p:sql="select password from test where name=? and used=1"
+      p:sql="select password from test where name=?"
       p:passwordEncoder-ref="passwordEncoder"/>
 
     <!-- Required for proxy ticket mechanism -->
