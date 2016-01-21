@@ -1,4 +1,4 @@
-2016-01-21 17:04:16,855 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
+2016-01-21 17:10:29,732 INFO [org.jasig.cas.CasEnvironmentContextListener] - 
 ******************** Welcome to CAS ********************
 CAS Version: 4.1.4
 Java Home: D:\worktools\Java\jdk1.8.0_45\jre
@@ -9,13 +9,113 @@ OS Name: Windows 7
 OS Version: 6.1
 *******************************************************
 
-2016-01-21 17:04:19,941 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
-2016-01-21 17:04:20,444 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
-2016-01-21 17:04:20,447 INFO [org.jasig.cas.CasEnvironmentContextListener] - [Apache Tomcat/8.0.22] has loaded the CAS application context
-2016-01-21 17:04:28,187 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for warn cookie generator to: /cas/ 
-2016-01-21 17:04:28,187 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for warn cookie generator to: /cas/ 
-2016-01-21 17:04:28,189 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for TGC cookie generator to: /cas/ 
-2016-01-21 17:04:28,189 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for TGC cookie generator to: /cas/ 
-2016-01-21 17:04:40,067 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Beginning ticket cleanup.
-2016-01-21 17:04:40,071 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - 0 expired tickets found to be removed.
-2016-01-21 17:04:40,071 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Finished ticket cleanup.
+2016-01-21 17:10:32,654 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.
+2016-01-21 17:10:33,274 INFO [org.jasig.cas.util.AutowiringSchedulerFactoryBean] - Starting Quartz Scheduler now
+2016-01-21 17:10:33,337 INFO [org.jasig.cas.CasEnvironmentContextListener] - [Apache Tomcat/8.0.22] has loaded the CAS application context
+2016-01-21 17:10:41,606 ERROR [org.jasig.cas.authentication.PolicyBasedAuthenticationManager] - QueryDatabaseAuthenticationHandler: SQL exception while executing query for yxc  (Details: PreparedStatementCallback; bad SQL grammar [select password from test where name=? and used=1]; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'used' in 'where clause')
+2016-01-21 17:10:41,611 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: supplied credentials: [yxc]
+ACTION: AUTHENTICATION_FAILED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:10:41 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:10:41,611 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: supplied credentials: [yxc]
+ACTION: AUTHENTICATION_FAILED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:10:41 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:10:41,612 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: 1 errors, 0 successes
+ACTION: TICKET_GRANTING_TICKET_NOT_CREATED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:10:41 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:10:41,612 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: 1 errors, 0 successes
+ACTION: TICKET_GRANTING_TICKET_NOT_CREATED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:10:41 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:10:52,784 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Beginning ticket cleanup.
+2016-01-21 17:10:52,789 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - 0 expired tickets found to be removed.
+2016-01-21 17:10:52,790 INFO [org.jasig.cas.ticket.registry.support.DefaultTicketRegistryCleaner] - Finished ticket cleanup.
+2016-01-21 17:11:01,095 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for warn cookie generator to: /cas/ 
+2016-01-21 17:11:01,095 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for warn cookie generator to: /cas/ 
+2016-01-21 17:11:01,095 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for TGC cookie generator to: /cas/ 
+2016-01-21 17:11:01,095 INFO [org.jasig.cas.web.flow.InitialFlowSetupAction] - Setting path for cookies for TGC cookie generator to: /cas/ 
+2016-01-21 17:11:29,154 ERROR [org.jasig.cas.authentication.PolicyBasedAuthenticationManager] - QueryDatabaseAuthenticationHandler: SQL exception while executing query for yxc  (Details: PreparedStatementCallback; bad SQL grammar [select password from test where name=? and used=1]; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'used' in 'where clause')
+2016-01-21 17:11:29,157 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: supplied credentials: [yxc]
+ACTION: AUTHENTICATION_FAILED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:11:29 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:11:29,157 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: supplied credentials: [yxc]
+ACTION: AUTHENTICATION_FAILED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:11:29 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:11:29,164 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: 1 errors, 0 successes
+ACTION: TICKET_GRANTING_TICKET_NOT_CREATED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:11:29 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:11:29,164 INFO [org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager] - Audit trail record BEGIN
+=============================================================
+WHO: yxc
+WHAT: 1 errors, 0 successes
+ACTION: TICKET_GRANTING_TICKET_NOT_CREATED
+APPLICATION: CAS
+WHEN: Thu Jan 21 17:11:29 CST 2016
+CLIENT IP ADDRESS: 127.0.0.1
+SERVER IP ADDRESS: 127.0.0.1
+=============================================================
+
+
+2016-01-21 17:12:32,771 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Reloading registered services.
+2016-01-21 17:12:32,775 INFO [org.jasig.cas.services.DefaultServicesManagerImpl] - Loaded 2 services.

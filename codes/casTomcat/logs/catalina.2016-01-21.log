@@ -1,522 +1,90 @@
-21-Jan-2016 16:54:17.150 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.22
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 29 2015 11:46:15 UTC
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.22.0
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 7
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.1
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\worktools\Java\jdk1.8.0_45\jre
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_45-b15
-21-Jan-2016 16:54:17.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
-21-Jan-2016 16:54:17.153 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         E:\laoshiji\codes\casTomcat
-21-Jan-2016 16:54:17.153 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         E:\laoshiji\codes\casTomcat
-21-Jan-2016 16:54:17.153 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=E:\laoshiji\codes\casTomcat\conf\logging.properties
-21-Jan-2016 16:54:17.153 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
-21-Jan-2016 16:54:17.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=E:\laoshiji\codes\casTomcat\endorsed
-21-Jan-2016 16:54:17.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=E:\laoshiji\codes\casTomcat
-21-Jan-2016 16:54:17.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=E:\laoshiji\codes\casTomcat
-21-Jan-2016 16:54:17.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=E:\laoshiji\codes\casTomcat\temp
-21-Jan-2016 16:54:17.156 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.1.33 using APR version 1.5.1.
-21-Jan-2016 16:54:17.156 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-21-Jan-2016 16:54:17.735 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.1m 19 Mar 2015)
-21-Jan-2016 16:54:17.822 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
-21-Jan-2016 16:54:17.829 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
-21-Jan-2016 16:54:17.831 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 962 ms
-21-Jan-2016 16:54:17.849 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
-21-Jan-2016 16:54:17.849 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.22
-21-Jan-2016 16:54:17.868 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war
-21-Jan-2016 16:54:20.463 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-21-Jan-2016 16:54:21.824 INFO [localhost-startStop-1] <unknown>.<unknown> HV000001: Hibernate Validator 5.1.3.Final
-21-Jan-2016 16:54:23.306 SEVERE [localhost-startStop-1] org.apache.catalina.core.StandardContext.startInternal One or more listeners failed to start. Full details will be found in the appropriate container log file
-21-Jan-2016 16:54:23.307 SEVERE [localhost-startStop-1] org.apache.catalina.core.StandardContext.startInternal Context [/cas] startup failed due to previous errors
-21-Jan-2016 16:54:23.331 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [cas] created a ThreadLocal with key of type [java.lang.ThreadLocal] (value [java.lang.ThreadLocal@1831d31e]) and a value of type [org.apache.logging.log4j.core.LoggerContext] (value [org.apache.logging.log4j.core.LoggerContext@2be222ff]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
-21-Jan-2016 16:54:23.338 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war has finished in 5,469 ms
-21-Jan-2016 16:54:23.339 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\docs
-21-Jan-2016 16:54:23.373 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\docs has finished in 34 ms
-21-Jan-2016 16:54:23.373 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\examples
-21-Jan-2016 16:54:23.577 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\examples has finished in 204 ms
-21-Jan-2016 16:54:23.577 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager
-21-Jan-2016 16:54:23.601 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager has finished in 24 ms
-21-Jan-2016 16:54:23.601 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\manager
-21-Jan-2016 16:54:23.617 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\manager has finished in 16 ms
-21-Jan-2016 16:54:23.617 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT
-21-Jan-2016 16:54:23.628 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT has finished in 10 ms
-21-Jan-2016 16:54:23.631 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
-21-Jan-2016 16:54:23.638 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
-21-Jan-2016 16:54:23.639 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5808 ms
-21-Jan-2016 17:04:12.903 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.22
-21-Jan-2016 17:04:12.905 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 29 2015 11:46:15 UTC
-21-Jan-2016 17:04:12.905 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.22.0
-21-Jan-2016 17:04:12.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 7
-21-Jan-2016 17:04:12.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.1
-21-Jan-2016 17:04:12.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
-21-Jan-2016 17:04:12.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\worktools\Java\jdk1.8.0_45\jre
-21-Jan-2016 17:04:12.906 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_45-b15
-21-Jan-2016 17:04:12.907 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
-21-Jan-2016 17:04:12.907 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         E:\laoshiji\codes\casTomcat
-21-Jan-2016 17:04:12.907 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         E:\laoshiji\codes\casTomcat
-21-Jan-2016 17:04:12.907 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=E:\laoshiji\codes\casTomcat\conf\logging.properties
-21-Jan-2016 17:04:12.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
-21-Jan-2016 17:04:12.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=E:\laoshiji\codes\casTomcat\endorsed
-21-Jan-2016 17:04:12.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=E:\laoshiji\codes\casTomcat
-21-Jan-2016 17:04:12.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=E:\laoshiji\codes\casTomcat
-21-Jan-2016 17:04:12.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=E:\laoshiji\codes\casTomcat\temp
-21-Jan-2016 17:04:12.910 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.1.33 using APR version 1.5.1.
-21-Jan-2016 17:04:12.910 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
-21-Jan-2016 17:04:13.542 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.1m 19 Mar 2015)
-21-Jan-2016 17:04:13.632 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
-21-Jan-2016 17:04:13.640 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
-21-Jan-2016 17:04:13.642 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 1018 ms
-21-Jan-2016 17:04:13.660 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
-21-Jan-2016 17:04:13.661 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.22
-21-Jan-2016 17:04:13.685 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war
-21-Jan-2016 17:04:16.449 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-21-Jan-2016 17:04:17.775 INFO [localhost-startStop-1] null.null HV000001: Hibernate Validator 5.1.3.Final
-21-Jan-2016 17:04:19.169 INFO [localhost-startStop-1] com.mchange.v2.log.MLog.<clinit> MLog clients using java 1.4+ standard logging.
-21-Jan-2016 17:04:19.214 INFO [localhost-startStop-1] com.mchange.v2.c3p0.C3P0Registry.banner Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
-21-Jan-2016 17:04:21.357 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war has finished in 7,672 ms
-21-Jan-2016 17:04:21.358 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\docs
-21-Jan-2016 17:04:21.373 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\docs has finished in 15 ms
-21-Jan-2016 17:04:21.375 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\examples
-21-Jan-2016 17:04:21.519 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\examples has finished in 144 ms
-21-Jan-2016 17:04:21.519 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager
-21-Jan-2016 17:04:21.542 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager has finished in 22 ms
-21-Jan-2016 17:04:21.542 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\manager
-21-Jan-2016 17:04:21.562 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\manager has finished in 20 ms
-21-Jan-2016 17:04:21.562 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT
-21-Jan-2016 17:04:21.577 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT has finished in 15 ms
-21-Jan-2016 17:04:21.583 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
-21-Jan-2016 17:04:21.593 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
-21-Jan-2016 17:04:21.594 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 7953 ms
-21-Jan-2016 17:04:35.089 INFO [http-apr-8080-exec-4] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource.getPoolManager Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge6zj9erl5gcn68i2d9|185aae2b, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6zj9erl5gcn68i2d9|185aae2b, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://rdsecoyb0e12uig5ji3th.mysql.rds.aliyuncs.com:3306/rs7188h1fb4j6137?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
-21-Jan-2016 17:04:35.089 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:35.090 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:35.090 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:36.093 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:36.094 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:36.096 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:37.095 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:37.098 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:37.103 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:38.097 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:38.100 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:38.105 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:39.098 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:39.101 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:39.106 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:40.099 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:40.103 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:40.108 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:41.100 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:41.108 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:41.111 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:47.128 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:47.138 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:47.139 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:48.133 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:48.143 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
-21-Jan-2016 17:04:48.148 WARNING [com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1] com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded Could not load driverClass com.mysql.jdbc.Driver
- java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1305)
-	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1157)
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.ensureDriverLoaded(DriverManagerDataSource.java:100)
-	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:132)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:182)
-	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:171)
-	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:137)
-	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1014)
-	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:32)
-	at com.mchange.v2.resourcepool.BasicResourcePool$AcquireTask.run(BasicResourcePool.java:1810)
-	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
-
+21-Jan-2016 17:09:21.656 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.22
+21-Jan-2016 17:09:21.657 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 29 2015 11:46:15 UTC
+21-Jan-2016 17:09:21.657 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.22.0
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 7
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.1
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\worktools\Java\jdk1.8.0_45\jre
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_45-b15
+21-Jan-2016 17:09:21.658 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+21-Jan-2016 17:09:21.659 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:09:21.659 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:09:21.659 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=E:\laoshiji\codes\casTomcat\conf\logging.properties
+21-Jan-2016 17:09:21.659 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+21-Jan-2016 17:09:21.660 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=E:\laoshiji\codes\casTomcat\endorsed
+21-Jan-2016 17:09:21.661 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:09:21.661 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:09:21.662 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=E:\laoshiji\codes\casTomcat\temp
+21-Jan-2016 17:09:21.662 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.1.33 using APR version 1.5.1.
+21-Jan-2016 17:09:21.662 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+21-Jan-2016 17:09:22.240 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.1m 19 Mar 2015)
+21-Jan-2016 17:09:22.330 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
+21-Jan-2016 17:09:22.338 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
+21-Jan-2016 17:09:22.340 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 957 ms
+21-Jan-2016 17:09:22.360 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+21-Jan-2016 17:09:22.360 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.22
+21-Jan-2016 17:09:22.382 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war
+21-Jan-2016 17:09:25.148 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+21-Jan-2016 17:09:26.415 INFO [localhost-startStop-1] null.null HV000001: Hibernate Validator 5.1.3.Final
+21-Jan-2016 17:09:27.724 INFO [localhost-startStop-1] com.mchange.v2.log.MLog.<clinit> MLog clients using java 1.4+ standard logging.
+21-Jan-2016 17:09:27.748 INFO [localhost-startStop-1] com.mchange.v2.c3p0.C3P0Registry.banner Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+21-Jan-2016 17:09:29.910 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war has finished in 7,527 ms
+21-Jan-2016 17:09:29.912 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\docs
+21-Jan-2016 17:09:29.933 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\docs has finished in 20 ms
+21-Jan-2016 17:09:29.933 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\examples
+21-Jan-2016 17:09:30.076 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\examples has finished in 143 ms
+21-Jan-2016 17:09:30.077 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager
+21-Jan-2016 17:09:30.095 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager has finished in 18 ms
+21-Jan-2016 17:09:30.095 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\manager
+21-Jan-2016 17:09:30.111 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\manager has finished in 16 ms
+21-Jan-2016 17:09:30.112 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT
+21-Jan-2016 17:09:30.125 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT has finished in 13 ms
+21-Jan-2016 17:09:30.129 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
+21-Jan-2016 17:09:30.136 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
+21-Jan-2016 17:09:30.137 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 7796 ms
+21-Jan-2016 17:09:38.471 INFO [http-apr-8080-exec-2] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource.getPoolManager Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge6zj9erlc2f0b90ood|4eda765c, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6zj9erlc2f0b90ood|4eda765c, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://rdsecoyb0e12uig5ji3th.mysql.rds.aliyuncs.com:3306/rs7188h1fb4j6137?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+21-Jan-2016 17:10:25.846 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.22
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 29 2015 11:46:15 UTC
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.22.0
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 7
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            6.1
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             D:\worktools\Java\jdk1.8.0_45\jre
+21-Jan-2016 17:10:25.848 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_45-b15
+21-Jan-2016 17:10:25.849 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+21-Jan-2016 17:10:25.849 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:10:25.849 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:10:25.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=E:\laoshiji\codes\casTomcat\conf\logging.properties
+21-Jan-2016 17:10:25.850 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+21-Jan-2016 17:10:25.851 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=E:\laoshiji\codes\casTomcat\endorsed
+21-Jan-2016 17:10:25.851 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:10:25.852 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=E:\laoshiji\codes\casTomcat
+21-Jan-2016 17:10:25.852 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=E:\laoshiji\codes\casTomcat\temp
+21-Jan-2016 17:10:25.852 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded APR based Apache Tomcat Native library 1.1.33 using APR version 1.5.1.
+21-Jan-2016 17:10:25.852 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+21-Jan-2016 17:10:26.430 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized (OpenSSL 1.0.1m 19 Mar 2015)
+21-Jan-2016 17:10:26.519 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-apr-8080"]
+21-Jan-2016 17:10:26.527 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-apr-8009"]
+21-Jan-2016 17:10:26.529 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 943 ms
+21-Jan-2016 17:10:26.548 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+21-Jan-2016 17:10:26.549 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.22
+21-Jan-2016 17:10:26.578 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war
+21-Jan-2016 17:10:29.279 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+21-Jan-2016 17:10:30.584 INFO [localhost-startStop-1] null.null HV000001: Hibernate Validator 5.1.3.Final
+21-Jan-2016 17:10:31.908 INFO [localhost-startStop-1] com.mchange.v2.log.MLog.<clinit> MLog clients using java 1.4+ standard logging.
+21-Jan-2016 17:10:31.940 INFO [localhost-startStop-1] com.mchange.v2.c3p0.C3P0Registry.banner Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+21-Jan-2016 17:10:34.369 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive E:\laoshiji\codes\casTomcat\webapps\cas.war has finished in 7,791 ms
+21-Jan-2016 17:10:34.371 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\docs
+21-Jan-2016 17:10:34.385 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\docs has finished in 15 ms
+21-Jan-2016 17:10:34.388 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\examples
+21-Jan-2016 17:10:34.527 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\examples has finished in 140 ms
+21-Jan-2016 17:10:34.527 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager
+21-Jan-2016 17:10:34.546 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\host-manager has finished in 19 ms
+21-Jan-2016 17:10:34.547 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\manager
+21-Jan-2016 17:10:34.565 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\manager has finished in 18 ms
+21-Jan-2016 17:10:34.566 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT
+21-Jan-2016 17:10:34.581 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory E:\laoshiji\codes\casTomcat\webapps\ROOT has finished in 15 ms
+21-Jan-2016 17:10:34.584 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-apr-8080"]
+21-Jan-2016 17:10:34.592 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-apr-8009"]
+21-Jan-2016 17:10:34.593 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 8063 ms
+21-Jan-2016 17:10:40.488 INFO [http-apr-8080-exec-2] com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource.getPoolManager Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge6zj9erldfy21cpu4ge|4544732c, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6zj9erldfy21cpu4ge|4544732c, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://rdsecoyb0e12uig5ji3th.mysql.rds.aliyuncs.com:3306/rs7188h1fb4j6137?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
