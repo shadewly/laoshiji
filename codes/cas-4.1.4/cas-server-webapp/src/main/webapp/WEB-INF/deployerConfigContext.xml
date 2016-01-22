@@ -111,12 +111,18 @@
             </map>
         </property>
     </bean>-->
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
      class="com.mchange.v2.c3p0.ComboPooledDataSource"
      p:driverClass="com.mysql.jdbc.Driver"
      p:jdbcUrl="jdbc:mysql://rdsecoyb0e12uig5ji3th.mysql.rds.aliyuncs.com:3306/rs7188h1fb4j6137?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
      p:user="rs7188h1fb4j6137"
-     p:password="123456" />
+     p:password="123456" />-->
+     <bean id="dataSource"
+     class="com.mchange.v2.c3p0.ComboPooledDataSource"
+     p:driverClass="com.mysql.jdbc.Driver"
+     p:jdbcUrl="jdbc:mysql://127.0.0.1:3306/drivemasterdb;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
+     p:user="root"
+     p:password="root" />
 	 
 	<!-- Define the encode method-->
      <!--<bean id="passwordEncoder" 
@@ -132,8 +138,8 @@
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
       p:sql="select password from test where name=?"
-      p:passwordEncoder-ref="passwordEncoder"/>
-
+      />
+   <!-- p:passwordEncoder-ref="passwordEncoder" -->
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
           class="org.jasig.cas.authentication.principal.BasicPrincipalResolver" />
