@@ -121,10 +121,9 @@
      <bean id="dataSource"
      class="com.mchange.v2.c3p0.ComboPooledDataSource"
      p:driverClass="com.mysql.jdbc.Driver"
-     p:jdbcUrl="jdbc:mysql://127.0.0.1:3306/drivemasterdb;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
+     p:jdbcUrl="jdbc:mysql://127.0.0.1:3306/drivemasterdb"
      p:user="root"
      p:password="root" />
-	 
 	<!-- Define the encode method-->
      <!--<bean id="passwordEncoder" 
        class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder" autowire="byName">     
@@ -138,7 +137,7 @@
 	<bean id="dbAuthHandler"
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
-      p:sql="select password from test where name=?"/>
+      p:sql="select password from test where username=?"/>
    <!-- p:passwordEncoder-ref="passwordEncoder" -->
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
