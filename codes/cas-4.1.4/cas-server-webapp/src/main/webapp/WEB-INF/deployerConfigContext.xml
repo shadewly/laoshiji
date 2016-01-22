@@ -60,7 +60,7 @@
                    | If more than one instance of the same handler class is configured, you must explicitly
                    | set its name to something other than its default name (typically the simple class name).
                    -->
-                <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
+               <!-- <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />-->
                  <!--<entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />-->
 				<entry key-ref="dbAuthHandler" value-ref="primaryPrincipalResolver" />
             </map>
@@ -89,7 +89,8 @@
     <!-- Required for proxy ticket mechanism. -->
     <bean id="proxyAuthenticationHandler"
           class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
-          p:httpClient-ref="supportsTrustStoreSslSocketFactoryHttpClient" />
+          p:httpClient-ref="supportsTrustStoreSslSocketFactoryHttpClient" 
+          p:requireSecure="false"/>
 
     <!--
        | TODO: Replace this component with one suitable for your enviroment.
@@ -137,8 +138,7 @@
 	<bean id="dbAuthHandler"
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
-      p:sql="select password from test where name=?"
-      />
+      p:sql="select password from test where name=?"/>
    <!-- p:passwordEncoder-ref="passwordEncoder" -->
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
