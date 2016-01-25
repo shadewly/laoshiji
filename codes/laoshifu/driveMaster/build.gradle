@@ -1,0 +1,29 @@
+
+  repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+  }
+  dependencies {
+      apply plugin: 'java'
+        compile ('io.netty:netty-all:5.0.0.Alpha2')
+        compile ('org.springframework:spring-core:4.2.4.RELEASE')
+        compile ('org.springframework:spring-webmvc:4.2.4.RELEASE')
+        compile ('org.springframework:spring-jdbc:4.2.4.RELEASE')
+        compile ('org.springframework:spring-test:4.2.4.RELEASE')
+        compile ('org.springframework:spring-context:4.2.4.RELEASE')
+        compile ('org.springframework.data:spring-data-mongodb:1.8.2.RELEASE')
+        compile ('org.springframework.security:spring-security-core:4.0.3.RELEASE')
+        compile ('org.springframework.security:spring-security-web:4.0.3.RELEASE')
+        compile ('javax.servlet:javax.servlet-api:3.1.0')
+        compile ('org.mybatis:mybatis:3.3.0')
+        compile ('org.mybatis:mybatis-spring:1.2.3')
+        compile ('net.sf.json-lib:json-lib:2.4:jdk15')
+        compile ('c3p0:c3p0:0.9.1.2')
+        compile ('com.google.protobuf:protobuf-java:2.6.1')
+        compile ('mysql:mysql-connector-java:5.1.38')
+        compile ('org.mongodb:mongo-java-driver:3.2.0')
+        compile ('org.slf4j:slf4j-log4j12:1.7.2')
+        testCompile ( 'junit:junit:4.12')
+    }
+
