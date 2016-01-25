@@ -15,4 +15,5 @@
     <import resource="mongodb-context.xml"/>
     <import resource="spring-jdbc.xml"/>
     <import resource="spring-mvc.xml"/>
+    <import resource="spring-cas.xml"/>
 </beans>

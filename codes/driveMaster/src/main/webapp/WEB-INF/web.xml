@@ -37,7 +37,7 @@
 	</servlet-mapping> -->
 	<!-- spring mvc配置end -->
 	<!-- cas start -->
-	<filter>
+	<!-- <filter>
 		<filter-name>CAS Authentication Filter</filter-name>
 		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
 		<init-param>
@@ -48,6 +48,19 @@
 			<param-name>serverName</param-name>
 			<param-value>http://127.0.0.1:8090</param-value>
 		</init-param>
-	</filter>
+	</filter>-->
+	
+	<filter>
+    <filter-name>CAS Authentication Filter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+        <param-name>targetBeanName</param-name>
+        <param-value>authenticationFilter</param-value>
+    </init-param>
+  </filter>
+<filter-mapping>
+    <filter-name>CAS Authentication Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 	<!-- cas end -->
 </web-app>
