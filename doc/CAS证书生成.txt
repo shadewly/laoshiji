@@ -3,7 +3,7 @@ keytool -export -file d:/keys/mycas.crt -alias mycas -keystore d:/keys/mycas.key
 
 keytool -import -keystore D:\worktools\Java\jdk1.8.0_45\jre\lib\security\cacerts -file d:/keys/mycas.crt -alias mycas 
 
-keytool -import -keystore D:\worktools\Java\jre1.8.0_45\lib\security -file d:/keys/mycas.crt -alias mycas 
+keytool -import -keystore D:\worktools\Java\jre1.8.0_45\lib\security\cacerts -file d:/keys/mycas.crt -alias mycas 
 
 keytool -delete -alias mycas -keystore "D:\worktools\Java\jdk1.8.0_45\jre\lib\security\cacerts"
 
