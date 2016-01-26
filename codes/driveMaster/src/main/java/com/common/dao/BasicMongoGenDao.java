@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
  */
 public abstract class BasicMongoGenDao<T> {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
+//    @Autowired
     protected MongoTemplate mongoTemplate;
 
     /**
