@@ -12,6 +12,7 @@
     <property name="casServerLoginUrl" value="https://localhost:8443/cas/login"/>
     <property name="renew" value="false"/>
     <property name="gateway" value="false"/>
-    <property name="service" value="http://localhost:8080/driveMaster"/>
+    <property name="service" value="https://localhost:8080/driveMaster"/>
     </bean>
+  
 </beans>
