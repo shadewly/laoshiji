@@ -10,17 +10,17 @@
     <!--<context:property-placeholder location="classpath:properties/mongodb.properties"/>-->
     <!-- <context:property-placeholder location="classpath:mongo.properties" /> -->
     <!--<mongo:mongo-client id="mongo" replica-set="xxx.xx.x.xx:27017,xxx.xx.x.xx::27017" credentials="admin:abc_123@xyz">-->
-    <mongo:mongo-client id="mongo" replica-set="127.0.0.1:27017" credentials="laoshifu:123456@laoshifu">
-        <mongo:client-options write-concern="NORMAL"
-                              connections-per-host="10"
-                              connect-timeout="30000"
-                              max-wait-time="10000"
-                />
-    </mongo:mongo-client>
+    <!--<mongo:mongo-client id="mongo" replica-set="127.0.0.1:27017" credentials="laoshifu:123456@laoshifu">-->
+        <!--<mongo:client-options write-concern="NORMAL"-->
+                              <!--connections-per-host="10"-->
+                              <!--connect-timeout="30000"-->
+                              <!--max-wait-time="10000"-->
+                <!--/>-->
+    <!--</mongo:mongo-client>-->
 
     <!-- MongoTemplate for connecting and quering the documents in the database -->
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg ref="mongo"/>
-        <constructor-arg name="databaseName" value="laoshifu"/>
-    </bean>
+    <!--<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">-->
+        <!--<constructor-arg ref="mongo"/>-->
+        <!--<constructor-arg name="databaseName" value="laoshifu"/>-->
+    <!--</bean>-->
 </beans>
