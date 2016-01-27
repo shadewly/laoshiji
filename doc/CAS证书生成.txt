@@ -1,9 +1,0 @@
-keytool -genkey -alias mycas -keyalg RSA -keysize 2048 -keystore D:/keys/mycas.keystore 
-keytool -export -file d:/keys/mycas.crt -alias mycas -keystore d:/keys/mycas.keystore
-
-keytool -import -keystore D:\worktools\Java\jdk1.8.0_45\jre\lib\security\cacerts -file d:/keys/mycas.crt -alias mycas 
-
-keytool -import -keystore D:\worktools\Java\jre1.8.0_45\lib\security\cacerts -file d:/keys/mycas.crt -alias mycas 
-
-keytool -delete -alias mycas -keystore "D:\worktools\Java\jdk1.8.0_45\jre\lib\security\cacerts"
-
