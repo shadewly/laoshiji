@@ -164,10 +164,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		MockFilterChain filterChain = new MockFilterChain();
 		
 		//创建filter
-	
 		this.filter.doFilter(servletRequest, servletResponse, filterChain);
-
-//		this.servlet.service(servletRequest, servletResponse);
 
 		HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse
 				.getStatus());
@@ -178,17 +175,18 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				response.headers().addObject(name, value);
 			}
 		}
-
-		// Write the initial line and the header.
-		channelHandlerContext.write(response);
-
-		InputStream contentStream = new ByteArrayInputStream(
-				servletResponse.getContentAsByteArray());
-
-		// Write the content and flush it.
-		ChannelFuture writeFuture = channelHandlerContext
-				.writeAndFlush(new ChunkedStream(contentStream));
-		writeFuture.addListener(ChannelFutureListener.CLOSE);
+		//调用下一个handler
+		channelHandlerContext.fireChannelRead(fullHttpRequest);
+//		// Write the initial line and the header.
+//		channelHandlerContext.write(response);
+//
+//		InputStream contentStream = new ByteArrayInputStream(
+//				servletResponse.getContentAsByteArray());
+//
+//		// Write the content and flush it.
+//		ChannelFuture writeFuture = channelHandlerContext
+//				.writeAndFlush(new ChunkedStream(contentStream));
+//		writeFuture.addListener(ChannelFutureListener.CLOSE);
 
 	}
 }
