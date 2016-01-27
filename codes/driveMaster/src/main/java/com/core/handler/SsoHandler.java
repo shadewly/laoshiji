@@ -177,6 +177,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		}
 		//调用下一个handler
 		channelHandlerContext.fireChannelRead(fullHttpRequest);
+		fullHttpRequest.retain();
 //		// Write the initial line and the header.
 //		channelHandlerContext.write(response);
 //

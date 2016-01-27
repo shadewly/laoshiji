@@ -147,7 +147,7 @@ public class ServletNettyHandler extends
 	@Override
 	protected void messageReceived(ChannelHandlerContext channelHandlerContext,
 			FullHttpRequest fullHttpRequest) throws Exception {
-
+		
 		if (!fullHttpRequest.decoderResult().isSuccess()) {
 			sendError(channelHandlerContext, BAD_REQUEST);
 			return;
@@ -178,6 +178,9 @@ public class ServletNettyHandler extends
 		ChannelFuture writeFuture = channelHandlerContext
 				.writeAndFlush(new ChunkedStream(contentStream));
 		writeFuture.addListener(ChannelFutureListener.CLOSE);
+		//主动释放资源，当多个handler传递时候，在最后一个释放资源，每个handler都释放也不报错
+		fullHttpRequest.retain();
+		
 
 	}
 }
