@@ -25,7 +25,6 @@ public class TestServiceImpl implements TestServiceI {
 	@Qualifier("testDao")
 	protected TestDao testDao;
 
-	@Override
 	public List<TestModel> aa() throws Exception {
 		List<TestModel> list=testDao.selectTest();
 		System.out.println(list.size());

@@ -37,8 +37,8 @@ public class MasterServer {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup)
 					.channel(NioServerSocketChannel.class)
-					.localAddress(new InetSocketAddress("127.0.0.1", 8090))
-//					.localAddress(new InetSocketAddress("localhost", 8444))
+//					.localAddress(new InetSocketAddress("127.0.0.1", 8090))
+					.localAddress(new InetSocketAddress("localhost", 8444))
 					.option(ChannelOption.SO_BACKLOG, 100)
 					.childHandler(new SsoChannelInitializer(applicationContext))
 					.childHandler(

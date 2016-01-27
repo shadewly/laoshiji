@@ -24,6 +24,7 @@ public class TestController {
 	@RequestMapping(params = "aa")
 	public void aa() {
 		String aa = "你好";
+		System.out.println(aa);
 	}
 
 	@RequestMapping(params = "bb")
