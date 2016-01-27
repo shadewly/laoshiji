@@ -40,7 +40,7 @@ public class MasterServer {
 //					.localAddress(new InetSocketAddress("127.0.0.1", 8090))
 					.localAddress(new InetSocketAddress("localhost", 8444))
 					.option(ChannelOption.SO_BACKLOG, 100)
-					.childHandler(new SsoChannelInitializer(applicationContext))
+//					.childHandler(new SsoChannelInitializer(applicationContext));
 					.childHandler(
 							new DispatcherServletChannelInitializer(
 									applicationContext));
