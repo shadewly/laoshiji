@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="   
+           http://www.springframework.org/schema/beans   
+           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+
+<bean
+    name="authenticationFilter"
+    class="org.jasig.cas.client.authentication.AuthenticationFilter">
+    <property name="casServerLoginUrl" value="https://localhost:8443/cas/login"/>
+    <property name="renew" value="false"/>
+    <property name="gateway" value="false"/>
+    <property name="service" value="https://localhost:8444/driveMaster"/>
+    </bean>
+  
+</beans>

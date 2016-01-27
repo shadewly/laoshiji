@@ -1,0 +1,11 @@
+package com.bz.proto;
+
+option java_package = "com.bz.model";
+option java_outer_classname = "Test";
+
+message TestModel {
+  //required string aa = 1;
+  required int32 id = 1;
+  optional string bb = 3;
+
+}
