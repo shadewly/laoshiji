@@ -52,6 +52,23 @@
 		<filter-name>CAS Authentication Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>
+			org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+	</listener>
 	<!-- ======================== 单点登录/登出结束 ======================== -->
+
 	<!-- cas end -->
 </web-app>
