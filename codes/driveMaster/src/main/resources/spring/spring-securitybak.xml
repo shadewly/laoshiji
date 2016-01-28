@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+								http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+								http://www.springframework.org/schema/security
+								http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<!-- 不拦截请求start -->
+	<http pattern="/sys/js/**" security="none" />
+	<http pattern="/sys/css/**" security="none" />
+	<http pattern="/sys/image/**" security="none" />
+	<http pattern="/index.jsp" security="none" />
+	<!-- 不拦截请求end -->
+
+	<http auto-config="false" entry-point-ref="casEntryPoint"
+		servlet-api-provision="true">
+		<access-denied-handler ref="myAccessDeniedHandler" />
+
+
+		<custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
+		<custom-filter position="FORM_LOGIN_FILTER" ref="casFilter" />
+		<custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
+		<custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+
+	<!-- 验证配置 ， 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+	<authentication-manager alias="authenticationManager">
+		<!-- 用以下配置可验证成功 -->
+		<authentication-provider ref="casAuthenticationProvider" />
+		<!-- 用以下配置将无法验证成功,原因是没经过cas权限校验
+		<authentication-provider user-service-ref="userServiceDetail" /> -->
+	</authentication-manager>
+
+	<!-- 服务自定义配置后就不用userService
+	<user-service id="userService">
+		<user name="admin" password="123" authorities="ROLE_ADMIN" />
+	</user-service> -->
+
+</beans:beans>
