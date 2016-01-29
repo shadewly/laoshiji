@@ -59,4 +59,14 @@
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
         <property name="markerInterface" value="com.core.mybatis.SqlMapper"/>
     </bean>
+    
+    <!-- 系统启动对应dao和service都未生成实力，所以必须用这种方式配置 -->
+	<!-- <bean id="urlDao" class="com.snowwolf.sys.dao.impl.UrlDAOImpl"></bean>
+	<bean id="menudao" class="com.snowwolf.sys.dao.impl.MenuDAOImpl"></bean>
+	<bean id="dbConfdao" class="com.snowwolf.sys.dao.impl.DBConfDAOImpl"></bean>
+	<bean id="titledao" class="com.snowwolf.sys.dao.impl.TitleDAOImpl"></bean>
+	<bean id="controlItemdao" class="com.snowwolf.sys.dao.impl.ControlItemDAOImpl"></bean>
+	<bean id="baseDataDao" class="com.snowwolf.sys.dao.impl.BaseDataDAOImpl"></bean>
+	<bean id="baseUserDao" class="com.snowwolf.sys.dao.impl.BaseUserDAOImpl"></bean>
+	<bean id="securityAuthoritydao" class="com.snowwolf.sys.dao.impl.SecurityAuthorityDAOImpl"></bean>-->
 </beans>

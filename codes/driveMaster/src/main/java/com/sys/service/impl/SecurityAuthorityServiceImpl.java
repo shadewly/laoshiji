@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.core.util.ReflectionUtil;
 import com.sys.dao.SecurityAuthorityDao;
 import com.sys.model.SecurityAuthority;
 import com.sys.model.vo.SecurityAuthorityVo;
@@ -18,6 +20,7 @@ import com.sys.service.SecurityAuthorityServiceI;
 @Transactional
 public class SecurityAuthorityServiceImpl implements SecurityAuthorityServiceI {
 	@Autowired
+	@Qualifier("securityAuthorityDao")
 	private SecurityAuthorityDao securityAuthorityDao;
 
 	@Override
@@ -44,12 +47,15 @@ public class SecurityAuthorityServiceImpl implements SecurityAuthorityServiceI {
 
 	@Override
 	public List<SecurityAuthorityVo> findAuthorities() throws Exception {
-		StringBuilder sql = new StringBuilder(
-				"select * from t_security_authority t1 left join t_security_authority_url t2 on t1.AUTH_CODE=t2.AUTH_CODE left join t_url t3 on t2.URL_CODE=t3.URL_CODE");
 
-//		return securityAuthorityDao.selectBySql(SecurityAuthorityVo.class,
-//				sql.toString());
-		return null;
+		List modelList = null;
+		List resultMapList = securityAuthorityDao.selectSecurityAuthorityList();
+
+		if (null != resultMapList && resultMapList.size() > 0) {
+			modelList = ReflectionUtil.createObjListByClass(SecurityAuthorityVo.class, resultMapList);
+		}
+
+		return modelList;
 	}
 
 	@Override
