@@ -18,7 +18,7 @@
 		servlet-api-provision="true">
 		<security:access-denied-handler ref="myAccessDeniedHandler" />
 		<security:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
-		<security:custom-filter position="FORM_LOGIN_FILTER" ref="casFilter" />
+		<security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter" />
 		<security:custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
 		<security:custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 	</security:http>
