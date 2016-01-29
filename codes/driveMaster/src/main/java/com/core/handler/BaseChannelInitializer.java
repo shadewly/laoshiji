@@ -40,8 +40,7 @@ public class BaseChannelInitializer extends ChannelInitializer<SocketChannel> {
 
         // sso
         MockFilterConfig filterConfig = new MockFilterConfig();
-        this.delegatingFilterProxy = new DelegatingFilterProxy(
-                "authenticationFilter", applicationContext);
+        this.delegatingFilterProxy = new DelegatingFilterProxy("authenticationFilter", applicationContext);
         this.delegatingFilterProxy.init(filterConfig);
     }
 
@@ -49,9 +48,9 @@ public class BaseChannelInitializer extends ChannelInitializer<SocketChannel> {
     public void initChannel(SocketChannel channel) throws Exception {
         ChannelPipeline pipeline = channel.pipeline();
         // Uncomment the following line if you want HTTPS
-        File certChainFile = ResourceUtils.getFile("classpath:/resources/certification/cas_cert.pem");
+        File certChainFile = ResourceUtils.getFile("classpath:certifications/cas_cert.pem");
         com.common.util.Assert.notNull(certChainFile, "Certification file can't be null!");
-        File keyFile = ResourceUtils.getFile("classpath:/resources/certification/privateKey_pkcs8.pem");
+        File keyFile = ResourceUtils.getFile("classpath:certifications/privateKey_pkcs8.pem");
         com.common.util.Assert.notNull(keyFile, "Key file can't be null!");
         SslContext sslCtx = SslContext.newServerContext(certChainFile, keyFile);
         pipeline.addLast("ssl", new SslHandler(sslCtx.newEngine(channel.alloc())));
