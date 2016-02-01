@@ -7,12 +7,12 @@
 								http://www.springframework.org/schema/security
 								http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-	<!-- 不拦截请求start -->
+	<!-- 不拦截请求start 
 	<security:http pattern="/sys/js/**" security="none" />
 	<security:http pattern="/sys/css/**" security="none" />
 	<security:http pattern="/sys/image/**" security="none" />
 	<security:http pattern="/index.jsp" security="none" />
-	<!-- 不拦截请求end -->
+	 不拦截请求end -->
 
 	<security:http auto-config="false" entry-point-ref="casEntryPoint"
 		servlet-api-provision="true">
