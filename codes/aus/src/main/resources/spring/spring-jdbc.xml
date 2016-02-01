@@ -7,10 +7,10 @@
     <!-- 配置DataSource数据源 start -->
     <bean id="ausDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
-        <property name="driverClass" value="${drive_master.driverclass}"></property>
-        <property name="jdbcUrl" value="${drive_master.jdbcurl}"></property>
-        <property name="user" value="${drive_master.user}"></property>
-        <property name="password" value="${drive_master.password}"></property>
+        <property name="driverClass" value="${aus.driverclass}"></property>
+        <property name="jdbcUrl" value="${aus.jdbcurl}"></property>
+        <property name="user" value="${aus.user}"></property>
+        <property name="password" value="${aus.password}"></property>
         <property name="acquireIncrement" value="5"></property>
         <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目2 -->
         <property name="initialPoolSize" value="10"></property>
@@ -29,7 +29,7 @@
 
     <!-- 配置SqlSessionFactoryBean -->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="driveMasterDataSource"/>
+        <property name="dataSource" ref="ausDataSource"/>
         <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
         <!-- mapper和resultmap配置路径 -->
         <property name="mapperLocations">

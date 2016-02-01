@@ -23,7 +23,7 @@ import com.sys.service.AccountServiceI;
 import com.sys.service.SecurityAuthorityServiceI;
 
 /**
- * 基础user服务类
+ * 鍩虹user鏈嶅姟绫�
  * 
  * @author yuxinchen
  * 
@@ -38,27 +38,27 @@ public class AccountServiceImpl implements AccountServiceI , UserDetailsService 
 	@Autowired
 	SecurityAuthorityServiceI securityAuthorityService;
 
-	// 以下是spring security內容
+	// 浠ヤ笅鏄痵pring security鍏у
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		Account account = null;
-		boolean enabled = true; // 是否可用
-		boolean accountNonExpired = true; // 是否过期
+		boolean enabled = true; // 鏄惁鍙敤
+		boolean accountNonExpired = true; // 鏄惁杩囨湡
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		try {
-			// 通过该方式设定数据源
+			// 閫氳繃璇ユ柟寮忚瀹氭暟鎹簮
 			CustomerContextHolder
-					.setContextType(CustomerContextHolder.SESSION_FACTORY_DRIVE_MASTER);
+					.setContextType(CustomerContextHolder.SESSION_FACTORY_AUS);
 			account = null;
 //			(Account) accountDao.selectObjectBySql(
 //					Account.class,
 //					"select * from t_base_user where user_name='" + username
 //							+ "'");
 
-			// 通过角色获取权限
+			// 閫氳繃瑙掕壊鑾峰彇鏉冮檺
 			List<SecurityUserRoleVo> roles = findUserRolesByUserName(username);
 
 			if (null != roles) {
@@ -162,7 +162,7 @@ public class AccountServiceImpl implements AccountServiceI , UserDetailsService 
 //		} else {
 //			resultMap.put(SysConstant.JsonResult.Result.getIndex(),
 //					SysConstant.JsonResult.Fail.getIndex());
-//			resultMap.put(SysConstant.JsonResult.Msg.getIndex(), "用户名已经存在！");
+//			resultMap.put(SysConstant.JsonResult.Msg.getIndex(), "鐢ㄦ埛鍚嶅凡缁忓瓨鍦紒");
 //		}
 //		return resultMap;
 //	}

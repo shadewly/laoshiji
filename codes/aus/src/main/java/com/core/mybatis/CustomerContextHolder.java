@@ -2,7 +2,7 @@ package com.core.mybatis;
 
 public abstract class CustomerContextHolder {
 	 
-    public final static String SESSION_FACTORY_DRIVE_MASTER = "aus";
+    public final static String SESSION_FACTORY_AUS = "aus";
     
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();  
     
