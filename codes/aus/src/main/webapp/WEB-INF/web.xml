@@ -17,20 +17,6 @@
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
 	<!-- spring security配置end -->
 	<!-- spring mvc配置start -->
-	<servlet>
-		<servlet-name>spring-mvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:spring/spring-mvc.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>spring-mvc</servlet-name>
-		<url-pattern>/*</url-pattern>
-	</servlet-mapping>
-	<!-- spring mvc配置end -->
 	<!-- cas start -->
 	<!-- ======================== 单点登录/登出 ======================== -->
 	<filter>
@@ -45,7 +31,7 @@
 		<filter-name>authenticationFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<filter>
+	<!-- <filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -61,9 +47,24 @@
 		<listener-class>
 			org.jasig.cas.client.session.SingleSignOutHttpSessionListener
 		</listener-class>
-	</listener>
+	</listener> -->
 
 	<!-- ======================== 单点登录/登出结束 ======================== -->
 
 	<!-- cas end -->
+	<servlet>
+		<servlet-name>spring-mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:spring/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>spring-mvc</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- spring mvc配置end -->
+	
 </web-app>

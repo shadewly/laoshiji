@@ -1,27 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-								http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-								http://www.springframework.org/schema/security
-								http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xmlns:p="http://www.springframework.org/schema/p"  
+       xmlns:context="http://www.springframework.org/schema/context"  
+       xmlns:security="http://www.springframework.org/schema/security"  
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
+       http://www.springframework.org/schema/context  
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd  
+       http://www.springframework.org/schema/security  
+       http://www.springframework.org/schema/security/spring-security-4.0.xsd"  
+       default-lazy-init="true">
 
 	<!-- 不拦截请求start 
 	<security:http pattern="/sys/js/**" security="none" />
 	<security:http pattern="/sys/css/**" security="none" />
 	<security:http pattern="/sys/image/**" security="none" />
 	<security:http pattern="/index.jsp" security="none" />
-	 不拦截请求end -->
+	不拦截请求end  -->
 
 	<security:http auto-config="false" entry-point-ref="casEntryPoint"
 		servlet-api-provision="true">
+		<!-- <security:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		<security:intercept-url pattern="/**" access="ROLE_USER"/>-->
 		<security:access-denied-handler ref="myAccessDeniedHandler" />
+		<security:custom-filter position="CAS_FILTER" ref="authenticationFilter" />
+		<security:logout logout-success-url="/index.jsp"/>
 		<security:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER" />
-		<security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter" />
-		<security:custom-filter ref="singleLogoutFilter" before="CAS_FILTER" />
+		<security:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
 		<security:custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 	</security:http>
+	
+        
 
 	<!-- 验证配置 ， 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
 	<security:authentication-manager alias="authenticationManager">
@@ -33,4 +43,77 @@
 
 	<!-- 服务自定义配置后就不用userService <user-service id="userService"> <user name="admin" 
 		password="123" authorities="ROLE_ADMIN" /> </user-service> -->
+		
+			<bean id="casEntryPoint"
+		class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+		<property name="loginUrl" value="${sso.loginUrl}" />
+		<property name="serviceProperties" ref="serviceProperties" />
+	</bean>
+	<bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
+		<property name="service" value="${sso.service}" />
+		<property name="sendRenew" value="false" />
+	</bean>
+
+	<bean id="authenticationFilter"
+		class="org.springframework.security.cas.web.CasAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+
+	<bean id="casAuthenticationUserDetailsService"
+		class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+		<property name="userDetailsService">
+			<ref bean="userServiceDetail" />
+		</property>
+	</bean>
+	<bean id="casAuthenticationProvider"
+		class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
+		<property name="authenticationUserDetailsService" ref="casAuthenticationUserDetailsService" />
+		<property name="serviceProperties" ref="serviceProperties" />
+		<property name="ticketValidator">
+			<bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
+				<constructor-arg index="0" value="${sso.ticketValidator}" />
+			</bean>
+		</property>
+		<property name="key" value="an_id_for_this_auth_provider_only" />
+	</bean>
+
+	<!-- 注销客户端 -->
+	<bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
+
+	<!-- 注销服务器端 -->
+	<bean id="requestSingleLogoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg value="${sso.logout}" />
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+		</constructor-arg>
+		<property name="filterProcessesUrl" value="/j_spring_cas_security_logout" />
+	</bean>
+	<!-- security start -->
+	<bean id="myAccessDeniedHandler" class="com.sys.security.handler.MyAccessDeniedHandler">
+		<property name="errorPage" value="/sys/jsp/accessDenied.jsp"></property>
+	</bean>
+
+	<bean id="mySecurityFilter" class="com.sys.security.MyFilterSecurityInterceptor">
+		<property name="accessDecisionManager" ref="accessDescisionManager"></property>
+		<property name="fisMetadataSource" ref="securityMetadataSource"></property>
+		<property name="authenticationManager" ref="authenticationManager"></property>
+	</bean>
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<bean id="accessDescisionManager" class="com.sys.security.MyAccessDescisionManager"></bean>
+	<!-- 项目实现的用户查询服务,将用户信息查询出来 -->
+	<bean id="userServiceDetail" class="com.sys.service.impl.AccountServiceImpl">
+		<property name="accountDao">
+			<ref bean="accountDao" />
+		</property>
+	</bean>
+	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+	<bean id="securityMetadataSource" class="com.sys.security.MySecurityMetadataSource">
+		<constructor-arg name="securityAuthorityService" ref="securityAuthorityService"></constructor-arg>
+	</bean>
+
+
+	<!-- security end -->
 </beans>
