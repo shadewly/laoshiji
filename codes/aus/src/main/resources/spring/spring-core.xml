@@ -16,7 +16,5 @@
     <import resource="spring-jdbc.xml"/>
     <!-- 使用tomcat时要注释 -->
     <!--<import resource="spring-mvc.xml"/>-->
-    
-    <import resource="spring-security.xml"/>
-    <!--<import resource="spring-cas.xml"/> <import resource="spring-cassecurity.xml"/>-->
+    <import resource="spring-security-cas.xml"/>
 </beans>
