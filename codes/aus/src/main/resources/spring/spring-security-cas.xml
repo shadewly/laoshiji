@@ -23,8 +23,8 @@
 		auto-config="false" use-expressions="false" disable-url-rewriting="false">
 		<security:headers disabled="true" />
 		<security:csrf disabled="false" />
-		<!-- <security:access-denied-handler ref="myAccessDeniedHandler" /> -->
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:access-denied-handler ref="myAccessDeniedHandler" />
+		<!-- <security:intercept-url pattern="/**" access="ROLE_USER" /> -->
 		<security:custom-filter position="CAS_FILTER"
 			ref="casAuthenticationFilter" />
 		<security:logout logout-success-url="/index.jsp" />
@@ -32,8 +32,8 @@
 			before="LOGOUT_FILTER" />
 		<security:custom-filter ref="singleLogoutFilter"
 			before="CAS_FILTER" />
-		<!-- <security:custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" 
-			/> -->
+		<security:custom-filter ref="mySecurityFilter"
+			before="FILTER_SECURITY_INTERCEPTOR" />
 
 	</security:http>
 
