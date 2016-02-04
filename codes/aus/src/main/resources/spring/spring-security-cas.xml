@@ -11,10 +11,6 @@
        http://www.springframework.org/schema/security/spring-security-4.0.xsd"
 	default-lazy-init="true">
 
-	<!-- 不拦截请求start -->
-	<!--<security:http pattern="/sys/js/**" security="none" /> <security:http 
-		pattern="/sys/css/**" security="none" /> <security:http pattern="/sys/image/**" 
-		security="none" /> <security:http pattern="/index.jsp" security="none" /> -->
 	<!--不拦截请求end -->
 	<!-- <bean name="casAuthenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter"> 
 		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" 
@@ -23,25 +19,28 @@
 		</bean> -->
 	<!-- <property name="service" value="https://localhost:8444/driveMaster"/> -->
 
-	<security:http entry-point-ref="casEntryPoint">
-		<!-- <security:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
-		<security:intercept-url pattern="/aus/**"
-			access="ROLE_USER" />
+	<security:http entry-point-ref="casEntryPoint"
+		auto-config="false" use-expressions="false" disable-url-rewriting="false">
+		<security:headers disabled="true" />
+		<security:csrf disabled="false" />
+		<!-- <security:access-denied-handler ref="myAccessDeniedHandler" /> -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
 		<security:custom-filter position="CAS_FILTER"
-			ref="casFilter" />
+			ref="casAuthenticationFilter" />
 		<security:logout logout-success-url="/index.jsp" />
 		<security:custom-filter ref="requestSingleLogoutFilter"
 			before="LOGOUT_FILTER" />
 		<security:custom-filter ref="singleLogoutFilter"
 			before="CAS_FILTER" />
-		<!-- <security:custom-filter ref="mySecurityFilter"
-			before="FILTER_SECURITY_INTERCEPTOR" />
-		<security:access-denied-handler ref="myAccessDeniedHandler" />-->
+		<!-- <security:custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" 
+			/> -->
+
 	</security:http>
 
-	<bean id="casFilter"
+	<bean id="casAuthenticationFilter"
 		class="org.springframework.security.cas.web.CasAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
+
 	</bean>
 
 	<bean id="casEntryPoint"
@@ -52,7 +51,7 @@
 
 	<bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
 		<property name="service" value="${sso.service}" />
-		<property name="sendRenew" value="true" />
+		<property name="sendRenew" value="false" />
 	</bean>
 
 	<!-- 验证配置 ， 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
@@ -66,10 +65,9 @@
 		<property name="authenticationUserDetailsService">
 			<bean
 				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-				<constructor-arg ref="userService" />
-				<!-- <property name="userDetailsService">
-					<ref bean="userServiceDetail" />
-				</property> -->
+				<constructor-arg ref="userDetailsManager" />
+				<!-- <property name="userDetailsService"> <ref bean="userServiceDetail" 
+					/> </property> -->
 			</bean>
 		</property>
 		<!-- <property name="authenticationUserDetailsService" ref="casAuthenticationUserDetailsService"> 
@@ -83,16 +81,19 @@
 		<property name="key" value="an_id_for_this_auth_provider_only" />
 	</bean>
 
-	<!-- <bean id="casAuthenticationUserDetailsService" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper"> 
-		<property name="userDetailsService"> <ref bean="userServiceDetail" /> </property> 
-		</bean> -->
-	<security:user-service id="userService">
-		<security:user name="yxc" password="123" authorities="ROLE_USER" />
-	</security:user-service>
+	<bean id="casAuthenticationUserDetailsService"
+		class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+		<property name="userDetailsService">
+			<ref bean="userServiceDetail" />
+		</property>
+	</bean>
+
+	<!--<security:user-service id="userService"> <security:user name="yxc" password="123" 
+		authorities="ROLE_USER" /> </security:user-service> -->
 
 
 
-	<!-- This filter handles a Single Logout Request from the CAS Server -->
+	<!-- 单点登录退出配置start -->
 	<bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter" />
 
 	<!-- This filter redirects to the CAS Server to signal Single Logout should 
@@ -106,7 +107,7 @@
 		</constructor-arg>
 		<property name="filterProcessesUrl" value="/logout/cas" />
 	</bean>
-
+	<!-- 单点登录退出配置end -->
 
 
 
@@ -117,7 +118,7 @@
 			<ref bean="accountDao" />
 		</property>
 	</bean>
-
+	<bean id="userDetailsManager" class="com.sys.service.impl.AccountServiceImpl" />
 
 
 

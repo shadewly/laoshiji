@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_1452755542681" version="3.0">
-	<display-name>Archetype Created Web Application</display-name>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -12,11 +12,36 @@
 		<param-value>classpath*:spring/spring-core.xml</param-value>
 	</context-param>
 
+
+	<!-- ======================== 单点登录/登出 ======================== -->
+	<filter>
+		<filter-name>casSingleSignOutFilter</filter-name>
+		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>casSingleSignOutFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<!-- <init-param> <param-name>targetBeanName</param-name> <param-value>casAuthenticationFilter</param-value> 
+			</init-param> -->
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<listener>
+		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+	</listener>
+
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -26,20 +51,7 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- ======================== 单点登录/登出 ======================== -->
 
-	<filter>
-		<filter-name>casFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-		<!-- <init-param>
-			<param-name>targetBeanName</param-name>
-			<param-value>casAuthenticationFilter</param-value>
-		</init-param>-->
-	</filter>
-	<filter-mapping>
-		<filter-name>casFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 	<!-- spring mvc配置START -->
 	<servlet>
 		<servlet-name>spring-mvc</servlet-name>
@@ -56,8 +68,8 @@
 	</servlet-mapping>
 	<!-- spring mvc配置end -->
 
-	<listener>
-		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
-	</listener>
-
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<display-name>aus</display-name>
 </web-app>
