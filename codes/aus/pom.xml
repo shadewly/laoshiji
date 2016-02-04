@@ -8,8 +8,8 @@
 	<name>aus</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-	    <org.springframework.version>4.2.4.RELEASE</org.springframework.version>
-	    <org.springframework.security.version>4.0.3.RELEASE</org.springframework.security.version>
+		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
+		<org.springframework.security.version>4.0.3.RELEASE</org.springframework.security.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -73,10 +73,15 @@
 			<version>${org.springframework.security.version}</version>
 		</dependency>
 		<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-taglibs</artifactId>
-	<version>${org.springframework.security.version}</version>
-</dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-cas-client</artifactId>
+			<version>3.0.8.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
