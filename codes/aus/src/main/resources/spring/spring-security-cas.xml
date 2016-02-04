@@ -16,11 +16,19 @@
 		pattern="/sys/css/**" security="none" /> <security:http pattern="/sys/image/**" 
 		security="none" /> <security:http pattern="/index.jsp" security="none" /> -->
 	<!--不拦截请求end -->
+	<!-- <bean name="casAuthenticationFilter"
+		class="org.jasig.cas.client.authentication.AuthenticationFilter">
+		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" />
+		<property name="renew" value="false" />
+		<property name="gateway" value="false" />
+		<property name="service" value="https://localhost:8444/test?bb=qwe" />
+	</bean>-->
+	<!-- <property name="service" value="https://localhost:8444/driveMaster"/> -->
 
 	<security:http auto-config="false" entry-point-ref="casEntryPoint"
 		servlet-api-provision="true">
-		<!-- <security:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/> 
-			<security:intercept-url pattern="/**" access="ROLE_USER"/> -->
+		<!-- <security:intercept-url pattern="/index.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
 		<security:access-denied-handler ref="myAccessDeniedHandler" />
 		<security:custom-filter position="CAS_FILTER"
 			ref="casAuthenticationFilter" />
