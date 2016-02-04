@@ -1,9 +1,10 @@
 package com.sys.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,8 +15,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.core.mybatis.CustomerContextHolder;
 import com.sys.dao.AccountDao;
 import com.sys.model.Account;
+import com.sys.model.SecurityAuthority;
 import com.sys.model.vo.SecurityUserRoleVo;
 import com.sys.service.AccountServiceI;
 import com.sys.service.SecurityAuthorityServiceI;
@@ -40,137 +43,153 @@ public class AccountServiceImpl implements AccountServiceI, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		// Account account = null;
-		// boolean enabled = true; // 鏄惁鍙敤
-		// boolean accountNonExpired = true; // 鏄惁杩囨湡
-		// boolean credentialsNonExpired = true;
-		// boolean accountNonLocked = true;
-		// Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		// try {
-		// // 閫氳繃璇ユ柟寮忚瀹氭暟鎹簮
-		// CustomerContextHolder
-		// .setContextType(CustomerContextHolder.SESSION_FACTORY_AUS);
-		// account = null;
-		// // (Account) accountDao.selectObjectBySql(
-		// // Account.class,
-		// // "select * from t_base_user where user_name='" + username
-		// // + "'");
+		Account account = null;
+		boolean enabled = true; // 鏄惁鍙敤
+		boolean accountNonExpired = true; // 鏄惁杩囨湡
+		boolean credentialsNonExpired = true;
+		boolean accountNonLocked = true;
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		try {
+			//****** 账号需要cas端返回，角色集合需要启动时加载中获取
+			CustomerContextHolder
+					.setContextType(CustomerContextHolder.SESSION_FACTORY_AUS);
+			account = new Account();
+			account.setUserName("yxc");
+			account.setUserPwd("123");
+			// (Account) accountDao.selectObjectBySql(
+			// Account.class,
+			// "select * from t_base_user where user_name='" + username
+			// + "'");
+
+			// 閫氳繃瑙掕壊鑾峰彇鏉冮檺
+//			List<SecurityUserRoleVo> roles = findUserRolesByUserName(username);
+			List<SecurityUserRoleVo> roles = new ArrayList<SecurityUserRoleVo>();
+			SecurityUserRoleVo r1=new SecurityUserRoleVo();
+			SecurityUserRoleVo r2=new SecurityUserRoleVo();
+			r1.setRoleCode("10001");
+			r2.setRoleCode("10002");
+			roles.add(r1);
+			roles.add(r2);
+			
+			List<SecurityAuthority> securityAuthorityList=new ArrayList<SecurityAuthority>();
+			SecurityAuthority s1=new SecurityAuthority();
+			SecurityAuthority s2=new SecurityAuthority();
+			s1.setAuthName("ROLE_USER");
+			s2.setAuthName("ROLE_ADMIN");
+			securityAuthorityList.add(s2);
+
+			if (null != roles) {
+				for (SecurityUserRoleVo role : roles) {
+//					List<SecurityAuthority> securityAuthorityList = securityAuthorityService
+//							.findAuthoritiesByRoleCode(role.getRoleCode());
+					for (SecurityAuthority securityAuthority : securityAuthorityList) {
+						GrantedAuthority ga = new SimpleGrantedAuthority(
+								securityAuthority.getAuthName());
+						authorities.add(ga);
+					}
+
+				}
+			}
+
+		} catch (Exception e) {
+			// log.error(SysConstant.ERROR_MSG, e);
+			e.printStackTrace();
+		}
+		return new org.springframework.security.core.userdetails.User(
+				account.getUserName(), account.getUserPwd(), enabled,
+				accountNonExpired, credentialsNonExpired, accountNonLocked,
+				authorities);
+		// Collection<GrantedAuthority> auths = new
+		// ArrayList<GrantedAuthority>();
+		// UserDetails userDetails = new UserDetails() {
+		// /**
+		// * Returns the authorities granted to the user. Cannot return
+		// * <code>null</code>.
+		// *
+		// * @return the authorities, sorted by natural key (never
+		// * <code>null</code>)
+		// */
+		// @Override
+		// public Collection<? extends GrantedAuthority> getAuthorities() {
+		// SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
+		// "ROLE_USER");
+		// auths.add(authority);
 		//
-		// // 閫氳繃瑙掕壊鑾峰彇鏉冮檺
-		// List<SecurityUserRoleVo> roles = findUserRolesByUserName(username);
-		//
-		// if (null != roles) {
-		// for (SecurityUserRoleVo role : roles) {
-		// List<SecurityAuthority> securityAuthorityList =
-		// securityAuthorityService
-		// .findAuthoritiesByRoleCode(role.getRoleCode());
-		// for (SecurityAuthority securityAuthority : securityAuthorityList) {
-		// GrantedAuthority ga = new SimpleGrantedAuthority(
-		// securityAuthority.getAuthName());
-		// authorities.add(ga);
+		// return auths;
 		// }
 		//
-		// }
+		// /**
+		// * Returns the password used to authenticate the user.
+		// *
+		// * @return the password
+		// */
+		// @Override
+		// public String getPassword() {
+		// return "123";
 		// }
 		//
-		// } catch (Exception e) {
-		// // log.error(SysConstant.ERROR_MSG, e);
-		// e.printStackTrace();
+		// /**
+		// * Returns the username used to authenticate the user. Cannot return
+		// * <code>null</code> .
+		// *
+		// * @return the username (never <code>null</code>)
+		// */
+		// @Override
+		// public String getUsername() {
+		// return "yxc";
 		// }
-		// return new org.springframework.security.core.userdetails.User(
-		// account.getUserName(), account.getUserPwd(), enabled,
-		// accountNonExpired, credentialsNonExpired, accountNonLocked,
-		// authorities);
-		Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>();
-		UserDetails userDetails = new UserDetails() {
-			/**
-			 * Returns the authorities granted to the user. Cannot return
-			 * <code>null</code>.
-			 * 
-			 * @return the authorities, sorted by natural key (never
-			 *         <code>null</code>)
-			 */
-			@Override
-			public Collection<? extends GrantedAuthority> getAuthorities() {
-				SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
-						"ROLE_USER");
-				auths.add(authority);
-
-				return auths;
-			}
-
-			/**
-			 * Returns the password used to authenticate the user.
-			 * 
-			 * @return the password
-			 */
-			@Override
-			public String getPassword() {
-				return "123";
-			}
-
-			/**
-			 * Returns the username used to authenticate the user. Cannot return
-			 * <code>null</code> .
-			 * 
-			 * @return the username (never <code>null</code>)
-			 */
-			@Override
-			public String getUsername() {
-				return "yxc";
-			}
-
-			/**
-			 * Indicates whether the user's account has expired. An expired
-			 * account cannot be authenticated.
-			 * 
-			 * @return <code>true</code> if the user's account is valid (ie
-			 *         non-expired), <code>false</code> if no longer valid (ie
-			 *         expired)
-			 */
-			@Override
-			public boolean isAccountNonExpired() {
-				return true;
-			}
-
-			/**
-			 * Indicates whether the user is locked or unlocked. A locked user
-			 * cannot be authenticated.
-			 * 
-			 * @return <code>true</code> if the user is not locked,
-			 *         <code>false</code> otherwise
-			 */
-			@Override
-			public boolean isAccountNonLocked() {
-				return true;
-			}
-
-			/**
-			 * Indicates whether the user's credentials (password) has expired.
-			 * Expired credentials prevent authentication.
-			 * 
-			 * @return <code>true</code> if the user's credentials are valid (ie
-			 *         non-expired), <code>false</code> if no longer valid (ie
-			 *         expired)
-			 */
-			@Override
-			public boolean isCredentialsNonExpired() {
-				return true;
-			}
-
-			/**
-			 * Indicates whether the user is enabled or disabled. A disabled
-			 * user cannot be authenticated.
-			 * 
-			 * @return <code>true</code> if the user is enabled,
-			 *         <code>false</code> otherwise
-			 */
-			@Override
-			public boolean isEnabled() {
-				return true;
-			}
-		};
-		return userDetails;
+		//
+		// /**
+		// * Indicates whether the user's account has expired. An expired
+		// * account cannot be authenticated.
+		// *
+		// * @return <code>true</code> if the user's account is valid (ie
+		// * non-expired), <code>false</code> if no longer valid (ie
+		// * expired)
+		// */
+		// @Override
+		// public boolean isAccountNonExpired() {
+		// return true;
+		// }
+		//
+		// /**
+		// * Indicates whether the user is locked or unlocked. A locked user
+		// * cannot be authenticated.
+		// *
+		// * @return <code>true</code> if the user is not locked,
+		// * <code>false</code> otherwise
+		// */
+		// @Override
+		// public boolean isAccountNonLocked() {
+		// return true;
+		// }
+		//
+		// /**
+		// * Indicates whether the user's credentials (password) has expired.
+		// * Expired credentials prevent authentication.
+		// *
+		// * @return <code>true</code> if the user's credentials are valid (ie
+		// * non-expired), <code>false</code> if no longer valid (ie
+		// * expired)
+		// */
+		// @Override
+		// public boolean isCredentialsNonExpired() {
+		// return true;
+		// }
+		//
+		// /**
+		// * Indicates whether the user is enabled or disabled. A disabled
+		// * user cannot be authenticated.
+		// *
+		// * @return <code>true</code> if the user is enabled,
+		// * <code>false</code> otherwise
+		// */
+		// @Override
+		// public boolean isEnabled() {
+		// return true;
+		// }
+		// };
+		// return userDetails;
 
 	}
 
