@@ -113,34 +113,34 @@
 
 
 	<!-- 项目实现的用户查询服务,将用户信息查询出来 -->
-	<bean id="userServiceDetail" class="com.sys.service.impl.AccountServiceImpl">
+	<bean id="userServiceDetail" class="com.bz.service.impl.AccountServiceImpl">
 		<property name="accountDao">
 			<ref bean="accountDao" />
 		</property>
 	</bean>
-	<bean id="userDetailsManager" class="com.sys.service.impl.AccountServiceImpl" />
+	<bean id="userDetailsManager" class="com.bz.service.impl.AccountServiceImpl" />
 
 
 
 
 
 
-	<bean id="myAccessDeniedHandler" class="com.sys.security.handler.MyAccessDeniedHandler">
+	<bean id="myAccessDeniedHandler" class="com.security.handler.MyAccessDeniedHandler">
 		<property name="errorPage" value="/sys/jsp/accessDenied.jsp"></property>
 	</bean>
 
-	<bean id="mySecurityFilter" class="com.sys.security.MyFilterSecurityInterceptor">
+	<bean id="mySecurityFilter" class="com.security.core.MyFilterSecurityInterceptor">
 		<property name="accessDecisionManager" ref="accessDescisionManager"></property>
 		<property name="fisMetadataSource" ref="securityMetadataSource"></property>
 		<property name="authenticationManager" ref="authenticationManager"></property>
 	</bean>
 
 	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
-	<bean id="accessDescisionManager" class="com.sys.security.MyAccessDescisionManager"></bean>
+	<bean id="accessDescisionManager" class="com.security.core.MyAccessDescisionManager"></bean>
 
 	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
-	<bean id="securityMetadataSource" class="com.sys.security.MySecurityMetadataSource">
-		<constructor-arg name="securityAuthorityService" ref="securityAuthorityService"></constructor-arg>
+	<bean id="securityMetadataSource" class="com.security.core.MySecurityMetadataSource">
+		<constructor-arg name="authorityService" ref="authorityService"></constructor-arg>
 	</bean>
 
 

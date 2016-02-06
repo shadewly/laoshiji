@@ -35,7 +35,6 @@
         <property name="mapperLocations">
             <list>
                 <value>classpath:com/bz/dao/*.xml</value>
-                <value>classpath:com/sys/dao/*.xml</value>
                 <!-- 表示在com.hoo.resultmap包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
                 <!-- <value>classpath:com/hoo/resultmap/**/*-resultmap.xml</value> <value>classpath:com/hoo/entity/*-resultmap.xml</value>
                     <value>classpath:com/hoo/mapper/**/*-mapper.xml</value> -->
