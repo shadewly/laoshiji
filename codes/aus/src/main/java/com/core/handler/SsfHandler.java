@@ -183,7 +183,7 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		//已登录cas执行下一个handler，未登录跳转到cas界面
 		if (casResult) {
 			channelHandlerContext.fireChannelRead(fullHttpRequest);
-			
+			fullHttpRequest.retain();
 		} else {
 			// Write the initial line and the header.
 			channelHandlerContext.write(response);
