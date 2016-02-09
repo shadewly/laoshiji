@@ -39,7 +39,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
-public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 //	private final Servlet servlet;
 
@@ -47,7 +47,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 	private final Filter filter;
 
-	public SsoHandler(Filter filter) {
+	public SsfHandler(Filter filter) {
 
 //		this.servlet = servlet;
 //		this.servletContext = servlet.getServletConfig().getServletContext();
