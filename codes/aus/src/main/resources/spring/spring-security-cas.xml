@@ -12,11 +12,13 @@
 	default-lazy-init="true">
 
 	<!--不拦截请求end -->
-	<!-- <bean name="casAuthenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter"> 
-		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" 
-		/> <property name="renew" value="false" /> <property name="gateway" value="false" 
-		/> <property name="service" value="https://localhost:8444/test?bb=qwe" /> 
-		</bean> -->
+	<!-- <bean name="authenticationFilter"
+		class="org.jasig.cas.client.authentication.AuthenticationFilter">
+		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" />
+		<property name="renew" value="false" />
+		<property name="gateway" value="false" />
+		<property name="service" value="https://localhost:8444/test?bb=abc" />
+	</bean>-->
 	<!-- <property name="service" value="https://localhost:8444/driveMaster"/> -->
 
 	<security:http entry-point-ref="casEntryPoint"

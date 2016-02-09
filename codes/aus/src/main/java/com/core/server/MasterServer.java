@@ -2,7 +2,6 @@ package com.core.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -40,6 +39,7 @@ public class MasterServer {
 //					.localAddress(new InetSocketAddress("127.0.0.1", 8090))
 					.localAddress(new InetSocketAddress("localhost", 8444))
 					.option(ChannelOption.SO_BACKLOG, 100)
+//					.childHandler(new SsfChannelInitializer(applicationContext));
 					.childHandler(new BaseChannelInitializer(applicationContext));
 			ChannelFuture f = b.bind().sync();
 

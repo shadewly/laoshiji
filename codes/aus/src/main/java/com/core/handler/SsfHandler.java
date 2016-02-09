@@ -175,18 +175,20 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				response.headers().addObject(name, value);
 			}
 		}
-		//调用下一个handler
-		channelHandlerContext.fireChannelRead(fullHttpRequest);
-		fullHttpRequest.retain();
-//		// Write the initial line and the header.
-//		channelHandlerContext.write(response);
-//
-//		InputStream contentStream = new ByteArrayInputStream(
-//				servletResponse.getContentAsByteArray());
-//
-//		// Write the content and flush it.
-//		ChannelFuture writeFuture = channelHandlerContext
-//				.writeAndFlush(new ChunkedStream(contentStream));
+		//调用下一个handler，加了fireChannelRead，cas拦截就失效了
+//		channelHandlerContext.fireChannelRead(fullHttpRequest);
+		//加了retain不跳转到cas登录界面，不加184，186，190行业不跳转到cas登录界面
+//		fullHttpRequest.retain();
+		
+		// Write the initial line and the header.
+		channelHandlerContext.write(response);
+
+		InputStream contentStream = new ByteArrayInputStream(
+				servletResponse.getContentAsByteArray());
+
+		// Write the content and flush it.
+		ChannelFuture writeFuture = channelHandlerContext
+				.writeAndFlush(new ChunkedStream(contentStream));
 //		writeFuture.addListener(ChannelFutureListener.CLOSE);
 
 	}
