@@ -41,16 +41,16 @@ import org.springframework.web.util.UriUtils;
 
 public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-//	private final Servlet servlet;
+	// private final Servlet servlet;
 
-//	private final ServletContext servletContext;
+	// private final ServletContext servletContext;
 
 	private final Filter filter;
 
 	public SsfHandler(Filter filter) {
 
-//		this.servlet = servlet;
-//		this.servletContext = servlet.getServletConfig().getServletContext();
+		// this.servlet = servlet;
+		// this.servletContext = servlet.getServletConfig().getServletContext();
 
 		this.filter = filter;
 	}
@@ -158,12 +158,12 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 			sendError(channelHandlerContext, BAD_REQUEST);
 			return;
 		}
-		
+
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 		MockFilterChain filterChain = new MockFilterChain();
-		
-		//创建filter
+
+		// 创建filter
 		this.filter.doFilter(servletRequest, servletResponse, filterChain);
 
 		HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse
@@ -175,21 +175,28 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				response.headers().addObject(name, value);
 			}
 		}
-		//调用下一个handler，加了fireChannelRead，cas拦截就失效了
-//		channelHandlerContext.fireChannelRead(fullHttpRequest);
-		//加了retain不跳转到cas登录界面，不加184，186，190行业不跳转到cas登录界面
-//		fullHttpRequest.retain();
-		
-		// Write the initial line and the header.
-		channelHandlerContext.write(response);
+		// 调用下一个handler，加了fireChannelRead，cas拦截就失效了
+		// channelHandlerContext.fireChannelRead(fullHttpRequest);
+		// 加了retain不跳转到cas登录界面，不加184，186，190行业不跳转到cas登录界面，如果加了又不跳转到springmvc
+		// fullHttpRequest.retain();
+		boolean casResult = false;
+		//已登录cas执行下一个handler，未登录跳转到cas界面
+		if (casResult) {
+			channelHandlerContext.fireChannelRead(fullHttpRequest);
+			
+		} else {
+			// Write the initial line and the header.
+			channelHandlerContext.write(response);
 
-		InputStream contentStream = new ByteArrayInputStream(
-				servletResponse.getContentAsByteArray());
+			InputStream contentStream = new ByteArrayInputStream(
+					servletResponse.getContentAsByteArray());
 
-		// Write the content and flush it.
-		ChannelFuture writeFuture = channelHandlerContext
-				.writeAndFlush(new ChunkedStream(contentStream));
-//		writeFuture.addListener(ChannelFutureListener.CLOSE);
+			// Write the content and flush it.
+			ChannelFuture writeFuture = channelHandlerContext
+					.writeAndFlush(new ChunkedStream(contentStream));
+			 writeFuture.addListener(ChannelFutureListener.CLOSE);
+			 fullHttpRequest.retain();
+		}
 
 	}
 }
