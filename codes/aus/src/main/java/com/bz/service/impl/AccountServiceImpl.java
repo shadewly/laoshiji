@@ -65,8 +65,8 @@ public class AccountServiceImpl implements AccountServiceI,UserDetailsService/*A
 
 			// UserDetails aa1=delegate.loadUserByUsername(accountNo);
 
-			account = (Account) SecurityContextHolder.getContext()
-					.getAuthentication().getPrincipal();
+//			account = (Account) SecurityContextHolder.getContext()
+//					.getAuthentication().getPrincipal();
 			account = new Account();
 			account.setAccountNo("yxc");
 
