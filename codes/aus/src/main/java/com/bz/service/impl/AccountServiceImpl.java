@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountServiceI,UserDetailsService/*A
 	@Override
 	public UserDetails loadUserByUsername(String accountNo)
 			throws UsernameNotFoundException {
-		Account account = null;
+//		Account account = null;
 		boolean enabled = true; // 鏄惁鍙敤
 		boolean accountNonExpired = true; // 鏄惁杩囨湡
 		boolean credentialsNonExpired = true;
@@ -67,8 +67,8 @@ public class AccountServiceImpl implements AccountServiceI,UserDetailsService/*A
 
 //			account = (Account) SecurityContextHolder.getContext()
 //					.getAuthentication().getPrincipal();
-			account = new Account();
-			account.setAccountNo("yxc");
+//			account = new Account();
+//			account.setAccountNo("yxc");
 
 			// 閫氳繃瑙掕壊鑾峰彇鏉冮檺
 			Map<String, Object> roleParaMap = new HashMap<String, Object>();
