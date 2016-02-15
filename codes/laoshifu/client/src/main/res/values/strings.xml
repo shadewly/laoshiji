@@ -11,6 +11,12 @@
     <string name="forgetPassword">忘记密码</string>
     <string name="getVerifyCode">获取验证码</string>
     <string name="verifyCode">短信验证码</string>
+    <string name="confirm">确定</string>
+    <string name="action_favorite">收藏夹</string>
+    <string name="action_search">查找</string>
+    <string name="share">分享</string>
+    <string name="homePage">首页</string>
+    <string name="title_activity_main">MainActivity</string>
 
 
 
