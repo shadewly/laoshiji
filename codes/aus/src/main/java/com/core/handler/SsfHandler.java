@@ -41,23 +41,23 @@ import org.springframework.web.util.UriUtils;
 
 public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-	// private final Servlet servlet;
+	 private final Servlet servlet;
 
-	// private final ServletContext servletContext;
+	 private final ServletContext servletContext;
 
 	private final Filter filter;
 
-	public SsfHandler(Filter filter) {
+	public SsfHandler(Filter filter,Servlet servlet) {
 
-		// this.servlet = servlet;
-		// this.servletContext = servlet.getServletConfig().getServletContext();
+		this.servlet = servlet;
+		this.servletContext = servlet.getServletConfig().getServletContext();
 
 		this.filter = filter;
 	}
 
 	private MockHttpServletRequest createServletRequest(
 			FullHttpRequest fullHttpRequest) {
-		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest(this.servletContext);
 		try {
 			UriComponents uriComponents = UriComponentsBuilder.fromUriString(
 					fullHttpRequest.uri()).build();
@@ -78,12 +78,14 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				servletRequest.setServerPort(uriComponents.getPort());
 			}
 
-			Set headerNameSet = fullHttpRequest.headers().names();
-			Iterator headerNames = headerNameSet.iterator();
-			while (headerNames.hasNext()) {
-				String name = headerNames.next().toString();
-				servletRequest.addHeader(name,
-						fullHttpRequest.headers().get(name));
+			Set<CharSequence> namesSet=fullHttpRequest.headers().names();
+			Iterator<CharSequence> namesIterator=namesSet.iterator();
+			while(namesIterator.hasNext()){
+				CharSequence charSequence=namesIterator.next();
+				
+				System.out.println("++"+charSequence.toString());
+				servletRequest.addHeader(charSequence.toString(),
+						fullHttpRequest.headers().get(charSequence.toString()));
 			}
 
 			// for (String name : fullHttpRequest.headers().names()) {
@@ -161,6 +163,7 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+		servletResponse.setHeader("Cookie", "JSESSIONID=ADF3SDFSDF");
 		MockFilterChain filterChain = new MockFilterChain();
 
 		// 创建filter
