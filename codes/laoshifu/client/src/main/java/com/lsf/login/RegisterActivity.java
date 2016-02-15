@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import cn.smssdk.SMSSDK;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        SMSSDK.initSDK(this, "f6ca1b0b0270", "4c2f5b2b09ff8a2206348c2ac1f2ed6d");
+
 
     }
 
