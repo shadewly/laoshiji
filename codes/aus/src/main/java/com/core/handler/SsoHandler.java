@@ -41,23 +41,24 @@ import org.springframework.web.util.UriUtils;
 
 public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-//	private final Servlet servlet;
+	private final Servlet servlet;
 
-//	private final ServletContext servletContext;
+	private final ServletContext servletContext;
 
 	private final Filter filter;
 
-	public SsoHandler(Filter filter) {
+	public SsoHandler(Filter filter,Servlet servlet) {
 
-//		this.servlet = servlet;
-//		this.servletContext = servlet.getServletConfig().getServletContext();
+		this.servlet = servlet;
+		this.servletContext = servlet.getServletConfig().getServletContext();
 
 		this.filter = filter;
 	}
 
 	private MockHttpServletRequest createServletRequest(
 			FullHttpRequest fullHttpRequest) {
-		MockHttpServletRequest servletRequest = new MockHttpServletRequest();
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest(this.servletContext);
+	
 		try {
 			UriComponents uriComponents = UriComponentsBuilder.fromUriString(
 					fullHttpRequest.uri()).build();
@@ -86,10 +87,19 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 						fullHttpRequest.headers().get(name));
 			}
 
-			// for (String name : fullHttpRequest.headers().names()) {
-			// servletRequest.addHeader(name,
-			// fullHttpRequest.headers().get(name));
-			// }
+			Set<CharSequence> namesSet=fullHttpRequest.headers().names();
+			Iterator<CharSequence> namesIterator=namesSet.iterator();
+			while(namesIterator.hasNext()){
+				CharSequence charSequence=namesIterator.next();
+				
+				System.out.println("++"+charSequence.toString());
+				servletRequest.addHeader(charSequence.toString(),
+						fullHttpRequest.headers().get(charSequence.toString()));
+			}
+//			for (String name : fullHttpRequest.headers().nnames()) {
+//				servletRequest.addHeader(name,
+//						fullHttpRequest.headers().get(name));
+//			}
 
 			ByteBuf buf = fullHttpRequest.content();
 			int readable = buf.readableBytes();
@@ -101,6 +111,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				String[] para = params.split("=");
 				if (para.length > 1) {
 					servletRequest.addParameter(para[0], para[1]);
+					
 				} else {
 					servletRequest.addParameter(para[0], "");
 				}
@@ -115,6 +126,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 			for (Entry<String, List<String>> entry : uriComponents
 					.getQueryParams().entrySet()) {
 				for (String value : entry.getValue()) {
+					System.out.println("--"+UriUtils.decode(entry.getKey(), "UTF-8"));
 					servletRequest.addParameter(
 							UriUtils.decode(entry.getKey(), "UTF-8"),
 							UriUtils.decode(value, "UTF-8"));
@@ -161,6 +173,7 @@ public class SsoHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+		servletResponse.setHeader("Cookie", "JSESSIONID=ADF3SDFSDF");
 		MockFilterChain filterChain = new MockFilterChain();
 		
 		//创建filter
