@@ -1,12 +1,12 @@
 package com.demo.service.impl;
 
-import com.demo.annotation.RPCService;
+import com.demo.annotation.RPCComponent;
 import com.demo.service.HelloService;
 
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
-@RPCService(HelloService.class) // 指定远程接口
+@RPCComponent(HelloService.class) // 指定远程接口
 public class HelloServiceImpl implements HelloService {
 
     @Override

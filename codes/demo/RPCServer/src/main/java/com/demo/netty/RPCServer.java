@@ -1,5 +1,6 @@
 package com.demo.netty;
 
+import com.demo.annotation.RPCComponent;
 import com.demo.pojo.RPCRequest;
 import com.demo.pojo.RPCResponse;
 import com.demo.util.RPCDecoder;
@@ -45,10 +46,10 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
 
     @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
-        Map<String, Object> serviceBeanMap = ctx.getBeansWithAnnotation(RPCServer.class); // 获取所有带有 RPCService 注解的 Spring Bean
+        Map<String, Object> serviceBeanMap = ctx.getBeansWithAnnotation(RPCComponent.class); // 获取所有带有 RPCComponent 注解的 Spring Bean
         if (MapUtils.isNotEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
-                String interfaceName = serviceBean.getClass().getAnnotation(RPCServer.class).value().getName();
+                String interfaceName = serviceBean.getClass().getAnnotation(RPCComponent.class).value().getName();
                 handlerMap.put(interfaceName, serviceBean);
             }
         }
