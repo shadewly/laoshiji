@@ -30,24 +30,24 @@ import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
 public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-	 private final Servlet servlet;
+	private final Servlet servlet;
 
-	 private final ServletContext servletContext;
+	private final ServletContext servletContext;
 
 	private final Filter filter;
 
-	public SsfHandler(Filter filter,Servlet servlet) {
+	public SsfHandler(Filter filter, Servlet servlet) {
 
 		this.servlet = servlet;
 		this.servletContext = servlet.getServletConfig().getServletContext();
@@ -57,7 +57,8 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 	private MockHttpServletRequest createServletRequest(
 			FullHttpRequest fullHttpRequest) {
-		MockHttpServletRequest servletRequest = new MockHttpServletRequest(this.servletContext);
+		MockHttpServletRequest servletRequest = new MockHttpServletRequest(
+				this.servletContext);
 		try {
 			UriComponents uriComponents = UriComponentsBuilder.fromUriString(
 					fullHttpRequest.uri()).build();
@@ -78,12 +79,12 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 				servletRequest.setServerPort(uriComponents.getPort());
 			}
 
-			Set<CharSequence> namesSet=fullHttpRequest.headers().names();
-			Iterator<CharSequence> namesIterator=namesSet.iterator();
-			while(namesIterator.hasNext()){
-				CharSequence charSequence=namesIterator.next();
-				
-				System.out.println("++"+charSequence.toString());
+			Set<CharSequence> namesSet = fullHttpRequest.headers().names();
+			Iterator<CharSequence> namesIterator = namesSet.iterator();
+			while (namesIterator.hasNext()) {
+				CharSequence charSequence = namesIterator.next();
+
+				System.out.println("++" + charSequence.toString());
 				servletRequest.addHeader(charSequence.toString(),
 						fullHttpRequest.headers().get(charSequence.toString()));
 			}
@@ -129,6 +130,64 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		return servletRequest;
 	}
 
+	private MockHttpServletResponse createServletResponse(
+			FullHttpRequest fullHttpRequest) {
+		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+		try {
+
+			Set<CharSequence> namesSet = fullHttpRequest.headers().names();
+			Iterator<CharSequence> namesIterator = namesSet.iterator();
+			while (namesIterator.hasNext()) {
+				CharSequence charSequence = namesIterator.next();
+
+				System.out.println("++" + charSequence.toString());
+				servletResponse.addHeader(charSequence.toString(),
+						fullHttpRequest.headers().get(charSequence.toString())
+								.toString());
+			}
+
+			// for (String name : fullHttpRequest.headers().names()) {
+			// servletRequest.addHeader(name,
+			// fullHttpRequest.headers().get(name));
+			// }
+
+			ByteBuf buf = fullHttpRequest.content();
+			int readable = buf.readableBytes();
+			byte[] bytes = new byte[readable];
+			buf.readBytes(bytes);
+			String contentStr = UriUtils.decode(new String(bytes, "UTF-8"),
+					"UTF-8");
+
+			// for (String params : contentStr.split("&")) {
+			// String[] para = params.split("=");
+			// if (para.length > 1) {
+			// servletResponse.addParameter(para[0], para[1]);
+			// } else {
+			// servletRequest.addParameter(para[0], "");
+			// }
+			// }
+
+			// if (uriComponents.getQuery() != null) {
+			// String query = UriUtils.decode(uriComponents.getQuery(),
+			// "UTF-8");
+			// servletRequest.setQueryString(query);
+			// }
+			//
+			// for (Entry<String, List<String>> entry : uriComponents
+			// .getQueryParams().entrySet()) {
+			// for (String value : entry.getValue()) {
+			// servletRequest.addParameter(
+			// UriUtils.decode(entry.getKey(), "UTF-8"),
+			// UriUtils.decode(value, "UTF-8"));
+			// }
+			// }
+		} catch (UnsupportedEncodingException ex) {
+			// shouldn't happen
+		}
+
+		return servletResponse;
+	}
+
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
 			throws Exception {
@@ -163,27 +222,38 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
-		servletResponse.setHeader("Cookie", "JSESSIONID=ADF3SDFSDF");
+
 		MockFilterChain filterChain = new MockFilterChain();
 
 		// 创建filter
 		this.filter.doFilter(servletRequest, servletResponse, filterChain);
 
+		
+		Cookie cookie = new Cookie("JSESSIONID",servletRequest.getSession().getId());  
+		cookie.setSecure(true);
+		cookie.setHttpOnly(true);
+		cookie.setPath("/");
+		servletResponse.addCookie(cookie);
+		servletResponse.addHeader("Set-Cookie", "JSESSIONID="+servletRequest.getSession().getId()+";Path=/;"+"Secure;HttpOnly");
+//		servletResponse.addHeader("Location", servletResponse.getHeader("Location")+"%3Bjessionid%3D"+servletRequest.getSession().getId());
+
+
 		HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse
 				.getStatus());
 		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, status);
-
+	
 		for (String name : servletResponse.getHeaderNames()) {
 			for (Object value : servletResponse.getHeaderValues(name)) {
 				response.headers().addObject(name, value);
 			}
 		}
+	
 		// 调用下一个handler，加了fireChannelRead，cas拦截就失效了
 		// channelHandlerContext.fireChannelRead(fullHttpRequest);
 		// 加了retain不跳转到cas登录界面，不加184，186，190行业不跳转到cas登录界面，如果加了又不跳转到springmvc
 		// fullHttpRequest.retain();
 		boolean casResult = false;
-		//已登录cas执行下一个handler，未登录跳转到cas界面
+		// 已登录cas执行下一个handler，未登录跳转到cas界面
 		if (casResult) {
 			channelHandlerContext.fireChannelRead(fullHttpRequest);
 			fullHttpRequest.retain();
@@ -197,8 +267,8 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 			// Write the content and flush it.
 			ChannelFuture writeFuture = channelHandlerContext
 					.writeAndFlush(new ChunkedStream(contentStream));
-			 writeFuture.addListener(ChannelFutureListener.CLOSE);
-			 fullHttpRequest.retain();
+			writeFuture.addListener(ChannelFutureListener.CLOSE);
+			fullHttpRequest.retain();
 		}
 
 	}
