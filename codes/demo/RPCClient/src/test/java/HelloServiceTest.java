@@ -1,6 +1,5 @@
 import com.demo.netty.RPCProxy;
 import com.demo.service.HelloService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,12 @@ public class HelloServiceTest {
 
     @Test
     public void helloTest() {
-        HelloService helloService = rpcProxy.create(HelloService.class);
-        String result = helloService.hello("World");
-        Assert.assertEquals("Hello! World", result);
+//        for (int i = 0; i < 10; i++) {
+            Long t = System.currentTimeMillis();
+            HelloService helloService = rpcProxy.create(HelloService.class);
+            String result = helloService.hello("World" );
+            System.out.println(result);
+            System.out.println("===>time cost>" +(System.currentTimeMillis()-t));
+//        }
     }
 }

@@ -82,6 +82,7 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
             LOGGER.debug("server started on port {}", port);
 
             if (serviceRegistry != null) {
+                LOGGER.info("Register service!");
                 serviceRegistry.register(serverAddress); // 注册服务地址
             }
 

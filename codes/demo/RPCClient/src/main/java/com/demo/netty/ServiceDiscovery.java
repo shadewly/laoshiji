@@ -86,6 +86,7 @@ public class ServiceDiscovery {
             this.dataList = dataList;
         } catch (KeeperException | InterruptedException e) {
             LOGGER.error("", e);
+            e.printStackTrace();
         }
     }
 }

@@ -56,6 +56,7 @@ public class ServiceRegistry {
             LOGGER.debug("create zookeeper node ({} => {})", path, data);
         } catch (KeeperException | InterruptedException e) {
             LOGGER.error("", e);
+            e.printStackTrace();
         }
     }
 }

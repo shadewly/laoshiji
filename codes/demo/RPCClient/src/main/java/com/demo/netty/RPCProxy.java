@@ -42,7 +42,7 @@ public class RPCProxy {
                         if (serviceDiscovery != null) {
                             serverAddress = serviceDiscovery.discover(); // 发现服务
                         }
-
+                        System.out.println("Discovery service detected!");
                         String[] array = serverAddress.split(":");
                         String host = array[0];
                         int port = Integer.parseInt(array[1]);
