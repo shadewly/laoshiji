@@ -18,12 +18,28 @@ public class HelloServiceTest {
 
     @Test
     public void helloTest() {
-//        for (int i = 0; i < 10; i++) {
+        int i = 0;
+        HelloService helloService = rpcProxy.create(HelloService.class);
+        for (; i < 10; i++) {
             Long t = System.currentTimeMillis();
-            HelloService helloService = rpcProxy.create(HelloService.class);
-            String result = helloService.hello("World" );
+            String result = helloService.hello("World" + i);
             System.out.println(result);
-            System.out.println("===>time cost>" +(System.currentTimeMillis()-t));
+//        result = helloService.handShake("Li lei" + i);
+//        System.out.println(result);
+            System.out.println("===>time cost>" + (System.currentTimeMillis() - t));
+        }
+    }
+
+    @Test
+    public void nettyTest() {
+        HelloService helloService = rpcProxy.create(HelloService.class);
+//        while (true){
+//            TimeUnit.SECONDS.sleep(3);
+//            AskMsg askMsg=new AskMsg();
+//            AskParams askParams=new AskParams();
+//            askParams.setAuth("authToken");
+//            askMsg.setParams(askParams);
+//            bootstrap.socketChannel.writeAndFlush(askMsg);
 //        }
     }
 }

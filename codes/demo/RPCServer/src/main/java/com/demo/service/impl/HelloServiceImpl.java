@@ -13,4 +13,9 @@ public class HelloServiceImpl implements HelloService {
     public String hello(String name) {
         return "Hello! " + name;
     }
+
+    @Override
+    public String handShake(String name) {
+        return "Handshaking with " + name;
+    }
 }

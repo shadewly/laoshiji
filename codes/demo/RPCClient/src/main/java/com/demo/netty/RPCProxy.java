@@ -4,6 +4,7 @@ import com.demo.pojo.RPCRequest;
 import com.demo.pojo.RPCResponse;
 import net.sf.cglib.proxy.InvocationHandler;
 import net.sf.cglib.proxy.Proxy;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -13,15 +14,10 @@ import java.util.UUID;
  */
 public class RPCProxy {
 
-    private String serverAddress;
-    private ServiceDiscovery serviceDiscovery;
+    @Autowired
+    private RPCClient rpcClient;
 
-    public RPCProxy(String serverAddress) {
-        this.serverAddress = serverAddress;
-    }
-
-    public RPCProxy(ServiceDiscovery serviceDiscovery) {
-        this.serviceDiscovery = serviceDiscovery;
+    public RPCProxy(RPCClient rpcClient) {
     }
 
     @SuppressWarnings("unchecked")
@@ -39,16 +35,8 @@ public class RPCProxy {
                         request.setParameterTypes(method.getParameterTypes());
                         request.setParameters(args);
 
-                        if (serviceDiscovery != null) {
-                            serverAddress = serviceDiscovery.discover(); // 发现服务
-                        }
-                        System.out.println("Discovery service detected!");
-                        String[] array = serverAddress.split(":");
-                        String host = array[0];
-                        int port = Integer.parseInt(array[1]);
-
-                        RPCClient client = new RPCClient(host, port); // 初始化 RPC 客户端
-                        RPCResponse response = client.send(request); // 通过 RPC 客户端发送 RPC 请求并获取 RPC 响应
+                        RPCResponse response = rpcClient.send(request); // 通过 RPC 客户端发送 RPC 请求并获取 RPC 响应
+                        System.out.println("return response!");
 
                         if (response.isError()) {
                             throw response.getError();
