@@ -32,6 +32,8 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
+import org.apache.catalina.connector.Response;
+import org.apache.catalina.connector.ResponseFacade;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -39,7 +41,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 
-import com.core.connector.ResponseFacade;
 
 public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
@@ -224,7 +225,8 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
-		ResponseFacade rf=new ResponseFacade();
+		Response response1 =new Response();
+		ResponseFacade rf=new ResponseFacade(response1);
 
 		MockFilterChain filterChain = new MockFilterChain();
 
