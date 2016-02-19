@@ -31,8 +31,6 @@ import javax.servlet.Filter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -40,6 +38,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
+
+import com.core.connector.ResponseFacade;
 
 public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
@@ -224,11 +224,12 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
+		ResponseFacade rf=new ResponseFacade();
 
 		MockFilterChain filterChain = new MockFilterChain();
 
 		// 创建filter
-		this.filter.doFilter(servletRequest, servletResponse, filterChain);
+		this.filter.doFilter(servletRequest, rf, filterChain);
 
 		
 		Cookie cookie = new Cookie("JSESSIONID",servletRequest.getSession().getId());  
@@ -237,7 +238,8 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		cookie.setPath("/");
 		servletResponse.addCookie(cookie);
 		servletResponse.addHeader("Set-Cookie", "JSESSIONID="+servletRequest.getSession().getId()+";Path=/;"+"Secure;HttpOnly");
-//		servletResponse.addHeader("Location", servletResponse.getHeader("Location")+"%3Bjessionid%3D"+servletRequest.getSession().getId());
+//		String url=toEncoded(servletResponse.getHeader("Location"),servletRequest.getSession().getId());
+//		servletResponse.sendRedirect(url);
 
 
 		HttpResponseStatus status = HttpResponseStatus.valueOf(servletResponse
@@ -274,4 +276,37 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 		}
 
 	}
+	
+	protected String toEncoded(String url, String sessionId) {
+
+        if ((url == null) || (sessionId == null)) {
+            return (url);
+        }
+
+        String path = url;
+        String query = "";
+        String anchor = "";
+        int question = url.indexOf('?');
+        if (question >= 0) {
+            path = url.substring(0, question);
+            query = url.substring(question);
+        }
+        int pound = path.indexOf('#');
+        if (pound >= 0) {
+            anchor = path.substring(pound);
+            path = path.substring(0, pound);
+        }
+        StringBuilder sb = new StringBuilder(path);
+        sb.append(query);
+        if( sb.length() > 0 ) { // jsessionid can't be first.
+            sb.append("%3B");//;%3B
+            sb.append("jsessionid");
+            sb.append("%3D");//=%3d
+            sb.append(sessionId);
+        }
+        sb.append(anchor);
+       
+        return (sb.toString());
+
+    }
 }
