@@ -96,9 +96,9 @@ public class BaseChannelInitializer extends ChannelInitializer<SocketChannel> {
 		pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
 		pipeline.addLast("encoder", new HttpResponseEncoder());
 		pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
-		pipeline.addLast("ssoHandler", new SsoHandler(this.singleSignOutFilter));
+//		pipeline.addLast("ssoHandler", new SsoHandler(this.singleSignOutFilter,this.dispatcherServlet));
 		pipeline.addLast("ssfHandler", new SsfHandler(
-				this.delegatingFilterProxy));
+				this.delegatingFilterProxy,this.dispatcherServlet));
 		//为什么添加了springmvc后就不跳转到cas登录页面
 		pipeline.addLast("springMvcHandler", new ServletNettyHandler(
 				this.dispatcherServlet));

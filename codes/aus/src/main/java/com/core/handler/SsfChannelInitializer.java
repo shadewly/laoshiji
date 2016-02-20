@@ -67,7 +67,7 @@ public class SsfChannelInitializer extends ChannelInitializer<SocketChannel> {
 		pipeline.addLast("aggregator", new HttpObjectAggregator(65536));
 		pipeline.addLast("encoder", new HttpResponseEncoder());
 		pipeline.addLast("chunkedWriter", new ChunkedWriteHandler());
-		pipeline.addLast("ssfHandler", new SsfHandler(this.delegatingFilterProxy));
+		pipeline.addLast("ssfHandler", new SsfHandler(this.delegatingFilterProxy,this.dispatcherServlet));
 		pipeline.addLast("springMvcHandler", new ServletNettyHandler(
 				this.dispatcherServlet));
 
