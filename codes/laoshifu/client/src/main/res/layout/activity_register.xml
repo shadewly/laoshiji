@@ -18,6 +18,7 @@
     </android.support.v7.widget.Toolbar>
 
         <EditText
+            android:id="@+id/user_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -27,7 +28,7 @@
             android:paddingLeft="10dp"
             android:textSize="20sp"
             android:background="#ffffff"
-            android:text="@string/hint_phone">
+            android:hint="@string/hint_phone">
         </EditText>
 
     <LinearLayout
@@ -36,6 +37,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/verifyCode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -45,14 +47,15 @@
             android:textSize="20sp"
             android:layout_weight="4"
             android:background="#ffffff"
-            android:text="@string/verifyCode">
+            android:hint="@string/verifyCode">
         </EditText>
 
         <Button
+            android:id="@+id/getVerifyCode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_marginRight="20dp"
             android:text="@string/getVerifyCode"/>
 
@@ -63,10 +66,11 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/confirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_marginTop="40dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
