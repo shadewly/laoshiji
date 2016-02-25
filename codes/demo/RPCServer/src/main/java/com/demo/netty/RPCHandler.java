@@ -2,7 +2,6 @@ package com.demo.netty;
 
 import com.demo.pojo.RPCRequest;
 import com.demo.pojo.RPCResponse;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.sf.cglib.reflect.FastClass;
@@ -40,17 +39,20 @@ public class RPCHandler extends SimpleChannelInboundHandler<RPCRequest> {
 
         FastClass serviceFastClass = FastClass.create(serviceClass);
         FastMethod serviceFastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
-        return serviceFastMethod.invoke(serviceBean, parameters);
+        Object obj= serviceFastMethod.invoke(serviceBean, parameters);
+        return obj;
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         LOGGER.error("server caught exception", cause);
+        System.out.print("server caught exception");
         ctx.close();
     }
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, RPCRequest request) throws Exception {
+        System.out.println("Receive message in server side");
         RPCResponse response = new RPCResponse();
         response.setRequestId(request.getRequestId());
         try {
@@ -59,6 +61,7 @@ public class RPCHandler extends SimpleChannelInboundHandler<RPCRequest> {
         } catch (Throwable t) {
             response.setError(t);
         }
-        ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+//        ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
+        ctx.writeAndFlush(response);
     }
 }

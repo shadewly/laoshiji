@@ -86,6 +86,9 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 serviceRegistry.register(serverAddress); // 注册服务地址
             }
 
+            if(future.isSuccess()){
+                System.out.println("Server started!");
+            }
             future.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();

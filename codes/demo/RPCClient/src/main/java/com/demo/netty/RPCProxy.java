@@ -36,7 +36,6 @@ public class RPCProxy {
                         request.setParameters(args);
 
                         RPCResponse response = rpcClient.send(request); // 通过 RPC 客户端发送 RPC 请求并获取 RPC 响应
-                        System.out.println("return response!");
 
                         if (response.isError()) {
                             throw response.getError();

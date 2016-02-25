@@ -12,7 +12,9 @@
 
     <!--配置RPC 客户端-->
     <bean id="rpcClient" class="com.demo.netty.RPCClient">
-        <constructor-arg ref="serviceDiscovery"/>
+        <constructor-arg name="host" value="192.168.30.57"/>
+        <constructor-arg name="port" value="8000"/>
+        <!--<constructor-arg ref="serviceDiscovery"/>-->
     </bean>
     <!-- 配置 RPC 代理 -->
     <bean id="rpcProxy" class="com.demo.netty.RPCProxy">
