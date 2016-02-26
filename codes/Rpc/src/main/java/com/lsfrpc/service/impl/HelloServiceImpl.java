@@ -1,0 +1,20 @@
+package com.lsfrpc.service.impl;
+
+import com.lsfrpc.annotation.RPCComponent;
+import com.lsfrpc.service.HelloService;
+
+/**
+ * Created by Wang LinYong on 2016-02-17.
+ */
+@RPCComponent(HelloServiceImpl.class) // 指定远程接口
+public class HelloServiceImpl implements HelloService {
+    @Override
+    public String hello(String name) {
+        return "Hello! " + name;
+    }
+
+    @Override
+    public String handShake(String name) {
+        return "Handshaking with " + name;
+    }
+}

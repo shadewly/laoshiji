@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:property-placeholder location="classpath:properties/rpcConfig.properties"/>
+
+    <!--====================================Server Config==================================-->
+    <!-- 配置服务注册组件 -->
+    <bean id="serviceRegistry" class="com.lsfrpc.netty.rpcManagement.ServiceRegistry">
+        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    </bean>
+
+    <!-- 配置 RPC 服务器 -->
+    <bean id="rpcServer" class="com.lsfrpc.netty.RPCServer">
+        <constructor-arg name="serverAddress">
+            <list>
+                <value>${server.address1}</value>
+                <value>${server.address2}</value>
+                <value>${server.address3}</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="serviceRegistry" ref="serviceRegistry"/>
+    </bean>
+
+    <!--====================================Client Config==================================-->
+    <!-- 配置服务注册组件 -->
+    <bean id="serviceDiscovery" class="com.lsfrpc.netty.rpcManagement.ServiceDiscovery">
+        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    </bean>
+</beans>
