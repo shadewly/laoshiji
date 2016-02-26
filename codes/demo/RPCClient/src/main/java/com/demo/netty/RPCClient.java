@@ -49,6 +49,9 @@ public class RPCClient extends SimpleChannelInboundHandler<RPCResponse> {
                         @Override
                         public void initChannel(SocketChannel channel) throws Exception {
                             channel.pipeline()
+//                            private final static int readerIdleTimeSeconds = 40;//读操作空闲30秒
+//                            private final static int writerIdleTimeSeconds = 50;//写操作空闲60秒
+//                            private final static int allIdleTimeSeconds = 100;//读写全部空闲100秒
                                     .addLast(new IdleStateHandler(20, 10, 0))
                                     .addLast(new RPCEncoder(RPCRequest.class)) // 将 RPC 请求进行编码（为了发送请求）
                                     .addLast(new RPCDecoder(RPCResponse.class)) // 将 RPC 响应进行解码（为了处理响应）
@@ -66,11 +69,13 @@ public class RPCClient extends SimpleChannelInboundHandler<RPCResponse> {
 
             ChannelFuture future = bootstrap.connect(host, port).sync();
             if (future.isSuccess()) {
+                System.out.println("connect server  成功---------");
                 socketChannel = (SocketChannel) future.channel();
             }
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("Connect server error!", e);
+            System.exit(-1);
         }
     }
 
@@ -87,9 +92,11 @@ public class RPCClient extends SimpleChannelInboundHandler<RPCResponse> {
             }
         }
     }
+
     @Override
     public void messageReceived(ChannelHandlerContext ctx, RPCResponse response) throws Exception {
         this.response = response;
+        System.out.println("lock obj when received!");
         synchronized (obj) {
             System.out.println("Thread " + Thread.currentThread().getName() + " notify all after receive response!");
             obj.notifyAll(); // 收到响应，唤醒线程
@@ -104,15 +111,30 @@ public class RPCClient extends SimpleChannelInboundHandler<RPCResponse> {
 
     public RPCResponse send(RPCRequest request) throws Exception {
 
+        System.out.println("lock obj when send!");
         synchronized (obj) {
-            socketChannel.writeAndFlush(request).sync();
-            System.out.println("Thread " + Thread.currentThread().getName() + " waiting after send request!");
+//            socketChannel.writeAndFlush(request).sync();
+            System.out.println("Thread " + Thread.currentThread().getName() + ",and socketChannel[" + socketChannel + "]waiting before send request!");
+            socketChannel.writeAndFlush(request).addListener(new ChannelFutureListener() {
+
+                @Override
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if (future.isSuccess()) {
+                        System.out.println("Client>>write and flush over:" + future.isSuccess());
+                    } else {
+                        System.out.println("error================>:" + future.isSuccess());
+                        future.cause().printStackTrace();
+                        future.channel().close();
+                    }
+                }
+            });
+            System.out.println("send msg end!");
             obj.wait(); // 未收到响应，使线程等待
         }
 
-//        if (response != null) {
+        if (response != null) {
 //            socketChannel.closeFuture().sync();
-//        }
+        }
         return response;
     }
 

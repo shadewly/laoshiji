@@ -67,13 +67,18 @@ public class DiscardClientHandler extends SimpleChannelInboundHandler<Object> {
         // Flush the outbound buffer to the socket.
         // Once flushed, generate the same amount of traffic again.
         ctx.writeAndFlush(content.duplicate().retain()).addListener(trafficGenerator);
+        ctx.writeAndFlush(content.duplicate().retain()).addListener(trafficGenerator);
+        ctx.writeAndFlush(content.duplicate().retain()).addListener(trafficGenerator);
+        ctx.writeAndFlush(content.duplicate().retain()).addListener(trafficGenerator);
+
     }
 
     private final ChannelFutureListener trafficGenerator = new ChannelFutureListener() {
         public void operationComplete(ChannelFuture future) {
             System.out.println("DiscardClientHandler->operationComplete:"+future.isSuccess());
             if (future.isSuccess()) {
-                generateTraffic();
+//                generateTraffic();
+                System.out.println("Client>>write and flush over:"+future.isSuccess());
             } else {
                 future.cause().printStackTrace();
                 future.channel().close();
