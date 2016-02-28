@@ -3,7 +3,8 @@ package com.lsfrpc.netty;
 import com.lsfrpc.annotation.RPCComponent;
 import com.lsfrpc.netty.encoder.RPCDecoder;
 import com.lsfrpc.netty.encoder.RPCEncoder;
-import com.lsfrpc.netty.rpcManagement.ServiceRegistry;
+import com.lsfrpc.netty.handler.ServerHandler;
+import com.lsfrpc.netty.zookeeper.ServiceRegistry;
 import com.lsfrpc.pojo.RPCRequest;
 import com.lsfrpc.pojo.RPCResponse;
 import io.netty.bootstrap.ServerBootstrap;
@@ -32,18 +33,35 @@ import java.util.concurrent.ConcurrentMap;
 public class RPCServer implements ApplicationContextAware, InitializingBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(RPCServer.class);
 
-    private String[] serverAddress;
+    private String[] serverAddresses;
     private ServiceRegistry serviceRegistry;
-
+    private EventLoopGroup bossGroup = new NioEventLoopGroup();
+    private EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private ServerBootstrap bootstrap = new ServerBootstrap();
     private ConcurrentMap<String, Object> handlerMap = new ConcurrentHashMap<>(); // 存放接口名与服务对象之间的映射关系
 
-    public RPCServer(String... serverAddress) {
-        this.serverAddress = serverAddress;
+    public RPCServer(String... serverAddresses) {
+        this.serverAddresses = serverAddresses;
     }
 
-    public RPCServer(ServiceRegistry serviceRegistry, String... serverAddress) {
+    public RPCServer(ServiceRegistry serviceRegistry, String... serverAddresses) {
         this.serviceRegistry = serviceRegistry;
-        this.serverAddress = serverAddress;
+        this.serverAddresses = serverAddresses;
+    }
+
+    private void init() {
+        bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+                .childHandler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    public void initChannel(SocketChannel channel) throws Exception {
+                        channel.pipeline()
+                                .addLast(new RPCDecoder(RPCRequest.class)) // 将 RPC 请求进行解码（为了处理请求）
+                                .addLast(new RPCEncoder(RPCResponse.class)) // 将 RPC 响应进行编码（为了返回响应）
+                                .addLast(new ServerHandler(handlerMap)); // 处理 RPC 请求
+                    }
+                })
+                .option(ChannelOption.SO_BACKLOG, 128)
+                .childOption(ChannelOption.SO_KEEPALIVE, true);
     }
 
     @Override
@@ -59,42 +77,37 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap bootstrap = new ServerBootstrap();
-            bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        public void initChannel(SocketChannel channel) throws Exception {
-                            channel.pipeline()
-                                    .addLast(new RPCDecoder(RPCRequest.class)) // 将 RPC 请求进行解码（为了处理请求）
-                                    .addLast(new RPCEncoder(RPCResponse.class)) // 将 RPC 响应进行编码（为了返回响应）
-                                    .addLast(new RPCHandler(handlerMap)); // 处理 RPC 请求
-                        }
-                    })
-                    .option(ChannelOption.SO_BACKLOG, 128)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true);
+        init();
+    }
 
-            String[] array = serverAddress[0].split(":");
-            String host = array[0];
-            int port = Integer.parseInt(array[1]);
+    public void shutDown() {
+        workerGroup.shutdownGracefully();
+        bossGroup.shutdownGracefully();
+    }
 
-            ChannelFuture future = bootstrap.bind(host, port).sync();
-            LOGGER.debug("server started on port {}", port);
+    public void bind(String... serverAddresses) {
+        for (String serverAddress : serverAddresses) {
+            try {
+                String[] array = serverAddress.split(":");
+                String host = array[0];
+                int port = Integer.parseInt(array[1]);
 
-            if (serviceRegistry != null) {
-                LOGGER.info("Register service!");
-                serviceRegistry.register(serverAddress[0]); // 注册服务地址
+                ChannelFuture future = null;
+                future = bootstrap.bind(host, port).sync();
+                LOGGER.debug("Server started on port {}", port);
+
+                if (serviceRegistry != null) {
+                    LOGGER.info("Register service address [{}]!", serverAddress);
+                    serviceRegistry.register(serverAddress); // 注册服务地址
+                }
+                if (future.isSuccess()) {
+                    LOGGER.debug("Start server with address [{}] success!", serverAddress);
+                }
+                future.channel().closeFuture().sync();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                LOGGER.error("Bind server error with address [{}]", serverAddress);
             }
-
-            if (future.isSuccess()) {
-                System.out.println("Server started!");
-            }
-            future.channel().closeFuture().sync();
-        } finally {
-            workerGroup.shutdownGracefully();
-            bossGroup.shutdownGracefully();
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.lsfrpc.netty;
 
-import com.lsfrpc.netty.rpcManagement.ServiceDiscovery;
+import com.lsfrpc.netty.zookeeper.ServiceDiscovery;
 import com.lsfrpc.pojo.RPCRequest;
 import com.lsfrpc.pojo.RPCResponse;
 import com.lsfrpc.netty.encoder.RPCDecoder;

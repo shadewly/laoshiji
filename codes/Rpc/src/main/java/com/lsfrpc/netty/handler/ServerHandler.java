@@ -1,4 +1,4 @@
-package com.lsfrpc.netty;
+package com.lsfrpc.netty.handler;
 
 import com.lsfrpc.pojo.RPCRequest;
 import com.lsfrpc.pojo.RPCResponse;
@@ -14,13 +14,13 @@ import java.util.Map;
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
-public class RPCHandler extends SimpleChannelInboundHandler<RPCRequest> {
+public class ServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RPCHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerHandler.class);
 
     private final Map<String, Object> handlerMap;
 
-    public RPCHandler(Map<String, Object> handlerMap) {
+    public ServerHandler(Map<String, Object> handlerMap) {
         this.handlerMap = handlerMap;
     }
     

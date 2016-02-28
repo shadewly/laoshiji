@@ -1,4 +1,4 @@
-package com.lsfrpc.util;
+package com.lsfrpc.netty.serialization;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;

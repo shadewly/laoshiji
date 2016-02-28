@@ -1,6 +1,5 @@
-package com.lsfrpc.netty.rpcManagement;
+package com.lsfrpc.netty.zookeeper;
 
-import com.lsfrpc.netty.Constant;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
