@@ -49,6 +49,10 @@ public class ServiceDiscovery {
         return data;
     }
 
+    public List<String> discoverList() {
+        return dataList;
+    }
+
     private ZooKeeper connectServer() {
         ZooKeeper zk = null;
         try {
@@ -69,12 +73,9 @@ public class ServiceDiscovery {
 
     private void watchNode(final ZooKeeper zk) {
         try {
-            List<String> nodeList = zk.getChildren(Constant.ZK_REGISTRY_PATH, new Watcher() {
-                @Override
-                public void process(WatchedEvent event) {
-                    if (event.getType() == Event.EventType.NodeChildrenChanged) {
-                        watchNode(zk);
-                    }
+            List<String> nodeList = zk.getChildren(Constant.ZK_REGISTRY_PATH, event -> {
+                if (event.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
+                    watchNode(zk);
                 }
             });
             List<String> dataList = new ArrayList<>();
@@ -85,7 +86,7 @@ public class ServiceDiscovery {
             LOGGER.debug("node data: {}", dataList);
             this.dataList = dataList;
         } catch (KeeperException | InterruptedException e) {
-            LOGGER.error("", e);
+            LOGGER.error("watch zoo keeper node error!", e);
             e.printStackTrace();
         }
     }

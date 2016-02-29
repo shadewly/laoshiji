@@ -15,36 +15,35 @@ import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
 public class RPCClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RPCClient.class);
-
-    private String host;
-    private int port;
-    private SocketChannel socketChannel;
+    private Bootstrap bootstrap = new Bootstrap();
+    private List<ChannelFuture> channelFutures;
+    private String[] serverAddresses = new String[0];
     private RPCResponse response;
     private ServiceDiscovery serviceDiscovery;
 
     private final Object obj = new Object();
 
-    public RPCClient(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public RPCClient(String... serverAddresses) {
+        this.serverAddresses = serverAddresses;
         initial();
     }
 
     public RPCClient(ServiceDiscovery serviceDiscovery) {
         this.serviceDiscovery = serviceDiscovery;
-        initial();
+        serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
     }
 
     private void initial() {
         try {
             EventLoopGroup group = new NioEventLoopGroup();
-            Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group).channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
@@ -60,23 +59,31 @@ public class RPCClient {
                         }
                     })
                     .option(ChannelOption.SO_KEEPALIVE, true);
-
-            if (serviceDiscovery != null) {
-                String serverAddress = serviceDiscovery.discover(); // 发现服务
-                String[] array = serverAddress.split(":");
-                host = array[0];
-                port = Integer.parseInt(array[1]);
-            }
-
-            ChannelFuture future = bootstrap.connect(host, port).sync();
-            if (future.isSuccess()) {
-                System.out.println("connect server  成功---------");
-                socketChannel = (SocketChannel) future.channel();
-            }
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error("Connect server error!", e);
             System.exit(-1);
+        }
+    }
+
+    public void startUp() {
+        if (serviceDiscovery != null) {
+            for (String address : serverAddresses) {
+                String[] array = address.split(":");
+                String host = array[0];
+                int port = Integer.parseInt(array[1]);
+                try {
+                    ChannelFuture future = bootstrap.connect(host, port).sync();
+                    if (future.isSuccess()) {
+                        LOGGER.debug("connect server[{}]  success!", address);
+                        channelFutures.add(future);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    LOGGER.error("Connect {} error!", address);
+                }
+            }
+
         }
     }
 }
