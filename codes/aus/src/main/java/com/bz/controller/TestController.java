@@ -3,6 +3,7 @@ package com.bz.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bz.service.TestServiceI;
-import com.core.util.JsonUtil;
 
 @Controller
 @RequestMapping("/test")
@@ -25,14 +25,15 @@ public class TestController {
 	}
 
 	@RequestMapping(params = "bb")
-	public void createmenu(HttpServletResponse response, Integer fatherId) {
+	public void createmenu(HttpServletRequest request,HttpServletResponse response, Integer fatherId) {
 		try {
 
 			Map<String, Object> aa = new HashMap<String, Object>();
 			aa.put("bb", testService.aa());
 			System.out.println("----->"+Thread.currentThread().getName());
-			
-			JsonUtil.writeJson(response, aa);
+			response.sendRedirect("https://localhost:8449");
+//			request.getRequestDispatcher("https://localhost:8449").forward(request, response);
+//			JsonUtil.writeJson(response, aa);
 		} catch (Exception e) {
 
 			e.printStackTrace();
