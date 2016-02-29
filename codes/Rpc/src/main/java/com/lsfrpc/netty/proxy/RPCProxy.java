@@ -1,5 +1,6 @@
-package com.lsfrpc.netty;
+package com.lsfrpc.netty.proxy;
 
+import com.lsfrpc.netty.RPCClient;
 import com.lsfrpc.pojo.RPCRequest;
 import com.lsfrpc.pojo.RPCResponse;
 import net.sf.cglib.proxy.InvocationHandler;

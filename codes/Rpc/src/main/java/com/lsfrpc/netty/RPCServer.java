@@ -70,7 +70,10 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
         if (MapUtils.isNotEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 String interfaceName = serviceBean.getClass().getAnnotation(RPCComponent.class).value().getName();
-                handlerMap.put(interfaceName, serviceBean);
+                Object previousObj = handlerMap.putIfAbsent(interfaceName, serviceBean);
+                if (previousObj != null) {
+                    LOGGER.warn("Found replicate service {}, replaced", interfaceName);
+                }
             }
         }
     }
@@ -78,6 +81,7 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         init();
+        bind(this.serverAddresses);
     }
 
     public void shutDown() {

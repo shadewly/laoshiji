@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <jmxConfigurator/>
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%level]%d{HH:mm:ss.SSS}-%logger{5} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${HOME}/logs/ShineHIS-SystemOut.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${HOME}/logs/ShineHIS-log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+
+        <file>${HOME}/logs/error/ShineHIS-SystemErr.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${HOME}/logs/error/ShineHIS-error.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.ibatis.io.ResolverUtil">
+        <level value="error"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <!--添加到根logger-->
+        <appender-ref ref="FILE-ERROR"/>
+        <!--添加到根logger-->
+        <appender-ref ref="FILE"/>
+        <!--添加到根logger-->
+    </root>
+</configuration>
