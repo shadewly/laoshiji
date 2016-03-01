@@ -22,9 +22,9 @@ import java.util.List;
  */
 public class RPCClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RPCClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);
     private Bootstrap bootstrap = new Bootstrap();
-    private List<ChannelFuture> channelFutures;
+    private List<SocketChannel> socketChannelList;
     private String[] serverAddresses = new String[0];
     private RPCResponse response;
     private ServiceDiscovery serviceDiscovery;
@@ -61,7 +61,7 @@ public class RPCClient {
                     .option(ChannelOption.SO_KEEPALIVE, true);
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.error("Connect server error!", e);
+            logger.error("Connect server error!", e);
             System.exit(-1);
         }
     }
@@ -75,15 +75,33 @@ public class RPCClient {
                 try {
                     ChannelFuture future = bootstrap.connect(host, port).sync();
                     if (future.isSuccess()) {
-                        LOGGER.debug("connect server[{}]  success!", address);
-                        channelFutures.add(future);
+                        logger.debug("connect server[{}]  success!", address);
+                        socketChannelList.add((SocketChannel) future.channel());
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    LOGGER.error("Connect {} error!", address);
+                    logger.error("Connect {} error!", address);
                 }
             }
 
         }
     }
+
+    public RPCResponse send(RPCRequest request) throws Exception {
+        SocketChannel socketChannel = getChannel();
+        ChannelFuture channelFuture = socketChannel.writeAndFlush(request).addListener(future -> {
+            if (future.isSuccess()) {
+                logger.debug("Channel[{}] send request success!", socketChannel);
+            } else {
+                logger.debug("Channel[{}] send request failed! caused by {}", socketChannel, future.cause());
+                future.cause().printStackTrace();
+            }
+        });
+        return response;
+    }
+
+    private SocketChannel getChannel() {
+        return null;
+    }
+
 }
