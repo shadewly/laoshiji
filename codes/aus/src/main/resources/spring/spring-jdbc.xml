@@ -5,12 +5,12 @@
           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
     <!-- 配置DataSource数据源 start -->
-    <bean id="ausDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+    <bean id="webServerDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
-        <property name="driverClass" value="${aus.driverclass}"></property>
-        <property name="jdbcUrl" value="${aus.jdbcurl}"></property>
-        <property name="user" value="${aus.user}"></property>
-        <property name="password" value="${aus.password}"></property>
+        <property name="driverClass" value="${webServer.driverclass}"></property>
+        <property name="jdbcUrl" value="${webServer.jdbcurl}"></property>
+        <property name="user" value="${webServer.user}"></property>
+        <property name="password" value="${webServer.password}"></property>
         <property name="acquireIncrement" value="5"></property>
         <!-- 当连接池中的连接用完时，C3P0一次性创建新连接的数目2 -->
         <property name="initialPoolSize" value="10"></property>
@@ -29,7 +29,7 @@
 
     <!-- 配置SqlSessionFactoryBean -->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="ausDataSource"/>
+        <property name="dataSource" ref="webServerDataSource"/>
         <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
         <!-- mapper和resultmap配置路径 -->
         <property name="mapperLocations">
@@ -48,7 +48,7 @@
         <constructor-arg ref="sessionFactory"/>
         <property name="targetSqlSessionFactorys">
             <map>
-                <entry value-ref="sessionFactory" key="aus"/>
+                <entry value-ref="sessionFactory" key="webServer"/>
             </map>
         </property>
     </bean>

@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>baishi</groupId>
-	<artifactId>aus</artifactId>
+	<artifactId>webServer</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>aus</name>
+	<name>webServer</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
@@ -133,14 +133,10 @@
 			<artifactId>cas-client-core</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-catalina</artifactId>
-			<version>8.0.23</version>
-		</dependency>
+	
 	</dependencies>
 	<build>
-		<finalName>aus</finalName>
+		<finalName>webServer</finalName>
 		<plugins>
 			<plugin>
 				<!--The Spring Boot Maven plugin provides many convenient features: -->

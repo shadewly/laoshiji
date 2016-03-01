@@ -32,10 +32,6 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 
-import org.apache.catalina.connector.Request;
-import org.apache.catalina.connector.RequestFacade;
-import org.apache.catalina.connector.Response;
-import org.apache.catalina.connector.ResponseFacade;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -227,15 +223,12 @@ public class SsfHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
 		MockHttpServletRequest servletRequest = createServletRequest(fullHttpRequest);
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
-		Request request1 =new Request();
-		RequestFacade rq=new RequestFacade(request1);
-		Response response1 =new Response();
-		ResponseFacade rf=new ResponseFacade(response1);
+	
 
 		MockFilterChain filterChain = new MockFilterChain();
 
 		// 创建filter
-		this.filter.doFilter(rq, rf, filterChain);
+		this.filter.doFilter(servletRequest, servletResponse, filterChain);
 
 		
 		Cookie cookie = new Cookie("JSESSIONID",servletRequest.getSession().getId());  

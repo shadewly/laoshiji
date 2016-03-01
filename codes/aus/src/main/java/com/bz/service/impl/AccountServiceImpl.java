@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountServiceI,UserDetailsService/*A
 		try {
 			// ****** 账号需要cas端返回，角色集合需要启动时加载中获取
 			CustomerContextHolder
-					.setContextType(CustomerContextHolder.SESSION_FACTORY_AUS);
+					.setContextType(CustomerContextHolder.SESSION_FACTORY_WEB_SERVER);
 			// SecurityContextImpl securityContextImpl = (SecurityContextImpl)
 			// request
 			// .getSession().getAttribute("SPRING_SECURITY_CONTEXT");
