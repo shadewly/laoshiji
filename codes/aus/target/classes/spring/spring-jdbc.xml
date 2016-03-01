@@ -34,7 +34,8 @@
         <!-- mapper和resultmap配置路径 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath:com/bz/dao/*.xml</value>
+                <value>classpath:com/aus/dao/*.xml</value>
+                 <value>classpath:com/test/dao/*.xml</value>
                 <!-- 表示在com.hoo.resultmap包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
                 <!-- <value>classpath:com/hoo/resultmap/**/*-resultmap.xml</value> <value>classpath:com/hoo/entity/*-resultmap.xml</value>
                     <value>classpath:com/hoo/mapper/**/*-mapper.xml</value> -->
@@ -44,7 +45,7 @@
 
     <!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
     <bean id="sqlSessionTemplate"
-          class="com.core.mybatis.CustomSqlSessionTemplate">
+          class="com.common.mybatis.CustomSqlSessionTemplate">
         <constructor-arg ref="sessionFactory"/>
         <property name="targetSqlSessionFactorys">
             <map>
@@ -57,7 +58,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
-        <property name="markerInterface" value="com.core.mybatis.SqlMapper"/>
+        <property name="markerInterface" value="com.common.mybatis.SqlMapper"/>
     </bean>
     
     <!-- 系统启动对应dao和service都未生成实力，所以必须用这种方式配置 -->

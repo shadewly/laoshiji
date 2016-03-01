@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aus.dao.RoleDao">
+
+	<resultMap id="roleMap" type="com.aus.model.Role">
+		<id property="roleId" column="roleId" />
+		<result property="roleName" column="roleName" />
+		<result property="roleCode" column="roleCode" />
+		<!-- <collection property="urlList" ofType="com.aus.model.Url" select="selectUrlListByAuthCode" 
+			column="authCode"></collection> -->
+	</resultMap>
+
+	<select id="selectRoleList" resultMap="roleMap" parameterType="Map">
+		select T1.ROLE_ID AS
+		roleId,
+		T1.ROLE_NAME AS roleName,
+		T1.ROLE_CODE AS
+		roleCode
+		from
+		ROLE
+		T1
+		<if test="accountNo!=null">
+			,ROLE_ACCOUNT T2 WHERE T2.ROLE_CODE=T1.ROLE_CODE AND
+			T2.ACCOUNT_NO=#{accountNo}
+		</if>
+	</select>
+
+
+
+</mapper>
