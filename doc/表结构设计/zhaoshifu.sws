@@ -4,7 +4,9 @@
 
 <Workspace>
 	<Local Expanded="Yes" Name="zhaoshifu">
-		<Model Expanded="Yes" ID="{97341944-6745-40EB-935E-B9950E710151}" Name="zhaoshifu-shifu" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="../zhaoshifuDB.pdm"/>
+		<Model Expanded="Yes" ID="{97341944-6745-40EB-935E-B9950E710151}" Loaded="No" Name="zhaoshifu-shifu" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="../zhaoshifuDB.pdm"/>
+		<Model Expanded="Yes" ID="{97341944-6745-40EB-935E-B9950E710151}" Name="zhaoshifu-shifu" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="zhaoshifuDB.pdm"/>
+		<Model Expanded="Yes" ID="{49393082-52F9-4053-9E3A-57B57A84689B}" Name="zhaoshifu" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="../类图/zhaoshifu.oom"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
