@@ -1,5 +1,7 @@
 package com.lsfrpc.pojo;
 
+import java.util.UUID;
+
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
@@ -9,6 +11,11 @@ public class RPCRequest {
     private String methodName;
     private Class<?>[] parameterTypes;
     private Object[] parameters;
+
+    public RPCRequest() {
+        requestId = UUID.randomUUID().toString();
+
+    }
 
     public String getRequestId() {
         return requestId;

@@ -1,8 +1,10 @@
 package com.lsfrpc.netty.channel;
 
 
+import com.lsfrpc.netty.RPCClient;
 import com.lsfrpc.netty.future.InvokeFuture;
 import com.lsfrpc.pojo.RPCRequest;
+import com.lsfrpc.pojo.RPCResponse;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelId;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Wang Linyong on 2016/3/1.
@@ -19,10 +22,30 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RPCChannel {
     private static Logger logger = LoggerFactory.getLogger(RPCChannel.class);
     private Channel channel;
-    private Map<ChannelId, InvokeFuture> futureMap = new ConcurrentHashMap<>();
+    private RPCClient client;
+    private Map<String, InvokeFuture> futureMap = new ConcurrentHashMap<>();
     private ChannelGroup channelGroup;
 
-    public InvokeFuture send(RPCRequest request) throws Exception {
+    public RPCChannel(RPCClient client, Channel channel) {
+        this.client = client;
+        this.channel = channel;
+    }
+
+    public ChannelId id() {
+        return channel.id();
+    }
+
+    public InvokeFuture getFuture(ChannelId id) {
+        return futureMap.get(id);
+    }
+
+    public InvokeFuture removeFuture(ChannelId id) {
+        return futureMap.remove(id);
+    }
+
+    public RPCResponse send(RPCRequest request) {
+        InvokeFuture<RPCResponse> invokeFuture = new InvokeFuture<>();
+        futureMap.put(request.getRequestId(), invokeFuture);
         ChannelFuture channelFuture = channel.writeAndFlush(request).addListener(future -> {
             if (future.isSuccess()) {
                 logger.debug("Channel[{}] send request success!", channel);
@@ -31,6 +54,30 @@ public class RPCChannel {
                 future.cause().printStackTrace();
             }
         });
-        return null;
+        return invokeFuture.getResult(10, TimeUnit.SECONDS);
+    }
+
+    public ChannelGroup getChannelGroup() {
+        return channelGroup;
+    }
+
+    public void setChannelGroup(ChannelGroup channelGroup) {
+        this.channelGroup = channelGroup;
+    }
+
+    public RPCClient getClient() {
+        return client;
+    }
+
+    public void setClient(RPCClient client) {
+        this.client = client;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
 }

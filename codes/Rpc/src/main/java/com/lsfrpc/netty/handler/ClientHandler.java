@@ -1,7 +1,11 @@
 package com.lsfrpc.netty.handler;
 
+import com.lsfrpc.netty.RPCClient;
+import com.lsfrpc.netty.channel.RPCChannel;
+import com.lsfrpc.netty.future.InvokeFuture;
 import com.lsfrpc.pojo.RPCResponse;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
@@ -12,17 +16,24 @@ import org.slf4j.LoggerFactory;
  */
 public class ClientHandler extends SimpleChannelInboundHandler<RPCResponse> {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientHandler.class);
+    private RPCClient client;
+
+    public ClientHandler(RPCClient client) {
+        this.client = client;
+    }
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, RPCResponse msg) throws Exception {
-        System.out.println("lock obj when received!");
-            System.out.println("Thread " + Thread.currentThread().getName() + " notify all after receive response!");
+        ChannelId id = ctx.channel().id();
+        RPCChannel rpcChannel = client.getSocketChannelMap().get(id);
+        InvokeFuture<RPCResponse> invokeFuture = rpcChannel.getFuture(id);
+        invokeFuture.setResult(msg);
+        rpcChannel.removeFuture(id);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         LOGGER.error("client caught exception", cause);
-        ctx.close();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ServiceRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRegistry.class);
 
-    private CountDownLatch latch = new CountDownLatch(3);
+    private CountDownLatch latch = new CountDownLatch(1);
 
     private String registryAddress;
 

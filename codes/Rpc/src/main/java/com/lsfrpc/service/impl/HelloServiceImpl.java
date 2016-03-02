@@ -6,7 +6,7 @@ import com.lsfrpc.service.HelloService;
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
-@RPCComponent(HelloServiceImpl.class) // 指定远程接口
+@RPCComponent(HelloService.class) // 指定远程接口
 public class HelloServiceImpl implements HelloService {
     @Override
     public String hello(String name) {

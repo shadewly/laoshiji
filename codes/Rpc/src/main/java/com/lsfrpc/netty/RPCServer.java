@@ -98,7 +98,7 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
 
                 ChannelFuture future = null;
                 future = bootstrap.bind(host, port).sync();
-                LOGGER.debug("Server started on port {}", port);
+                LOGGER.warn("Server started on port {}", port);
 
                 if (serviceRegistry != null) {
                     LOGGER.info("Register service address [{}]!", serverAddress);
@@ -107,7 +107,6 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 if (future.isSuccess()) {
                     LOGGER.debug("Start server with address [{}] success!", serverAddress);
                 }
-                future.channel().closeFuture().sync();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 LOGGER.error("Bind server error with address [{}]", serverAddress);

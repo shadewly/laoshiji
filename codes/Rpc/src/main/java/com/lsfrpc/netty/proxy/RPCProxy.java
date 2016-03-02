@@ -6,6 +6,7 @@ import com.lsfrpc.pojo.RPCResponse;
 import net.sf.cglib.proxy.InvocationHandler;
 import net.sf.cglib.proxy.Proxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -13,12 +14,14 @@ import java.util.UUID;
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
+@Component
 public class RPCProxy {
 
     @Autowired
     private RPCClient rpcClient;
 
     public RPCProxy(RPCClient rpcClient) {
+        this.rpcClient = rpcClient;
     }
 
     @SuppressWarnings("unchecked")
@@ -29,8 +32,7 @@ public class RPCProxy {
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        RPCRequest request = new RPCRequest(); // 创建并初始化 RPC 请求
-                        request.setRequestId(UUID.randomUUID().toString());
+                        RPCRequest request = new RPCRequest();
                         request.setClassName(method.getDeclaringClass().getName());
                         request.setMethodName(method.getName());
                         request.setParameterTypes(method.getParameterTypes());

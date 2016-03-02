@@ -1,5 +1,6 @@
 package com.lsfrpc.netty;
 
+import com.lsfrpc.netty.channel.RPCChannel;
 import com.lsfrpc.netty.encoder.RPCDecoder;
 import com.lsfrpc.netty.encoder.RPCEncoder;
 import com.lsfrpc.netty.handler.ClientHandler;
@@ -14,31 +15,37 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
+@Component
 public class RPCClient {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);
     private Bootstrap bootstrap = new Bootstrap();
-    private List<SocketChannel> socketChannelList;
+    private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap;
     private String[] serverAddresses = new String[0];
+    private int threadNum;
     private RPCResponse response;
+    private int index = 0;
     private ServiceDiscovery serviceDiscovery;
 
     private final Object obj = new Object();
 
     public RPCClient(String... serverAddresses) {
         this.serverAddresses = serverAddresses;
+        threadNum = serverAddresses.length;
         initial();
     }
 
     public RPCClient(ServiceDiscovery serviceDiscovery) {
         this.serviceDiscovery = serviceDiscovery;
         serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
+        threadNum = serverAddresses.length;
     }
 
     private void initial() {
@@ -55,7 +62,7 @@ public class RPCClient {
                                     .addLast(new IdleStateHandler(20, 10, 0))
                                     .addLast(new RPCEncoder(RPCRequest.class)) // 将 RPC 请求进行编码（为了发送请求）
                                     .addLast(new RPCDecoder(RPCResponse.class)) // 将 RPC 响应进行解码（为了处理响应）
-                                    .addLast(new ClientHandler()); // 使用 RPCClient 发送 RPC 请求
+                                    .addLast(new ClientHandler(RPCClient.this)); // 使用 RPCClient 发送 RPC 请求
                         }
                     })
                     .option(ChannelOption.SO_KEEPALIVE, true);
@@ -64,44 +71,35 @@ public class RPCClient {
             logger.error("Connect server error!", e);
             System.exit(-1);
         }
+        startUp();
     }
 
     public void startUp() {
-        if (serviceDiscovery != null) {
-            for (String address : serverAddresses) {
-                String[] array = address.split(":");
-                String host = array[0];
-                int port = Integer.parseInt(array[1]);
-                try {
-                    ChannelFuture future = bootstrap.connect(host, port).sync();
-                    if (future.isSuccess()) {
-                        logger.debug("connect server[{}]  success!", address);
-                        socketChannelList.add((SocketChannel) future.channel());
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    logger.error("Connect {} error!", address);
+        for (String address : serverAddresses) {
+            String[] array = address.split(":");
+            String host = array[0];
+            int port = Integer.parseInt(array[1]);
+            try {
+                ChannelFuture future = bootstrap.connect(host, port).sync();
+                if (future.isSuccess()) {
+                    logger.debug("connect server[{}]  success!", address);
+                    RPCChannel rpcChannel = new RPCChannel(this, future.channel());
+                    socketChannelMap.put(rpcChannel.id(), rpcChannel);
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                logger.error("Connect {} error!", address);
             }
-
         }
     }
 
-    public RPCResponse send(RPCRequest request) throws Exception {
-        SocketChannel socketChannel = getChannel();
-        ChannelFuture channelFuture = socketChannel.writeAndFlush(request).addListener(future -> {
-            if (future.isSuccess()) {
-                logger.debug("Channel[{}] send request success!", socketChannel);
-            } else {
-                logger.debug("Channel[{}] send request failed! caused by {}", socketChannel, future.cause());
-                future.cause().printStackTrace();
-            }
-        });
-        return response;
+    public ConcurrentHashMap<ChannelId, RPCChannel> getSocketChannelMap() {
+        return socketChannelMap;
     }
 
-    private SocketChannel getChannel() {
-        return null;
+    public RPCResponse send(RPCRequest request) {
+        RPCChannel rpcChannel = socketChannelMap.get(1234l);
+        return rpcChannel.send(request);
     }
 
 }
