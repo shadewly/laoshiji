@@ -12,10 +12,13 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.group.ChannelGroupFuture;
+import io.netty.channel.group.ChannelGroupFutureListener;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.apache.commons.collections4.MapUtils;
+import org.jboss.netty.channel.group.DefaultChannelGroupFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -23,6 +26,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -37,7 +42,7 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
     private ServiceRegistry serviceRegistry;
     private EventLoopGroup bossGroup = new NioEventLoopGroup();
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
-    private ServerBootstrap bootstrap = new ServerBootstrap();
+    private List<ChannelFuture> futureList = new ArrayList<>();
     private ConcurrentMap<String, Object> handlerMap = new ConcurrentHashMap<>(); // 存放接口名与服务对象之间的映射关系
 
     public RPCServer(String... serverAddresses) {
@@ -49,7 +54,8 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
         this.serverAddresses = serverAddresses;
     }
 
-    private void init() {
+    private ServerBootstrap newBootstrap() {
+        ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -62,6 +68,7 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
+        return bootstrap;
     }
 
     @Override
@@ -80,8 +87,8 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        init();
         bind(this.serverAddresses);
+        syncChannelClose();
     }
 
     public void shutDown() {
@@ -96,10 +103,11 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 String host = array[0];
                 int port = Integer.parseInt(array[1]);
 
-                ChannelFuture future = null;
-                future = bootstrap.bind(host, port).sync();
+                final ChannelFuture future = newBootstrap().bind(host, port).sync();
                 LOGGER.warn("Server started on port {}", port);
-
+                ChannelFuture closeFuture = future.channel().closeFuture();
+                closeFuture.addListener(future1 -> LOGGER.warn("Server on address[{}] is closing!", future.channel().localAddress()));
+                futureList.add(closeFuture);
                 if (serviceRegistry != null) {
                     LOGGER.info("Register service address [{}]!", serverAddress);
                     serviceRegistry.register(serverAddress); // 注册服务地址
@@ -111,6 +119,18 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 e.printStackTrace();
                 LOGGER.error("Bind server error with address [{}]", serverAddress);
             }
+        }
+    }
+
+    public void syncChannelClose() {
+        if (futureList.size() > 0) {
+            futureList.forEach(channelFuture -> {
+                try {
+                    channelFuture.sync();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 }
