@@ -10,7 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/client" />
-            <option value="$PROJECT_DIR$/driveMaster" />
+            <option value="$PROJECT_DIR$/webServer" />
           </set>
         </option>
       </GradleProjectSettings>

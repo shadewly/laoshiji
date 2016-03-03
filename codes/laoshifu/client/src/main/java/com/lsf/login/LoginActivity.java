@@ -1,5 +1,6 @@
 package com.lsf.login;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.aus.model.Role;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         String userPhone = editTextPhone.getText().toString();
         String userPwd= editTextPassword.getText().toString();
 
+        Role account = new Role();
 
         TextView registerLink = (TextView)findViewById(R.id.registerLink);
         registerLink.setOnClickListener(new View.OnClickListener() {
