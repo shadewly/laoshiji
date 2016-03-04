@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <context:component-scan base-package="com.lsfrpc.service"/>
+    <context:property-placeholder location="classpath:properties/rpcConfig.properties"/>
+
+    <!--====================================Server Config==================================-->
+    <!-- 配置服务注册组件 -->
+    <bean id="serviceRegistry" class="com.lsfrpc.netty.zookeeper.ServiceRegistry">
+        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    </bean>
+
+    <!-- 配置 RPC 服务器 -->
+    <bean id="rpcServer" class="com.lsfrpc.netty.RPCServer">
+        <constructor-arg name="serverAddresses">
+            <list>
+                <value>${server.address1}</value>
+                <value>${server.address2}</value>
+                <value>${server.address3}</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="serviceRegistry" ref="serviceRegistry"/>
+    </bean>
+
+    <!--====================================Client Config==================================-->
+    <!-- 配置服务注册组件 -->
+    <bean id="serviceDiscovery" class="com.lsfrpc.netty.zookeeper.ServiceDiscovery">
+        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    </bean>
+    <!--配置RPC 客户端-->
+    <bean id="rpcClient" class="com.lsfrpc.netty.RPCClient">
+        <constructor-arg name="serviceDiscovery" ref="serviceDiscovery"/>
+    </bean>
+    <!-- 配置 RPC 代理 -->
+    <bean id="rpcProxy" class="com.lsfrpc.netty.proxy.RPCProxy">
+        <constructor-arg name="rpcClient" ref="rpcClient"/>
+    </bean>
+</beans>
