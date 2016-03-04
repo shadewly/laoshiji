@@ -10,7 +10,7 @@ import com.lsfrpc.service.HelloService;
 public class HelloServiceImpl implements HelloService {
     @Override
     public String hello(String name) {
-        return "Hello! " + name;
+        return "Hello 余鑫晨,your nick name is ! " + name;
     }
 
     @Override
