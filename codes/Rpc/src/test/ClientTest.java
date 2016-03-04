@@ -1,4 +1,4 @@
-import com.lsfrpc.netty.proxy.RPCProxy;
+import com.lsfrpc.bean.RPCBeanManager;
 import com.lsfrpc.service.HelloService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,16 +10,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by Wang LinYong on 2016-02-17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/spring-rpc.xml")
+@ContextConfiguration(locations = "classpath:spring/spring-rpc-client.xml")
 public class ClientTest {
-
     @Autowired
-    private RPCProxy rpcProxy;
+    private RPCBeanManager manager;
 
     @Test
     public void helloTest() {
         int i = 0;
-        HelloService helloService = rpcProxy.create(HelloService.class);
+        HelloService helloService = manager.getBean(HelloService.class);
         for (; i < 10; i++) {
             Long t = System.currentTimeMillis();
             String result = helloService.hello("World" + i);

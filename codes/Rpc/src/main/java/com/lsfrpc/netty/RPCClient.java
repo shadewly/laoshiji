@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Wang LinYong on 2016-02-17.
@@ -27,11 +28,10 @@ public class RPCClient {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);
     private Bootstrap bootstrap = new Bootstrap();
-    private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap;
+    private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap = new ConcurrentHashMap();
     private String[] serverAddresses = new String[0];
     private int threadNum;
-    private RPCResponse response;
-    private int index = 0;
+    private AtomicInteger index = new AtomicInteger();
     private ServiceDiscovery serviceDiscovery;
 
     private final Object obj = new Object();
@@ -46,6 +46,7 @@ public class RPCClient {
         this.serviceDiscovery = serviceDiscovery;
         serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
         threadNum = serverAddresses.length;
+        initial();
     }
 
     private void initial() {
@@ -98,7 +99,12 @@ public class RPCClient {
     }
 
     public RPCResponse send(RPCRequest request) {
-        RPCChannel rpcChannel = socketChannelMap.get(1234l);
+        ChannelId[] ids = new ChannelId[0];
+        if (socketChannelMap == null || socketChannelMap.isEmpty()) {
+            throw new NullPointerException("No connection!");
+        }
+        ids = socketChannelMap.keySet().toArray(ids);
+        RPCChannel rpcChannel = this.socketChannelMap.get(ids[index.getAndIncrement() % threadNum]);
         return rpcChannel.send(request);
     }
 

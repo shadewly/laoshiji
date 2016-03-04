@@ -35,7 +35,7 @@ public class RPCChannel {
         return channel.id();
     }
 
-    public InvokeFuture getFuture(ChannelId id) {
+    public InvokeFuture getFuture(String id) {
         return futureMap.get(id);
     }
 

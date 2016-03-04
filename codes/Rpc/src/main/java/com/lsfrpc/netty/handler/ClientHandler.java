@@ -26,9 +26,11 @@ public class ClientHandler extends SimpleChannelInboundHandler<RPCResponse> {
     protected void messageReceived(ChannelHandlerContext ctx, RPCResponse msg) throws Exception {
         ChannelId id = ctx.channel().id();
         RPCChannel rpcChannel = client.getSocketChannelMap().get(id);
-        InvokeFuture<RPCResponse> invokeFuture = rpcChannel.getFuture(id);
-        invokeFuture.setResult(msg);
-        rpcChannel.removeFuture(id);
+        InvokeFuture<RPCResponse> invokeFuture = rpcChannel.getFuture(msg.getRequestId());
+        if (invokeFuture != null) {
+            invokeFuture.setResult(msg);
+            rpcChannel.removeFuture(id);
+        }
     }
 
     @Override
