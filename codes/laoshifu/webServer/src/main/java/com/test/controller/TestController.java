@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.common.util.JsonUtil;
 import com.test.service.TestServiceI;
 
 @Controller
@@ -31,9 +32,9 @@ public class TestController {
 			Map<String, Object> aa = new HashMap<String, Object>();
 			aa.put("bb", testService.aa());
 			System.out.println("----->"+Thread.currentThread().getName());
-			response.sendRedirect("https://localhost:8449");
-//			request.getRequestDispatcher("https://localhost:8449").forward(request, response);
-//			JsonUtil.writeJson(response, aa);
+//			response.sendRedirect("https://localhost:8449");
+////			request.getRequestDispatcher("https://localhost:8449").forward(request, response);
+			JsonUtil.writeJson(response, aa);
 		} catch (Exception e) {
 
 			e.printStackTrace();
