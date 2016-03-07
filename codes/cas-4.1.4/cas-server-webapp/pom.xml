@@ -93,7 +93,6 @@
 			<groupId>org.jasig.cas</groupId>
 			<artifactId>cas-server-integration-restlet</artifactId>
 			<version>4.1.4</version>
-			<type>jar</type>
 		</dependency>
 	</dependencies>
 
