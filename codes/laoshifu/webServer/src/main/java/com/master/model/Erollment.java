@@ -1,4 +1,5 @@
 package com.master.model;
+
 /***********************************************************************
  * Module:  EROLLMENT.java
  * Author:  Administrator
@@ -7,19 +8,64 @@ package com.master.model;
 
 import java.util.*;
 
-/** @pdOid ac929a61-bdad-4446-9095-2809a3ac22d1 */
+/**
+ * / / / / / / / 报名表
+ */
 public class Erollment {
-   /** @pdOid 6c310492-4416-4cd0-af39-ee02208c5c51 */
-   private Integer id;
-   /** @pdOid 9b36335d-3d65-43f7-afb9-06e3ce80d04e */
-   private String scheduleNo;
-   /** @pdOid 3f66f53f-14af-4062-b08b-c19749a7625e */
-   private String status;
-   /** @pdOid dad47b95-65d5-4cf2-b83f-3f4ee496dc4d */
-   private Date trainStartTime;
-   /** @pdOid a15df8e9-41cc-43c1-9461-bf888caea2eb */
-   private Date trainEndTime;
-   /** @pdOid 8317be6e-70e9-4a76-9992-c355f23c60f6 */
-   private Account account;
+	// id
+	private int id; // 发布课程号
+	private String scheduleNo; // 学习状态：报名0，开始上课1，结束2
+	private String status; // 学员这一次学习开始时间
+	private java.util.Date trainStartTime; // 学员这一次学习结束时间
+	private java.util.Date trainEndTime; // 账户
+	private Account account;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getScheduleNo() {
+		return scheduleNo;
+	}
+
+	public void setScheduleNo(String scheduleNo) {
+		this.scheduleNo = scheduleNo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public java.util.Date getTrainStartTime() {
+		return trainStartTime;
+	}
+
+	public void setTrainStartTime(java.util.Date trainStartTime) {
+		this.trainStartTime = trainStartTime;
+	}
+
+	public java.util.Date getTrainEndTime() {
+		return trainEndTime;
+	}
+
+	public void setTrainEndTime(java.util.Date trainEndTime) {
+		this.trainEndTime = trainEndTime;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 }
