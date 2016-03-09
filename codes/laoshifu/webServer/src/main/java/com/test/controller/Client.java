@@ -151,10 +151,10 @@ public class Client {
     }  
   
     public static void main(final String[] args) throws Exception {  
-        final String server = "http://l145q8w2034.iok.la:8443/cas/v1/tickets";  
+        final String server = "https://localhost:8443/cas/v1/tickets";  
         final String username = "yxc";  
         final String password = "123";  
-        final String service = "https://145q8w2034.iok.la:8445/webServer/login/cas";  //随意写  
+        final String service = "https://localhost:8445/webServer/login/cas";  //随意写  
         final String proxyValidate = "http://localhost:8080/<span style='font-family: Arial, Helvetica, sans-serif;'>CASServer</span>/proxyValidate";  
   
           
