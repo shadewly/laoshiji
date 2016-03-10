@@ -14,10 +14,10 @@
 	<!--不拦截请求end -->
 	 <bean name="authenticationFilter"
 		class="org.jasig.cas.client.authentication.AuthenticationFilter">
-		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" />
+		<property name="casServerLoginUrl" value="${sso.loginUrl}" />
 		<property name="renew" value="false" />
 		<property name="gateway" value="false" />
-		<property name="service" value="https://localhost:8445/webServer" />
+		<property name="service" value="${sso.aus.service}" />
 	</bean>
 	<!-- <property name="service" value="https://localhost:8444/driveMaster"/> -->
 

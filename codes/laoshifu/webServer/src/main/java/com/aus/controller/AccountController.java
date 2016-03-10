@@ -23,7 +23,8 @@ public class AccountController {
 	@RequestMapping(params = "login")
 	public void login(HttpServletResponse response, Account account) {
 		try {
-		
+			account.setAccountNo("yxc");
+			account.setPassword("123");
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("result", accountService.login(account));
 
