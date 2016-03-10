@@ -4,14 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +25,8 @@ import com.aus.service.AccountServiceI;
 import com.aus.service.AuthorityServiceI;
 import com.aus.service.RoleServiceI;
 import com.common.mybatis.CustomerContextHolder;
+import com.common.util.ServletContextUtil;
+import com.common.util.SysConstant;
 
 /**
  * 鍩虹user鏈嶅姟绫�
@@ -113,13 +113,16 @@ public class AccountServiceImpl implements AccountServiceI, UserDetailsService/*
 
 	@Override
 	public boolean login(Account account) {
+
+		Properties pop=ServletContextUtil.getSysProperties();
+	
 		String ticket = CasRestClient.getTicket(
-				"https://localhost:8443/cas/v1/tickets",
+				pop.getProperty(SysConstant.SSO_TICKETS),
 				account.getAccountNo(), account.getPassword(),
-				"https://www.baidu.com");
+				pop.getProperty(SysConstant.SSO_AUS_SERVICE));
 		return CasRestClient.ticketValidate(
-				"https://localhost:8443/cas/proxyValidate", ticket,
-				"https://www.baidu.com");
+				pop.getProperty(SysConstant.SSO_PROXY_VALIDATE), ticket,
+				pop.getProperty(SysConstant.SSO_AUS_SERVICE));
 
 	}
 
