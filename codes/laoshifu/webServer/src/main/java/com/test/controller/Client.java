@@ -154,8 +154,8 @@ public class Client {
         final String server = "https://localhost:8443/cas/v1/tickets";  
         final String username = "yxc";  
         final String password = "123";  
-        final String service = "https://localhost:8445/webServer/login/cas";  //随意写  
-        final String proxyValidate = "http://localhost:8080/<span style='font-family: Arial, Helvetica, sans-serif;'>CASServer</span>/proxyValidate";  
+        final String service = "https://www.baidu.com";  //随意写  
+        final String proxyValidate = "https://localhost:8443/cas/proxyValidate";  
   
           
         ticketValidate(proxyValidate, getTicket(server, username, password, service), service);  
