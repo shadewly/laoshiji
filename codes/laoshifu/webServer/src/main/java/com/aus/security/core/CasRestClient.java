@@ -1,4 +1,4 @@
-package com.test.controller;
+package com.aus.security.core;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -12,7 +12,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 
 
-public class Client {
+public class CasRestClient {
 	public static String getTicket(final String server, final String username, final String password,  
             final String service) {  
         notNull(server, "server must not be null");  
@@ -114,7 +114,7 @@ public class Client {
         return null;  
     }  
   
-    private static void ticketValidate(String serverValidate, String serviceTicket, String service) {  
+    public static boolean ticketValidate(String serverValidate, String serviceTicket, String service) {  
         notNull(serviceTicket, "paramter 'serviceTicket' is not null");  
         notNull(service, "paramter 'service' is not null");  
   
@@ -129,7 +129,8 @@ public class Client {
             info(response);  
             switch (post.getStatusCode()) {  
             case 200: {  
-                info("成功取得用户数据");  
+                info("成功取得用户数据");
+                return true;
             }  
             default: {  
   
@@ -141,7 +142,8 @@ public class Client {
         } finally {  
             //释放资源  
             post.releaseConnection();  
-        }  
+        }
+		return false;  
   
     }  
   

@@ -10,14 +10,14 @@
        http://www.springframework.org/schema/security  
        http://www.springframework.org/schema/security/spring-security-4.0.xsd"
 	default-lazy-init="true">
-
+	<security:http pattern="/accountController?login" security="none" />
 	<!--不拦截请求end -->
 	 <bean name="authenticationFilter"
 		class="org.jasig.cas.client.authentication.AuthenticationFilter">
-		<property name="casServerLoginUrl" value="https://localhost:8444/cas/login" />
+		<property name="casServerLoginUrl" value="https://localhost:8443/cas/login" />
 		<property name="renew" value="false" />
 		<property name="gateway" value="false" />
-		<property name="service" value="https://localhost:8444/test?bb=abc" />
+		<property name="service" value="https://localhost:8445/webServer" />
 	</bean>
 	<!-- <property name="service" value="https://localhost:8444/driveMaster"/> -->
 

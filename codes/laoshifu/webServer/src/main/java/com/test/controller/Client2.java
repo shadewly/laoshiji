@@ -5,14 +5,14 @@ import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
+//import org.apache.http.client.HttpClient;
+//import org.apache.http.client.methods.CloseableHttpResponse;
+//import org.apache.http.client.methods.HttpPost;
+//import org.apache.http.entity.ContentType;
+//import org.apache.http.entity.StringEntity;
+//import org.apache.http.impl.client.HttpClients;
 
 public class Client2 {
 	public static String getTicket(final String server, final String username,
@@ -83,88 +83,90 @@ public class Client2 {
 	 */
 	private static String getTicketGrantingTicket(final String server,
 			final String username, final String password) {
-		final HttpClient client = HttpClients.createDefault();
-
-		HttpPost httpPost = new HttpPost(server);
-
-		HttpEntity entity = new StringEntity("username=" + username
-				+ "&password=" + password, ContentType.create("text/plain",
-				"UTF-8"));
-
-		httpPost.setEntity(entity);
-
-		try {
-			HttpResponse response = client.execute(httpPost);
-			HttpEntity responseEntity = response.getEntity();
-			
-			info("TGT=" + responseEntity.getContent());
-			switch (response.getStatusLine().getStatusCode()) {
-//			case 201: {
-//				final Matcher matcher = Pattern.compile(
-//						".*action=\".*/(.*?)\".*").matcher(response);
+				return password;
+		
+//		final HttpClient client = HttpClients.createDefault();
 //
-//				if (matcher.matches())
-//					return matcher.group(1);
+//		HttpPost httpPost = new HttpPost(server);
 //
-//				warning("Successful ticket granting request, but no ticket found!");
-//				info("Response (1k): "
-//						+ response.substring(0,
-//								Math.min(1024, response.length())));
-//				break;
-//			}
+//		HttpEntity entity = new StringEntity("username=" + username
+//				+ "&password=" + password, ContentType.create("text/plain",
+//				"UTF-8"));
 //
-//			default:
-//				warning("Invalid response code (" + post.getStatusCode()
-//						+ ") from CAS server!");
-//				info("Response (1k): "
-//						+ response.substring(0,
-//								Math.min(1024, response.length())));
-//				break;
-			}
-		}
-
-		catch (final IOException e) {
-			warning(e.getMessage());
-		}
-
-		finally {
-			httpPost.releaseConnection();
-		}
-
-		return null;
-	}
-
-	private static void ticketValidate(String serverValidate,
-			String serviceTicket, String service) {
-//		notNull(serviceTicket, "paramter 'serviceTicket' is not null");
-//		notNull(service, "paramter 'service' is not null");
-//
-//		final HttpClient client = new HttpClient();
-//		GetMethod post = null;
+//		httpPost.setEntity(entity);
 //
 //		try {
-//			post = new GetMethod(serverValidate + "?" + "ticket="
-//					+ serviceTicket + "&service="
-//					+ URLEncoder.encode(service, "UTF-8"));
-//			client.executeMethod(post);
-//
-//			final String response = post.getResponseBodyAsString();
-//			info(response);
-//			switch (post.getStatusCode()) {
-//			case 200: {
-//				info("成功取得用户数据");
+//			HttpResponse response = client.execute(httpPost);
+//			HttpEntity responseEntity = response.getEntity();
+//			
+//			info("TGT=" + responseEntity.getContent());
+//			switch (response.getStatusLine().getStatusCode()) {
+////			case 201: {
+////				final Matcher matcher = Pattern.compile(
+////						".*action=\".*/(.*?)\".*").matcher(response);
+////
+////				if (matcher.matches())
+////					return matcher.group(1);
+////
+////				warning("Successful ticket granting request, but no ticket found!");
+////				info("Response (1k): "
+////						+ response.substring(0,
+////								Math.min(1024, response.length())));
+////				break;
+////			}
+////
+////			default:
+////				warning("Invalid response code (" + post.getStatusCode()
+////						+ ") from CAS server!");
+////				info("Response (1k): "
+////						+ response.substring(0,
+////								Math.min(1024, response.length())));
+////				break;
 //			}
-//			default: {
-//
-//			}
-//			}
-//
-//		} catch (Exception e) {
-//			warning(e.getMessage());
-//		} finally {
-//			// 释放资源
-//			post.releaseConnection();
 //		}
+//
+//		catch (final IOException e) {
+//			warning(e.getMessage());
+//		}
+//
+//		finally {
+//			httpPost.releaseConnection();
+//		}
+//
+//		return null;
+//	}
+//
+//	private static void ticketValidate(String serverValidate,
+//			String serviceTicket, String service) {
+////		notNull(serviceTicket, "paramter 'serviceTicket' is not null");
+////		notNull(service, "paramter 'service' is not null");
+////
+////		final HttpClient client = new HttpClient();
+////		GetMethod post = null;
+////
+////		try {
+////			post = new GetMethod(serverValidate + "?" + "ticket="
+////					+ serviceTicket + "&service="
+////					+ URLEncoder.encode(service, "UTF-8"));
+////			client.executeMethod(post);
+////
+////			final String response = post.getResponseBodyAsString();
+////			info(response);
+////			switch (post.getStatusCode()) {
+////			case 200: {
+////				info("成功取得用户数据");
+////			}
+////			default: {
+////
+////			}
+////			}
+////
+////		} catch (Exception e) {
+////			warning(e.getMessage());
+////		} finally {
+////			// 释放资源
+////			post.releaseConnection();
+////		}
 
 	}
 
