@@ -89,7 +89,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-integration-restlet</artifactId>
+			<version>4.1.4</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jasig.cas</groupId>
+			<artifactId>cas-server-support-rest</artifactId>
+			<version>4.1.4</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
