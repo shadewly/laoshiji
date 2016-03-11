@@ -10,7 +10,9 @@
        http://www.springframework.org/schema/security  
        http://www.springframework.org/schema/security/spring-security-4.0.xsd"
 	default-lazy-init="true">
+	<security:http pattern="/accountController?register" security="none" />
 	<security:http pattern="/accountController?login" security="none" />
+	
 	<!--不拦截请求end -->
 	 <bean name="authenticationFilter"
 		class="org.jasig.cas.client.authentication.AuthenticationFilter">
@@ -115,17 +117,8 @@
 
 
 	<!-- 项目实现的用户查询服务,将用户信息查询出来 -->
-	<bean id="userServiceDetail" class="com.aus.service.impl.AccountServiceImpl">
-		<property name="accountDao">
-			<ref bean="accountDao" />
-		</property>
-	</bean>
-	<bean id="userDetailsManager" class="com.aus.service.impl.AccountServiceImpl" />
-
-
-
-
-
+	<bean id="userServiceDetail" class="com.aus.security.core.MyUserDetailsService"/>
+	<bean id="userDetailsManager" class="com.aus.security.core.MyUserDetailsService" />
 
 	<bean id="myAccessDeniedHandler" class="com.aus.security.handler.MyAccessDeniedHandler">
 		<property name="errorPage" value="/sys/jsp/accessDenied.jsp"></property>

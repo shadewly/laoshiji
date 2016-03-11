@@ -12,9 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 
 	<typeAliases>
-		<!-- <typeAlias type="com.snowwolf.sys.models.vo.TitleVo" alias="titleVo" />-->
-	
-		
+		<package name="com.aus.model" />
 	</typeAliases>
 
 </configuration>

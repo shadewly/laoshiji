@@ -5,7 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 
 /**
  * $.ajax后需要接受的JSON
@@ -57,10 +58,10 @@ public class JsonUtil {
 			Map<String, Object> resultMap) throws IOException {
 		response.setContentType("text/json");
 		response.setCharacterEncoding("utf-8");		
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.accumulateAll( JSONObject.fromObject(resultMap));
-		System.out.println(JSONObject.fromObject(resultMap));
-		response.getWriter().print(jsonObj.toString());
+	
+		
+		System.out.println(JSONObject.toJSONString(resultMap));
+		response.getWriter().print(JSONObject.toJSONString(resultMap));
 	}
 
 }

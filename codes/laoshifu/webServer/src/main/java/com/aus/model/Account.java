@@ -2,18 +2,10 @@ package com.aus.model;
 
 public class Account {
 
-	private Long accountId;
+	private Long id;
 	private String accountNo;
 	private String password;
 	private String userName;
-
-	public Long getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
-	}
 
 	public String getAccountNo() {
 		return accountNo;
@@ -37,6 +29,14 @@ public class Account {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
