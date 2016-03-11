@@ -117,7 +117,7 @@ public class AccountControllerTest {
 		URLConnection conn = null;
 		try {
 			URL url = new URL(
-					"https://145q8w2034.iok.la:8445/webServer/accountController?register");
+					"http://145q8w2034.iok.la:8080/webServer/accountController?register");
 			// 打开和URL之间的连接
 			conn = url.openConnection();
 			HttpURLConnection httpUrlConnection = (HttpURLConnection) conn;
