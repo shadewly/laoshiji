@@ -41,8 +41,7 @@ public class AccountControllerTest {
 			CloseableHttpClient client = HttpClients.createDefault();
 			// HttpPost httpPost = new HttpPost(serverUri
 			// + "accountController?register");
-			HttpPost httpPost = new HttpPost(serverUri
-					+ "accountController?register");
+			HttpPost httpPost = new HttpPost("https://145q8w2034.iok.la:8445/webServer/accountController?login");
 
 			List<NameValuePair> fromParams = new ArrayList<NameValuePair>();
 
