@@ -10,11 +10,13 @@
        http://www.springframework.org/schema/security  
        http://www.springframework.org/schema/security/spring-security-4.0.xsd"
 	default-lazy-init="true">
-	<security:http pattern="/accountController?register" security="none" />
-	<security:http pattern="/accountController?login" security="none" />
-	
+	<security:http pattern="/accountController?register"
+		security="none" />
+	<security:http pattern="/accountController?login"
+		security="none" />
+
 	<!--不拦截请求end -->
-	 <bean name="authenticationFilter"
+	<bean name="authenticationFilter"
 		class="org.jasig.cas.client.authentication.AuthenticationFilter">
 		<property name="casServerLoginUrl" value="${sso.loginUrl}" />
 		<property name="renew" value="false" />
@@ -26,7 +28,8 @@
 	<security:http entry-point-ref="casEntryPoint"
 		auto-config="false" use-expressions="false" disable-url-rewriting="false">
 		<security:headers disabled="true" />
-		<security:csrf disabled="false" />
+		<!-- 关闭csrf 不然所有post请求都将错误 -->
+		<security:csrf disabled="true" />
 		<security:access-denied-handler ref="myAccessDeniedHandler" />
 		<!-- <security:intercept-url pattern="/**" access="ROLE_USER" /> -->
 		<security:custom-filter position="CAS_FILTER"
@@ -117,7 +120,7 @@
 
 
 	<!-- 项目实现的用户查询服务,将用户信息查询出来 -->
-	<bean id="userServiceDetail" class="com.aus.security.core.MyUserDetailsService"/>
+	<bean id="userServiceDetail" class="com.aus.security.core.MyUserDetailsService" />
 	<bean id="userDetailsManager" class="com.aus.security.core.MyUserDetailsService" />
 
 	<bean id="myAccessDeniedHandler" class="com.aus.security.handler.MyAccessDeniedHandler">
