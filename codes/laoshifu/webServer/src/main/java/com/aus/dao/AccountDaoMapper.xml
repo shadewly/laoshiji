@@ -3,16 +3,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aus.dao.AccountDao">
 
-	<insert id="insertAccount"  parameterType="Account">
+	<insert id="insertAccount" parameterType="Account">
 
-	INSERT INTO ACCOUNT (
-	ACCOUNT_NO,
-	PASSWORD,
-	STATUS
-	)values(
-	#{account.accountNo},
-	#{account.password},
-	#{account.status}
-	)
+		INSERT INTO ACCOUNT (
+		ACCOUNT_NO,
+		PASSWORD,
+		STATUS
+		)values(
+		#{accountNo},
+		#{password},
+		#{status}
+		)
 	</insert>
+
+	<select id="countAccount" parameterType="HashMap" resultType="int">
+		select count(ID) FROM ACCOUNT WHERE
+		ACCOUNT_NO=#{accountNo}
+
+	</select>
+
+
 </mapper>

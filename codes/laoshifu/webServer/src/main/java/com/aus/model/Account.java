@@ -6,6 +6,7 @@ public class Account {
 	private String accountNo;
 	private String password;
 	private String userName;
+	private String status;
 
 	public String getAccountNo() {
 		return accountNo;
@@ -37,6 +38,14 @@ public class Account {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

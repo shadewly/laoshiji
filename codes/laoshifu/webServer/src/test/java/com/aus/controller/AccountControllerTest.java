@@ -41,17 +41,17 @@ public class AccountControllerTest {
 			CloseableHttpClient client = HttpClients.createDefault();
 			// HttpPost httpPost = new HttpPost(serverUri
 			// + "accountController?register");
-			HttpPost httpPost = new HttpPost("https://145q8w2034.iok.la:8445/webServer/accountController?login");
+			HttpPost httpPost = new HttpPost(serverUri+"accountController?register");
 
 			List<NameValuePair> fromParams = new ArrayList<NameValuePair>();
 
 			fromParams.add(new BasicNameValuePair("accountNo", "yxc1"));
 			fromParams.add(new BasicNameValuePair("password", "123"));
 
-			// UrlEncodedFormEntity entity = new
-			// UrlEncodedFormEntity(fromParams,"UTF-8");
-			//
-			// httpPost.setEntity(entity);
+			 UrlEncodedFormEntity entity = new
+			 UrlEncodedFormEntity(fromParams,"UTF-8");
+			
+			 httpPost.setEntity(entity);
 
 			HttpResponse response = client.execute(httpPost);
 
