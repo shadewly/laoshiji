@@ -6,6 +6,15 @@
 
 
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	  <!-- 系统消息配置 start -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename">
+            <value>spring\message_zh_CN</value>
+        </property>
+    </bean>
+    <!-- 系统消息配置 end -->
 
     <!-- 加载property文件 -->
     <context:property-placeholder location="classpath:properties/*.properties"/>
