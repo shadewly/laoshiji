@@ -11,7 +11,7 @@
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename">
-            <value>spring\message_zh_CN</value>
+            <value>properties\message_zh_CN</value>
         </property>
     </bean>
     <!-- 系统消息配置 end -->
