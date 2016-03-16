@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aus.common.AusConstant;
 import com.aus.dao.AccountDao;
 import com.aus.model.Account;
 import com.aus.security.core.CasRestClient;
 import com.aus.service.AccountServiceI;
+import com.common.util.DefaultPasswordEncoder;
 import com.common.util.MessageUtil;
 import com.common.util.ServletContextUtil;
 import com.common.util.SysConstant;
@@ -46,13 +48,14 @@ public class AccountServiceImpl implements AccountServiceI {
 
 		// 短信码校验??
 
-		
 		// 校验账号是否存在
 		if (validateAccount(account) > 0) {
 			throw new Exception(MessageUtil.getMsg("ERROR_ACCOUNT_0002"));
 		}
 		// MD5加密处理??
 
+		account.setPassword(DefaultPasswordEncoder.encode(account.getPassword()));
+		account.setStatus(AusConstant.AccountStatus.Enable.getValue());
 		// 插入数据库
 		if (accountDao.insertAccount(account) != 1) {
 			throw new Exception(MessageUtil.getMsg("ERROR_ACCOUNT_0001"));

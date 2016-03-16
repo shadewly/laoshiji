@@ -130,11 +130,11 @@
      p:jdbcUrl="jdbc:mysql://127.0.0.1:3306/drivemasterdb"
      p:user="root"
      p:password="root" />-->
-	<!-- Define the encode method-->
-     <!--<bean id="passwordEncoder" 
+	<!-- Define the encode method
+    <bean id="passwordEncoder" 
        class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder" autowire="byName">     
       <constructor-arg value="MD5"/> 
-     </bean> -->
+     </bean>-->
     <bean id="passwordEncoder"
       class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder"
       c:encodingAlgorithm="MD5"
@@ -143,8 +143,10 @@
 	<bean id="dbAuthHandler"
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
-      p:sql="select password from account where ACCOUNT_NO=?"/>
-   <!-- p:passwordEncoder-ref="passwordEncoder" -->
+      p:sql="select password from account where ACCOUNT_NO=?"
+      p:passwordEncoder-ref="passwordEncoder"
+      />
+      
     <!-- Required for proxy ticket mechanism -->
     <bean id="proxyPrincipalResolver"
           class="org.jasig.cas.authentication.principal.BasicPrincipalResolver" />

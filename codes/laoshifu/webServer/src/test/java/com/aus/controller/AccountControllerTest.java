@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class AccountControllerTest {
 
-	private static String serverUri = "https://145q8w2034.iok.la:27044/webServer/";
+	private static String serverUri = "https://145q8w2034.iok.la:8445/webServer/";
 
 	/**
 	 * 00:计划采购入库 insertInStoreDrugTest1:计划申请入库<br>
@@ -45,7 +45,7 @@ public class AccountControllerTest {
 
 			List<NameValuePair> fromParams = new ArrayList<NameValuePair>();
 
-			fromParams.add(new BasicNameValuePair("accountNo", "yxc1"));
+			fromParams.add(new BasicNameValuePair("accountNo", "yxc"));
 			fromParams.add(new BasicNameValuePair("password", "123"));
 
 			 UrlEncodedFormEntity entity = new
