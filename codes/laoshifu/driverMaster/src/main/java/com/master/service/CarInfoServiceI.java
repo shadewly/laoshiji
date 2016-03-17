@@ -14,7 +14,7 @@ public interface CarInfoServiceI {
    /** @param paraMap */
    CarInfo searchCarInfo(Map paraMap);
    /** @param carInfoList */
-   void addCarInfoList(List carInfoList);
+   public void addCarInfoList(List<CarInfo> carInfoList) throws Exception;
    
    /**
   	 * 通过车牌号校验教练车是否已经注册

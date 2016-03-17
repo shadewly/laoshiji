@@ -6,8 +6,6 @@ package com.master.dao;
  * Purpose: Defines the Interface UserMasterDao
  ***********************************************************************/
 
-import java.util.Map;
-
 import com.master.model.UserMaster;
 
 public interface UserMasterDao {
@@ -20,5 +18,5 @@ public interface UserMasterDao {
 	 * @param condition
 	 * @return
 	 */
-	public int countUserMaster(Map<String, Object> condition);
+	public int validateUserMaster(UserMaster userMaster);
 }

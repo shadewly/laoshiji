@@ -5,7 +5,7 @@
 
 
 
-	<select id="countUserMaster" parameterType="HashMap" resultType="int">
+	<select id="validateUserMaster" parameterType="UserMaster" resultType="int">
 		select count(ID) FROM USER_MASTER WHERE
 		REAL_NAME=#{realName} OR
 		IDENTITY=#{identity} OR MOBILE=#{mobile}

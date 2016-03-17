@@ -26,9 +26,14 @@ public class CarInfoServiceImpl implements CarInfoServiceI {
 		return null;
 	}
 
-	/** @param carInfoList */
-	public void addCarInfoList(List carInfoList) {
-		// TODO: implement
+	/** @param carInfoList 
+	 * @throws Exception */
+	public void addCarInfoList(List carInfoList) throws Exception {
+		// 插入教练车信息
+		if(carInfoDao.insertCarInfoList(carInfoList)!=carInfoList.size()){
+			throw new Exception("插入车辆信息出错");
+		}
+		// 上传教练车图片信息到图片服务器
 	}
 
 	@Override
@@ -42,7 +47,5 @@ public class CarInfoServiceImpl implements CarInfoServiceI {
 		// TODO Auto-generated method stub
 		return carInfoDao.validateCarInfoByAutoNo(autoNoList);
 	}
-
-	
 
 }
