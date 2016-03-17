@@ -16,7 +16,7 @@ public class UserMasterServiceImpl implements UserMasterServiceI {
 
 	/** @param userMaster */
 	public void addUserMaster(UserMaster userMaster) {
-		// TODO: implement
+		
 	}
 
 }

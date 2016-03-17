@@ -15,5 +15,13 @@ public interface CarInfoServiceI {
    CarInfo searchCarInfo(Map paraMap);
    /** @param carInfoList */
    void addCarInfoList(List carInfoList);
+   
+   /**
+  	 * 通过车牌号校验教练车是否已经注册
+  	 * 
+  	 * @param condition
+  	 * @return
+  	 */
+  	public List<String> validateCarInfoByAutoNo(List<String> autoNoList);
 
 }

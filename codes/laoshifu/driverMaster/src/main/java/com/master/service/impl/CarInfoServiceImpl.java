@@ -37,4 +37,12 @@ public class CarInfoServiceImpl implements CarInfoServiceI {
 		return null;
 	}
 
+	@Override
+	public List<String> validateCarInfoByAutoNo(List<String> autoNoList) {
+		// TODO Auto-generated method stub
+		return carInfoDao.validateCarInfoByAutoNo(autoNoList);
+	}
+
+	
+
 }

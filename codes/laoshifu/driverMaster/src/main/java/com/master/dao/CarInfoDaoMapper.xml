@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.dao.CarInfoDao">
+
+
+	<select id="validateCarInfoByAutoNo" parameterType="List"
+		resultType="String">
+		select AUTO_NO FROM CAR_INFO WHERE
+		<foreach collection="list" item="item" index="index" open="begin"
+			close=";end;" separator="OR">
+			AUTO_NO = #{item.autoNo}
+		</foreach>
+	</select>
+
+
+</mapper>
