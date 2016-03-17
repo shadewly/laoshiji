@@ -143,7 +143,7 @@
 	<bean id="dbAuthHandler"
       class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"
       p:dataSource-ref="dataSource"
-      p:sql="select password from account where ACCOUNT_NO=?"
+      p:sql="select password from account where ACCOUNT_NO=? and STATUS=0"
       p:passwordEncoder-ref="passwordEncoder"
       />
       
