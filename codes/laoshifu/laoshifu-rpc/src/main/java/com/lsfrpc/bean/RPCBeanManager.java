@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Wang LinYong on 2016-03-04.
  */
-@Component
 public class RPCBeanManager {
-    @Autowired
     private RPCProxy proxy;
 
     public RPCBeanManager(RPCProxy rpcProxy) {
+        this.proxy = rpcProxy;
     }
 
     public <V> V getBean(Class<V> vClass) {

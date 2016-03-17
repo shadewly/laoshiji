@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
-@Component
 public class RPCClient {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);

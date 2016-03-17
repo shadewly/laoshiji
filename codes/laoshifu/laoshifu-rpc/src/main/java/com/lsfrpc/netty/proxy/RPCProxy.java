@@ -14,10 +14,8 @@ import java.util.UUID;
 /**
  * Created by Wang LinYong on 2016-02-17.
  */
-@Component
 public class RPCProxy {
 
-    @Autowired
     private RPCClient rpcClient;
 
     public RPCProxy(RPCClient rpcClient) {
