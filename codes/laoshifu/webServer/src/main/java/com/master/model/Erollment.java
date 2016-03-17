@@ -6,7 +6,7 @@ package com.master.model;
  * Purpose: Defines the Class EROLLMENT
  ***********************************************************************/
 
-import java.util.*;
+import com.aus.model.Account;
 
 /**
  * / / / / / / / 报名表

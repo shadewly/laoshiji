@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aus.model.Account;
 import com.aus.service.AccountServiceI;
@@ -25,14 +23,14 @@ public class AccountController {
 
 	/**
 	 * 登录
+	 * 
 	 * @param response
 	 * @param account
 	 */
 	@RequestMapping(params = "login")
 	public void login(HttpServletResponse response, Account account) {
 		try {
-//			account.setAccountNo("yxc");
-//			account.setPassword("123");
+
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("result", accountService.login(account));
 
@@ -42,9 +40,10 @@ public class AccountController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 注册
+	 * 
 	 * @param response
 	 * @param account
 	 */
@@ -52,7 +51,7 @@ public class AccountController {
 	public void register(HttpServletResponse response, Account account) {
 		try {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
-			
+
 			accountService.register(account);
 			resultMap.put("msg", MessageUtil.getMsg("MSG_ACCOUNT_0001"));
 			JsonUtil.writeJson(response, resultMap);
