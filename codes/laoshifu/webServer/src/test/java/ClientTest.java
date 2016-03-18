@@ -1,10 +1,11 @@
-import com.lsfrpc.bean.RPCBeanManager;
-import com.lsfrpc.service.HelloService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.lsfrpc.bean.RPCBeanManager;
+import com.lsfrpc.service.HelloService;
 
 /**
  * Created by Wang LinYong on 2016-02-17.

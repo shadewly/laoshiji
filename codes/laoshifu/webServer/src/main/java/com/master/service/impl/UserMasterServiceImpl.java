@@ -6,12 +6,17 @@ package com.master.service.impl;
  * Purpose: Defines the Class UserMasterServiceImpl
  ***********************************************************************/
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.master.model.UserMaster;
 import com.master.service.UserMasterServiceI;
 
 /**
- * / / / / / / / 师傅用户信息服务实现类
+ *  师傅用户信息服务实现类
  */
+@Service(value = "userMasterService")
+@Transactional
 public class UserMasterServiceImpl implements UserMasterServiceI {
 
 	/** @param userMaster */
