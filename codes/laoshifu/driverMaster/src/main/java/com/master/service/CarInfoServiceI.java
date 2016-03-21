@@ -8,6 +8,7 @@ package com.master.service;
 import java.util.List;
 import java.util.Map;
 
+import com.lsfrpc.annotation.RPCComponent;
 import com.master.model.CarInfo;
 
 public interface CarInfoServiceI {

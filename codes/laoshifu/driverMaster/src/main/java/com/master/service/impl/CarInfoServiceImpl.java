@@ -9,6 +9,7 @@ package com.master.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.lsfrpc.annotation.RPCComponent;
 import com.master.dao.CarInfoDao;
 import com.master.model.CarInfo;
 import com.master.service.CarInfoServiceI;
@@ -16,6 +17,7 @@ import com.master.service.CarInfoServiceI;
 /**
  * / / / / / / / 车辆信息服务实现类
  */
+@RPCComponent(CarInfoServiceI.class)
 public class CarInfoServiceImpl implements CarInfoServiceI {
 	// 车辆信息dao接口对象
 	private CarInfoDao carInfoDao;

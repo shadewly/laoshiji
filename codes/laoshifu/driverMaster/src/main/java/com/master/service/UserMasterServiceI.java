@@ -17,6 +17,6 @@ public interface UserMasterServiceI {
 	 * 添加师傅信息
 	 * @param userMaster
 	 */
-	public void addUserMaster(UserMaster userMaster);
+	public void addUserMaster(UserMaster userMaster) throws Exception;
 
 }
