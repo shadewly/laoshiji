@@ -17,7 +17,7 @@ import com.master.service.UserMasterServiceI;
 @Controller
 @RequestMapping("/userMasterController")
 public class UserMasterController {
-	@Autowired
+//	@Autowired
 	private UserMasterServiceI userMasterService;
 
 	/**
