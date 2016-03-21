@@ -15,8 +15,6 @@ import com.common.util.DefaultPasswordEncoder;
 import com.common.util.MessageUtil;
 import com.common.util.ServletContextUtil;
 import com.common.util.SysConstant;
-import com.lsfrpc.bean.RPCBeanManager;
-import com.lsfrpc.service.HelloService;
 
 /**
  *
@@ -29,13 +27,9 @@ import com.lsfrpc.service.HelloService;
 public class AccountServiceImpl implements AccountServiceI {
 	@Autowired
 	private AccountDao accountDao;
-	@Autowired
-	private RPCBeanManager manager;
 
 	@Override
 	public boolean login(Account account) {
-		 HelloService helloService = manager.getBean(HelloService.class);
-		 helloService.hello("222");
 
 		Properties pop = ServletContextUtil.getSysProperties();
 

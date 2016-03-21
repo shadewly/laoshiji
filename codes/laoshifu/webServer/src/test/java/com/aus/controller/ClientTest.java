@@ -12,7 +12,7 @@ import com.lsfrpc.service.HelloService;
  * Created by Wang LinYong on 2016-02-17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath*:spring/spring-rpc-client.xml")
+@ContextConfiguration(locations = "classpath*:/spring/spring-rpc-client.xml")
 public class ClientTest {
     @Autowired
     private RPCBeanManager manager;
