@@ -55,11 +55,11 @@ public class SsfChannelInitializer extends ChannelInitializer<SocketChannel> {
 		// Uncomment the following line if you want HTTPS
 		File certChainFile = ResourceUtils
 				.getFile("classpath:certifications/cas_cert.pem");
-		com.dm.common.util.Assert.notNull(certChainFile,
+		com.wb.common.util.Assert.notNull(certChainFile,
 				"Certification file can't be null!");
 		File keyFile = ResourceUtils
 				.getFile("classpath:certifications/privateKey_pkcs8.pem");
-		com.dm.common.util.Assert.notNull(keyFile, "Key file can't be null!");
+		com.wb.common.util.Assert.notNull(keyFile, "Key file can't be null!");
 		SslContext sslCtx = SslContext.newServerContext(certChainFile, keyFile);
 		pipeline.addLast("ssl",
 				new SslHandler(sslCtx.newEngine(channel.alloc())));

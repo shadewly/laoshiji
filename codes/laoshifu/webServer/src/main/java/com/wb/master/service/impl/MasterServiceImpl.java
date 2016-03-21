@@ -10,25 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dm.master.model.UserMaster;
 import com.dm.master.service.UserMasterServiceI;
 import com.lsfrpc.bean.RPCBeanManager;
-import com.lsfrpc.service.HelloService;
+import com.wb.master.model.UserMaster;
 import com.wb.master.service.MasterServiceI;
 
 /**
  * 师傅用户信息服务实现类
  */
-@Service(value = "userMasterService")
+@Service(value = "masterService")
 @Transactional
 public class MasterServiceImpl implements MasterServiceI {
 	@Autowired
 	private RPCBeanManager manager;
 
-	/** @param userMaster */
-	public void addUserMaster(UserMaster userMaster) {
-		UserMasterServiceI userMasterServiceI = manager.getBean(UserMasterServiceI.class);
-		 helloService.hello("222");
+	/** @param userMaster 
+	 * @throws Exception */
+	public void addUserMaster(UserMaster userMaster) throws Exception {
+		UserMasterServiceI userMasterService = manager.getBean(UserMasterServiceI.class);
+//		userMasterService.addUserMaster(userMaster);
 	}
 
 }

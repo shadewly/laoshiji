@@ -19,10 +19,6 @@ package com.wb.common.util;
 import java.util.Collection;
 import java.util.Map;
 
-import com.dm.common.util.CollectionUtil;
-import com.dm.common.util.ObjectUtil;
-import com.dm.common.util.StringUtil;
-
 /**
  * Assertion utility class that assists in validating arguments.
  * <p>

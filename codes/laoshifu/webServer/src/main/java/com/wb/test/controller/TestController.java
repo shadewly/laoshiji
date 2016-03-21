@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dm.common.util.JsonUtil;
+import com.wb.common.util.JsonUtil;
 import com.wb.test.service.TestServiceI;
 
 @Controller

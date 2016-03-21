@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.dm.common.util.FieldUtil;
-
 public class ReflectionUtil {
 	/**
 	 * model 属性转化为field名字

@@ -6,10 +6,10 @@ package com.wb.master.service;
  * Purpose: Defines the Interface UserMasterServiceI
  ***********************************************************************/
 
-import com.dm.master.model.UserMaster;
+import com.wb.master.model.UserMaster;
 
 public interface MasterServiceI {
    /** @param userMaster */
-   void addUserMaster(UserMaster userMaster);
+   public void addUserMaster(UserMaster userMaster) throws Exception ;
 
 }
