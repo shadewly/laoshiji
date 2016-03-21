@@ -10,3 +10,4 @@ public class RPCBootstrap {
         new ClassPathXmlApplicationContext("spring/spring-rpc-server.xml");
     }
 }
+
