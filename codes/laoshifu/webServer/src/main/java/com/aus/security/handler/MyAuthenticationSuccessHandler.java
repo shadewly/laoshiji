@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.common.util.JsonUtil;
-import com.common.util.SysConstant;
+import com.dm.common.util.JsonUtil;
+import com.dm.common.util.SysConstant;
 
 public class MyAuthenticationSuccessHandler implements
 		AuthenticationSuccessHandler {

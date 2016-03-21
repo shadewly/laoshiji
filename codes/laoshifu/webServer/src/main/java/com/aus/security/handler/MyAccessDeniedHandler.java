@@ -13,8 +13,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-import com.common.util.JsonUtil;
-import com.common.util.SysConstant;
+import com.dm.common.util.JsonUtil;
+import com.dm.common.util.SysConstant;
 
 public class MyAccessDeniedHandler implements AccessDeniedHandler {
 

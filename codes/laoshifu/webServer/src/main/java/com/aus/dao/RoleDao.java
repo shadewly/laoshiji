@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aus.model.Role;
-import com.common.mybatis.SqlMapper;
+import com.wb.common.mybatis.SqlMapper;
 
 public interface RoleDao extends SqlMapper {
 
