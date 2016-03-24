@@ -8,6 +8,7 @@ package com.dm.master.service.impl;
 
 import java.util.List;
 
+import com.dm.master.common.MasterConstant;
 import com.dm.master.dao.UserMasterDao;
 import com.dm.master.model.UserMaster;
 import com.dm.master.service.CarInfoServiceI;
@@ -40,23 +41,64 @@ public class UserMasterServiceImpl implements UserMasterServiceI {
 
 			throw new Exception(sb.substring(0, sb.length()-1)+"车辆已经注册");
 		}
-//				// 校验提交信息是否满足审核条件l
-//				if(){
-//					//满足设置为待审
-//					userMaster.setMasterStatus(MasterConstant.UserMasterStatus.Pending.getValue());
-//				}else{
-//					//不满足设置为待完善
-//					userMaster.setMasterStatus(MasterConstant.UserMasterStatus.Incomplete.getValue());
-//				}
-//				//保存师傅信息并校验结果
-//				if(userMasterDao.insertUserMaster(userMaster)!=1){
-//					throw new Exception("插入师傅信息出错");
-//				}
+				// 校验提交信息是否满足审核条件l
+				if(userMaster.getCarInfoList().size()>0 && userMaster.getAvatar()!=null &&){
+					//满足设置为待审
+					userMaster.setMasterStatus(MasterConstant.UserMasterStatus.Pending.getValue());
+				}else{
+					//不满足设置为待完善
+					userMaster.setMasterStatus(MasterConstant.UserMasterStatus.Incomplete.getValue());
+				}
+				//保存师傅信息并校验结果
+				if(userMasterDao.insertUserMaster(userMaster)!=1){
+					throw new Exception("插入师傅信息出错");
+				}
 				//上传师傅图片到服务器并校验结果
 				//保存教练车信息并校验结果
 				carInfoService.addCarInfoList(userMaster.getCarInfoList());
 
 
 
+	}
+
+	private boolean checkUserMaster(UserMaster userMaster) {
+
+		if (userMaster.getCarInfoList().size() <= 0) {
+
+		} else if (strNullCheck(userMaster.getAvatar())) {
+
+		} else if (strNullCheck(userMaster.getRealName())) {
+
+		} else if (strNullCheck(userMaster.getIdentity())) {
+
+		} else if (strNullCheck(userMaster.getIdentityFront())) {
+
+		} else if (strNullCheck(userMaster.getIdentityReverse())) {
+
+		} else if (intNullCheck(userMaster.getExperience())) {
+
+		} else if (strNullCheck(userMaster.getLicenseFront())) {
+
+		} else if (strNullCheck(userMaster.getLicenseReverse())) {
+
+		} else if (strNullCheck(userMaster.getLicenseAssociateFront())) {
+
+		} else if (strNullCheck(userMaster.getLicenseAssociateReverse())) {
+
+		}
+	}
+
+	private boolean strNullCheck(String str) {
+		if (str == null || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean intNullCheck(Integer integer) {
+		if (integer == null || integer.intValue() == 0) {
+			return true;
+		}
+		return false;
 	}
 }
