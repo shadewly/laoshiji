@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dm.master.model.UserMaster;
 import com.dm.master.service.UserMasterServiceI;
 import com.lsfrpc.bean.RPCBeanManager;
-import com.wb.master.model.UserMaster;
 import com.wb.master.service.MasterServiceI;
 
 /**
@@ -28,7 +28,7 @@ public class MasterServiceImpl implements MasterServiceI {
 	 * @throws Exception */
 	public void addUserMaster(UserMaster userMaster) throws Exception {
 		UserMasterServiceI userMasterService = manager.getBean(UserMasterServiceI.class);
-//		userMasterService.addUserMaster(userMaster);
+		userMasterService.addUserMaster(userMaster);
 	}
 
 }

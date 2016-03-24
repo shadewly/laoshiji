@@ -6,7 +6,7 @@ package com.wb.master.service;
  * Purpose: Defines the Interface UserMasterServiceI
  ***********************************************************************/
 
-import com.wb.master.model.UserMaster;
+import com.dm.master.model.UserMaster;
 
 public interface MasterServiceI {
    /** @param userMaster */

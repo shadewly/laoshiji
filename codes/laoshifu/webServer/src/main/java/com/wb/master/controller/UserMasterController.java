@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dm.master.model.UserMaster;
 import com.wb.common.util.JsonUtil;
 import com.wb.common.util.MessageUtil;
-import com.wb.master.model.UserMaster;
 import com.wb.master.service.MasterServiceI;
 
 @Controller
@@ -27,7 +27,7 @@ public class UserMasterController {
 	 * @param account
 	 */
 	@RequestMapping(params = "addUserMaster")
-	public void register(HttpServletResponse response, UserMaster userMaster) {
+	public void addUserMaster(HttpServletResponse response, UserMaster userMaster) {
 		try {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 
