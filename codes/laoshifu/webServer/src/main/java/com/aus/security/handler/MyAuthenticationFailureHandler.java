@@ -14,8 +14,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import com.common.util.JsonUtil;
-import com.common.util.SysConstant;
+import com.wb.common.util.JsonUtil;
+import com.wb.common.util.SysConstant;
 
 public class MyAuthenticationFailureHandler implements
 		AuthenticationFailureHandler {

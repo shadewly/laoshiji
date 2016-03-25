@@ -14,4 +14,5 @@
 
     <import resource="mongodb-context.xml"/>
     <import resource="spring-jdbc.xml"/>
+    <import resource="classpath:spring/spring-rpc-server.xml"/>
 </beans>

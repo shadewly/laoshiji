@@ -34,8 +34,8 @@
         <!-- mapper和resultmap配置路径 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath:com/aus/dao/*.xml</value>
-                 <value>classpath:com/test/dao/*.xml</value>
+                <!--<value>classpath:com/aus/dao/*.xml</value>-->
+                 <!--<value>classpath:com/test/dao/*.xml</value>-->
                 <!-- 表示在com.hoo.resultmap包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
                 <!-- <value>classpath:com/hoo/resultmap/**/*-resultmap.xml</value> <value>classpath:com/hoo/entity/*-resultmap.xml</value>
                     <value>classpath:com/hoo/mapper/**/*-mapper.xml</value> -->
@@ -44,22 +44,22 @@
     </bean>
 
     <!-- 配置自定义的SqlSessionTemplate模板，注入相关配置 -->
-    <bean id="sqlSessionTemplate"
-          class="com.common.persistence.CustomSqlSessionTemplate">
-        <constructor-arg ref="sessionFactory"/>
-        <property name="targetSqlSessionFactorys">
-            <map>
-                <entry value-ref="sessionFactory" key="driverMaster"/>
-            </map>
-        </property>
-    </bean>
+    <!--<bean id="sqlSessionTemplate"-->
+          <!--class="com.common.persistence.CustomSqlSessionTemplate">-->
+        <!--<constructor-arg ref="sessionFactory"/>-->
+        <!--<property name="targetSqlSessionFactorys">-->
+            <!--<map>-->
+                <!--<entry value-ref="sessionFactory" key="driverMaster"/>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- 通过扫描的模式，扫描目录在com/hoo/mapper目录下，所有的mapper都继承SqlMapper接口的接口， 这样一个bean就可以了 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com"/>
-        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
-        <property name="markerInterface" value="com.common.persistence.SqlMapper"/>
-    </bean>
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com"/>-->
+        <!--<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>-->
+        <!--<property name="markerInterface" value="com.common.persistence.SqlMapper"/>-->
+    <!--</bean>-->
     
     <!-- 系统启动对应dao和service都未生成实力，所以必须用这种方式配置 -->
 	<!-- <bean id="urlDao" class="com.snowwolf.sys.dao.impl.UrlDAOImpl"></bean>

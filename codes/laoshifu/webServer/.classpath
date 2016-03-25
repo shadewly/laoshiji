@@ -28,5 +28,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/laoshifu-rpc-1.0-20160321.071233-5-jar-with-dependencies.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/driverMaster"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
