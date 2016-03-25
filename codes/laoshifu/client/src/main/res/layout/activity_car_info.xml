@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_carInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:text="@string/carInfo"/>
+
+    <TableLayout
+        android:id="@+id/tl_carInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_carInfo">
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/carModel"/>
+            <EditText
+                android:id="@+id/et_carModel"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:background="@drawable/edittext_selector"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/gearbox"/>
+
+            <RadioGroup
+                android:layout_marginTop="20dp"
+                android:layout_width="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"/>
+
+            <RadioButton
+
+                android:layout_marginLeft="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/IDPhoto"/>
+            <Button
+                android:id="@+id/btn_upload_ID1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadUpSide"/>
+            <Button
+                android:id="@+id/btn_upload_ID2"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadDownSide"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/driveLicense"/>
+            <Button
+                android:id="@+id/btn_upload_driveLicense1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadUpSide"/>
+            <Button
+                android:id="@+id/btn_upload_driveLicense2"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadDownSide"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/driveLicenseSec"/>
+            <Button
+                android:id="@+id/btn_upload_driveLicenseSec1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadUpSide"/>
+            <Button
+                android:id="@+id/btn_upload_driveLicenseSec2"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/uploadDownSide"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/coachLicense"/>
+            <Button
+                android:id="@+id/btn_upload_coachLicense1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:text="@string/upload"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/tl_carInfo"
+        android:text="@string/nextstep"/>
+
+
+</RelativeLayout>

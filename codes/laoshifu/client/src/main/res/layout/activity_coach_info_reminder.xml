@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/image_home_page"
+        android:contentDescription="@string/notCompleteInfo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/notCompleteInfo"
+        android:textSize="25sp" />
+    
+    <Button
+        android:id="@+id/btn_completeInfoSoon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:text="@string/completeSoon"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/btn_completeInfoLater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="@string/completeLater"
+        android:textSize="20sp"/>
+
+
+</LinearLayout>

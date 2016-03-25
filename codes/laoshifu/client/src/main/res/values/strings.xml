@@ -17,7 +17,38 @@
     <string name="share">分享</string>
     <string name="homePage">首页</string>
     <string name="title_activity_main">MainActivity</string>
-
+    <string name="title_activity_coach_info_reminder">CoachInfoReminder</string>
+    <string name="notCompleteInfo">还没有完善资料哦</string>
+    <string name="completeSoon">立刻去完善</string>
+    <string name="completeLater">稍后再说</string>
+    <string name="title_activity_coach_info">CoachInfo</string>
+    <string name="basicInfo">基本资料</string>
+    <string name="changePhoto">更改头像</string>
+    <string name="nickname">昵称</string>
+    <string name="email">邮箱</string>
+    <string name="sex">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="nextstep">下一步</string>
+    <string name="verifyInfo">认证资料</string>
+    <string name="name">真实姓名</string>
+    <string name="ID">身份证号</string>
+    <string name="IDPhoto">身份证照片</string>
+    <string name="driveLicense">驾驶证照片</string>
+    <string name="driveLicenseSec">驾驶证副页</string>
+    <string name="coachLicense">教练证照片</string>
+    <string name="uploadUpSide">上传正面</string>
+    <string name="uploadDownSide">上传背面</string>
+    <string name="upload">上  传</string>
+    <string name="title_activity_coach_verify_info">CoachVerifyInfo</string>
+    <string name="title_activity_car_info">CarInfo</string>
+    <string name="carInfo">车辆信息</string>
+    <string name="carModel">汽车型号</string>
+    <string name="gearbox">变速箱</string>
+    <string name="fuelType">燃料类型</string>
+    <string name="carLicensePhoto">行驶证照片</string>
+    <string name="carSafeCert">教学辅助</string>
+    <string name="title_activity_coach_main">CoachMainActivity</string>
 
 
 </resources>

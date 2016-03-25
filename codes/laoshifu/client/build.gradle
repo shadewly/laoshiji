@@ -58,7 +58,7 @@ dependencies {
     //compile name:'commons-logging-1.2',ext:'jar'
     compile name:'MobCommons',ext:'jar'
     compile name:'MobTools',ext:'jar'
-    //compile group: 'com.alibaba', name:'fastjson', version:'1.2.4'
+    compile group: 'com.alibaba', name:'fastjson', version:'1.2.4'
     //compile project(':webServer')
 
 

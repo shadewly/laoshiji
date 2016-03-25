@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_basicInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:text="@string/basicInfo"/>
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/image_home_page"
+        android:layout_below="@id/tv_basicInfo"
+        />
+
+    <Button
+        android:id="@+id/btn_changePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/changePhoto"
+        android:textSize="20dp"
+        android:layout_below="@id/iv_photo"/>
+
+    <TableLayout
+        android:id="@+id/tl_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_changePhoto">
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/nickname"/>
+
+            <EditText
+                android:id="@+id/et_nickname"
+                android:layout_marginTop="20dp"
+                android:layout_width="200dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_selector"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/email"/>
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_marginTop="20dp"
+                android:layout_width="200dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_selector"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/sex"/>
+
+            <RadioGroup
+                android:layout_marginTop="20dp"
+                android:layout_width="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male"/>
+
+                <RadioButton
+
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female"/>
+
+            </RadioGroup>
+        </TableRow>
+
+
+    </TableLayout>
+    
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/tl_info"
+        android:text="@string/nextstep"/>
+</RelativeLayout>

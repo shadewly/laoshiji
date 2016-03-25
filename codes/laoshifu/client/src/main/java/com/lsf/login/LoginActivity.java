@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +31,8 @@ public class LoginActivity extends AppCompatActivity implements HttpCallbackList
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg){
-            Toast.makeText(LoginActivity.this,  "***"+msg.obj,Toast.LENGTH_SHORT);
+            Log.d("LoginActivity", "the return message from server" + msg.obj);
+
         }
 
     };
@@ -77,14 +79,10 @@ public class LoginActivity extends AppCompatActivity implements HttpCallbackList
     @Override
     public void onError(Exception e) {
         Message msg = Message.obtain();
-        System.out.println("$$$$$$$$$$$$" + e.toString());
+        Log.e("LoginActivity", e.toString(), e);
         msg.obj = e.toString();
         handler.sendMessage(msg);
     }
-
-
-
-
 
     /*class myHandler extends  Handler{
         @Override
