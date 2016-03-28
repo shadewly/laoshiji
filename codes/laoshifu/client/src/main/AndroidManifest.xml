@@ -32,18 +32,26 @@
             android:name=".RegisterActivity"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-
+            android:name="com.lsf.coach.CoachInfoReminderActivity"
+            android:label="@string/title_activity_coach_info_reminder"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lsf.main.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name="com.lsf.coach.CoachInfoActivity"
+            android:label="@string/title_activity_coach_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.lsf.coach.CoachVerifyInfoActivity"
+            android:label="@string/title_activity_coach_verify_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.lsf.coach.CarInfoActivity"
+            android:label="@string/title_activity_car_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.lsf.coach.CoachMainActivity"
+            android:label="@string/title_activity_coach_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
     </application>
 
 </manifest>

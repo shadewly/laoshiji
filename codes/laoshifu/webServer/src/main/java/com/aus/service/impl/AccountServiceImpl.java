@@ -11,10 +11,10 @@ import com.aus.dao.AccountDao;
 import com.aus.model.Account;
 import com.aus.security.core.CasRestClient;
 import com.aus.service.AccountServiceI;
-import com.common.util.DefaultPasswordEncoder;
-import com.common.util.MessageUtil;
-import com.common.util.ServletContextUtil;
-import com.common.util.SysConstant;
+import com.wb.common.util.DefaultPasswordEncoder;
+import com.wb.common.util.MessageUtil;
+import com.wb.common.util.ServletContextUtil;
+import com.wb.common.util.SysConstant;
 
 /**
  *

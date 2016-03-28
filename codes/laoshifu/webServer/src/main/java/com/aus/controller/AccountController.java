@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aus.model.Account;
 import com.aus.service.AccountServiceI;
-import com.common.util.JsonUtil;
-import com.common.util.MessageUtil;
+import com.wb.common.util.JsonUtil;
+import com.wb.common.util.MessageUtil;
 
 @Controller
 @RequestMapping("/accountController")

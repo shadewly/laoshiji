@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 
 
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-	
-	  <!-- 系统消息配置 start -->
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename">
-            <value>properties\message_zh_CN</value>
-        </property>
-    </bean>
-    <!-- 系统消息配置 end -->
 
-    <!-- 加载property文件 -->
-    <context:property-placeholder location="classpath:properties/*.properties"/>
-    <!--扫描spring 管理的bean-->
-    <context:component-scan base-package="com"/>
+	<!-- 系统消息配置 start -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename">
+			<value>properties\message_zh_CN</value>
+		</property>
+	</bean>
+	<!-- 系统消息配置 end -->
 
-    <import resource="mongodb-context.xml"/>
-    <import resource="spring-jdbc.xml"/>
-    <import resource="spring-security-cas.xml"/>
-    <!-- 使用tomcat时要注释
-    <import resource="spring-mvc.xml"/> -->
-    
+	<!-- 加载property文件 -->
+	<context:property-placeholder location="classpath:properties/*.properties" />
+	<!--扫描spring 管理的bean -->
+	<context:component-scan base-package="com" />
+
+	<import resource="mongodb-context.xml" />
+	<import resource="spring-jdbc.xml" />
+	<import resource="spring-security-cas.xml" />
+	<import resource="classpath*:/spring/spring-rpc-client.xml" />
+
+	<!-- 使用tomcat时要注释 <import resource="spring-mvc.xml"/> -->
+
 </beans>

@@ -18,7 +18,7 @@ import com.aus.model.Authority;
 import com.aus.model.Role;
 import com.aus.service.AuthorityServiceI;
 import com.aus.service.RoleServiceI;
-import com.common.mybatis.CustomerContextHolder;
+import com.wb.common.mybatis.CustomerContextHolder;
 
 public class MyUserDetailsService implements UserDetailsService/* AuthenticationUserDetailsService */{
 
