@@ -15,8 +15,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,6 +31,8 @@ public class RPCClient {
     private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap = new ConcurrentHashMap();
     private String[] serverAddresses = new String[0];
     private int threadNum;
+    private int reconnectInterval = 10;
+    private Queue<String> failedQueue = new ArrayDeque<>();
     private AtomicInteger index = new AtomicInteger();
     private ServiceDiscovery serviceDiscovery;
 
@@ -68,7 +71,7 @@ public class RPCClient {
                     .option(ChannelOption.SO_KEEPALIVE, true);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("Connect server error!", e);
+            logger.error("Initial Channel error!", e);
             System.exit(-1);
         }
         startUp();
@@ -81,15 +84,29 @@ public class RPCClient {
             int port = Integer.parseInt(array[1]);
             try {
                 ChannelFuture future = bootstrap.connect(host, port).sync();
+                future.addListener(f -> {
+//                    f.
+                });
                 if (future.isSuccess()) {
                     logger.debug("connect server[{}]  success!", address);
                     RPCChannel rpcChannel = new RPCChannel(this, future.channel());
                     socketChannelMap.put(rpcChannel.id(), rpcChannel);
+                } else {
+                    //加入失败队列
+                    failedQueue.add(address);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                failedQueue.add(address);
                 logger.error("Connect {} error!", address);
             }
+        }
+    }
+
+
+    public void reconnect() {
+        for (String address : failedQueue) {
+
         }
     }
 

@@ -6,7 +6,7 @@
 
     <groupId>laoshifu</groupId>
     <artifactId>laoshifu-rpc</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -112,11 +112,16 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
-            <id>nexus-snapshots</id>
+        <!--<repository>-->
+        <!--<id>thirdparty-snapshots</id>-->
+        <!--<name>shine Repository</name>-->
+        <!--<url>http://192.168.20.3:8081/nexus/content/repositories/thirdparty/</url>-->
+        <!--</repository>-->
+        <snapshotRepository>
+            <id>thirdparty-snapshots</id>
             <name>shine Repository</name>
-            <url>file://${basedir}/target/deploy</url>
-        </repository>
+            <url>http://192.168.20.3:8081/nexus/content/repositories/thirdparty/</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <build>
@@ -130,6 +135,39 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!--跳过测试-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass></mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>
