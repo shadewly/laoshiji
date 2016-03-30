@@ -18,8 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,8 +33,8 @@ public class RPCClient {
     private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap = new ConcurrentHashMap();
     private String[] serverAddresses = new String[0];
     private int threadNum;
-    private int reconnectInterval = 10;
-    private BlockingQueue<SocketAddress> reconnectQueue = new ArrayBlockingQueue<>(10);
+    private int reconnectInterval = 2;
+    private Map<SocketAddress, Object> reconnectQueue = new ConcurrentHashMap<>();
     private AtomicInteger index = new AtomicInteger();
     private ServiceDiscovery serviceDiscovery;
 
@@ -47,7 +46,7 @@ public class RPCClient {
 
     public RPCClient(ServiceDiscovery serviceDiscovery) {
         this.serviceDiscovery = serviceDiscovery;
-        while (serverAddresses!=null&&serverAddresses.length==0) {
+        while (serverAddresses != null && serverAddresses.length == 0) {
             serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
         }
         threadNum = serverAddresses.length;
@@ -65,9 +64,9 @@ public class RPCClient {
             int port = Integer.parseInt(array[1]);
             startUp(new InetSocketAddress(host, port));
         }
-        if (!reconnectQueue.isEmpty()) {
-
-        }
+        /*重连连接失败的接口*/
+        reconnect();
+        logger.info("Launch client done!");
     }
 
     /**
@@ -101,15 +100,17 @@ public class RPCClient {
     /**
      * 启动重连
      */
-    private void reconnect() {
-        for (SocketAddress socketAddress : reconnectQueue) {
-            try {
+    private synchronized void reconnect() {
+        while (!reconnectQueue.isEmpty()) {
+            reconnectQueue.keySet().iterator().forEachRemaining(socketAddress -> {
+                try {
+                    Thread.currentThread().sleep(reconnectInterval * 1000);
+                } catch (InterruptedException e) {
+                }
+                startUp(socketAddress);
                 logger.debug("Reconnecting socketAddress[{}] and sleep for seconds!", socketAddress);
-                Thread.currentThread().sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            startUp(socketAddress);
+                startUp(socketAddress);
+            });
         }
     }
 
@@ -125,7 +126,8 @@ public class RPCClient {
                 @Override
                 public void channelInactive(ChannelHandlerContext ctx) throws Exception {
                     super.channelInactive(ctx);
-                    reconnectQueue.add(ctx.channel().remoteAddress());
+                    reconnectQueue.putIfAbsent(ctx.channel().remoteAddress(), RPCClient.this);
+                    socketChannelMap.remove(ctx.channel().id());
                     reconnect();
                 }
             });
@@ -134,17 +136,16 @@ public class RPCClient {
                 logger.debug("connect server[{}]  success!", serverSocketAddress);
                 RPCChannel rpcChannel = new RPCChannel(this, future.channel());
                 socketChannelMap.put(rpcChannel.id(), rpcChannel);
-                if (reconnectQueue.contains(serverSocketAddress)) {
+                if (reconnectQueue.containsKey(serverSocketAddress)) {
                     reconnectQueue.remove(serverSocketAddress);
                 }
             } else {
                 //加入失败队列
                 logger.debug("Connect server[{}] failed, add into reconnectQueue!", serverSocketAddress);
-                reconnectQueue.add(serverSocketAddress);
+                reconnectQueue.putIfAbsent(serverSocketAddress, RPCClient.this);
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            reconnectQueue.add(serverSocketAddress);
+        } catch (Exception e) {
+            reconnectQueue.putIfAbsent(serverSocketAddress, RPCClient.this);
             logger.error("Connect {} error!", serverSocketAddress);
         }
     }

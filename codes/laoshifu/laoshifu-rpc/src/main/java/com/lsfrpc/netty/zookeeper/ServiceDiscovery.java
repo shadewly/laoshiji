@@ -17,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Wang LinYong on 2016-02-17.
  */
 public class ServiceDiscovery {
+    private static int ZK_SESSION_TIMEOUT = 10000;
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceDiscovery.class);
 
     private CountDownLatch latch = new CountDownLatch(1);
@@ -25,12 +26,12 @@ public class ServiceDiscovery {
 
     private String registryAddress;
 
-    public ServiceDiscovery(String registryAddress) {
+    public ServiceDiscovery(String registryAddress, String path) {
         this.registryAddress = registryAddress;
 
         ZooKeeper zk = connectServer();
         if (zk != null) {
-            watchNode(zk);
+            watchNode(zk, path);
         }
     }
 
@@ -56,12 +57,9 @@ public class ServiceDiscovery {
     private ZooKeeper connectServer() {
         ZooKeeper zk = null;
         try {
-            zk = new ZooKeeper(registryAddress, Constant.ZK_SESSION_TIMEOUT, new Watcher() {
-                @Override
-                public void process(WatchedEvent event) {
-                    if (event.getState() == Event.KeeperState.SyncConnected) {
-                        latch.countDown();
-                    }
+            zk = new ZooKeeper(registryAddress, ZK_SESSION_TIMEOUT, event -> {
+                if (event.getState() == Watcher.Event.KeeperState.SyncConnected) {
+                    latch.countDown();
                 }
             });
             latch.await();
@@ -71,16 +69,17 @@ public class ServiceDiscovery {
         return zk;
     }
 
-    private void watchNode(final ZooKeeper zk) {
+    private void watchNode(final ZooKeeper zk, String path) {
         try {
-            List<String> nodeList = zk.getChildren(Constant.ZK_REGISTRY_PATH, event -> {
+            assert (path != null);
+            List<String> nodeList = zk.getChildren(path, event -> {
                 if (event.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                    watchNode(zk);
+                    watchNode(zk, path);
                 }
             });
             List<String> dataList = new ArrayList<>();
             for (String node : nodeList) {
-                byte[] bytes = zk.getData(Constant.ZK_REGISTRY_PATH + "/" + node, true, null);
+                byte[] bytes = zk.getData(path + "/" + node, true, null);
                 dataList.add(new String(bytes));
             }
             LOGGER.debug("node data: {}", dataList);
