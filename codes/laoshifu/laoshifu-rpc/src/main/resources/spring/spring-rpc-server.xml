@@ -24,6 +24,8 @@
             </list>
         </constructor-arg>
         <constructor-arg name="serviceRegistry" ref="serviceRegistry"/>
+        <property name="zkPath" value="${zkPath}"/>
+        <property name="zkNode" value="${zkNode}"/>
     </bean>
 
     <!--====================================Client Config==================================-->

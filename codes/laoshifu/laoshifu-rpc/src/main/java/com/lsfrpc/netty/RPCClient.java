@@ -16,8 +16,10 @@ import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,29 +30,49 @@ public class RPCClient {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);
     private Bootstrap bootstrap = new Bootstrap();
+    /*当前active socketChannel池*/
     private ConcurrentHashMap<ChannelId, RPCChannel> socketChannelMap = new ConcurrentHashMap();
     private String[] serverAddresses = new String[0];
     private int threadNum;
     private int reconnectInterval = 10;
-    private Queue<String> failedQueue = new ArrayDeque<>();
+    private BlockingQueue<SocketAddress> reconnectQueue = new ArrayBlockingQueue<>(10);
     private AtomicInteger index = new AtomicInteger();
     private ServiceDiscovery serviceDiscovery;
-
-    private final Object obj = new Object();
 
     public RPCClient(String... serverAddresses) {
         this.serverAddresses = serverAddresses;
         threadNum = serverAddresses.length;
-        initial();
+        launch();
     }
 
     public RPCClient(ServiceDiscovery serviceDiscovery) {
         this.serviceDiscovery = serviceDiscovery;
-        serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
+        while (serverAddresses!=null&&serverAddresses.length==0) {
+            serverAddresses = serviceDiscovery.discoverList().toArray(serverAddresses); // 发现服务
+        }
         threadNum = serverAddresses.length;
-        initial();
+        launch();
     }
 
+    /**
+     * 启动服务
+     */
+    private void launch() {
+        initial();
+        for (String address : serverAddresses) {
+            String[] array = address.split(":");
+            String host = array[0];
+            int port = Integer.parseInt(array[1]);
+            startUp(new InetSocketAddress(host, port));
+        }
+        if (!reconnectQueue.isEmpty()) {
+
+        }
+    }
+
+    /**
+     * 初始化客户端
+     */
     private void initial() {
         try {
             EventLoopGroup group = new NioEventLoopGroup();
@@ -74,39 +96,56 @@ public class RPCClient {
             logger.error("Initial Channel error!", e);
             System.exit(-1);
         }
-        startUp();
     }
 
-    public void startUp() {
-        for (String address : serverAddresses) {
-            String[] array = address.split(":");
-            String host = array[0];
-            int port = Integer.parseInt(array[1]);
+    /**
+     * 启动重连
+     */
+    private void reconnect() {
+        for (SocketAddress socketAddress : reconnectQueue) {
             try {
-                ChannelFuture future = bootstrap.connect(host, port).sync();
-                future.addListener(f -> {
-//                    f.
-                });
-                if (future.isSuccess()) {
-                    logger.debug("connect server[{}]  success!", address);
-                    RPCChannel rpcChannel = new RPCChannel(this, future.channel());
-                    socketChannelMap.put(rpcChannel.id(), rpcChannel);
-                } else {
-                    //加入失败队列
-                    failedQueue.add(address);
-                }
+                logger.debug("Reconnecting socketAddress[{}] and sleep for seconds!", socketAddress);
+                Thread.currentThread().sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                failedQueue.add(address);
-                logger.error("Connect {} error!", address);
             }
+            startUp(socketAddress);
         }
     }
 
+    /**
+     * 启动客户端
+     *
+     * @param serverSocketAddress
+     */
+    public void startUp(SocketAddress serverSocketAddress) {
+        try {
+            ChannelFuture future = bootstrap.connect(serverSocketAddress).sync();
+            future.channel().pipeline().addLast(new ChannelHandlerAdapter() {
+                @Override
+                public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+                    super.channelInactive(ctx);
+                    reconnectQueue.add(ctx.channel().remoteAddress());
+                    reconnect();
+                }
+            });
 
-    public void reconnect() {
-        for (String address : failedQueue) {
-
+            if (future.isSuccess()) {
+                logger.debug("connect server[{}]  success!", serverSocketAddress);
+                RPCChannel rpcChannel = new RPCChannel(this, future.channel());
+                socketChannelMap.put(rpcChannel.id(), rpcChannel);
+                if (reconnectQueue.contains(serverSocketAddress)) {
+                    reconnectQueue.remove(serverSocketAddress);
+                }
+            } else {
+                //加入失败队列
+                logger.debug("Connect server[{}] failed, add into reconnectQueue!", serverSocketAddress);
+                reconnectQueue.add(serverSocketAddress);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            reconnectQueue.add(serverSocketAddress);
+            logger.error("Connect {} error!", serverSocketAddress);
         }
     }
 

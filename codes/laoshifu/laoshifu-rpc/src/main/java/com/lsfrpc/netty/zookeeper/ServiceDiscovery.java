@@ -80,7 +80,7 @@ public class ServiceDiscovery {
             });
             List<String> dataList = new ArrayList<>();
             for (String node : nodeList) {
-                byte[] bytes = zk.getData(Constant.ZK_REGISTRY_PATH + "/" + node, false, null);
+                byte[] bytes = zk.getData(Constant.ZK_REGISTRY_PATH + "/" + node, true, null);
                 dataList.add(new String(bytes));
             }
             LOGGER.debug("node data: {}", dataList);

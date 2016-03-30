@@ -15,7 +15,7 @@ public class ClientTest {
     @Autowired
     private RPCBeanManager manager;
 
-    @Test
+        @Test
     public void helloTest() {
         int i = 0;
         HelloService helloService = manager.getBean(HelloService.class);

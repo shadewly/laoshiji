@@ -8,17 +8,11 @@ import com.lsfrpc.netty.zookeeper.ServiceRegistry;
 import com.lsfrpc.pojo.RPCRequest;
 import com.lsfrpc.pojo.RPCResponse;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.group.ChannelGroupFuture;
-import io.netty.channel.group.ChannelGroupFutureListener;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.apache.commons.collections4.MapUtils;
-import org.jboss.netty.channel.group.DefaultChannelGroupFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -26,11 +20,14 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Wang LinYong on 2016-02-17.
@@ -44,6 +41,8 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
     private List<ChannelFuture> futureList = new ArrayList<>();
     private ConcurrentMap<String, Object> handlerMap = new ConcurrentHashMap<>(); // 存放接口名与服务对象之间的映射关系
+    private String zkPath;
+    private String zkNode;
 
     public RPCServer(String... serverAddresses) {
         this.serverAddresses = serverAddresses;
@@ -87,7 +86,13 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        bind(this.serverAddresses);
+        for (String serverAddress : serverAddresses) {
+            String[] array = serverAddress.split(":");
+            String host = array[0];
+            int port = Integer.parseInt(array[1]);
+            SocketAddress address = new InetSocketAddress(host, port);
+            bind(address);
+        }
         syncChannelClose();
     }
 
@@ -96,31 +101,36 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
         bossGroup.shutdownGracefully();
     }
 
-    public void bind(String... serverAddresses) {
-        for (String serverAddress : serverAddresses) {
-            try {
-                String[] array = serverAddress.split(":");
-                String host = array[0];
-                int port = Integer.parseInt(array[1]);
-
-                final ChannelFuture future = newBootstrap().bind(host, port).sync();
-                LOGGER.warn("Server started on port {}", port);
-                ChannelFuture closeFuture = future.channel().closeFuture();
-                closeFuture.addListener(future1 -> LOGGER.warn("Server on address[{}] is closing!", future.channel().localAddress()));
-                futureList.add(closeFuture);
-                if (serviceRegistry != null) {
-                    LOGGER.info("Register service address [{}]!", serverAddress);
-                    serviceRegistry.register(serverAddress); // 注册服务地址
-                }
-                if (future.isSuccess()) {
-                    LOGGER.debug("Start server with address [{}] success!", serverAddress);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                LOGGER.error("Bind server error with address [{}]", serverAddress);
+    public void bind(SocketAddress serverAddress) {
+        try {
+            final ChannelFuture future = newBootstrap().bind(serverAddress).sync().addListener(reconnectListener);
+            ChannelFuture closeFuture = future.channel().closeFuture();
+            closeFuture.addListener(future1 -> LOGGER.warn("Server on address[{}] is closing!", future.channel().localAddress()));
+            futureList.add(closeFuture);
+            if (serviceRegistry != null) {
+                LOGGER.info("Register service address [{}]!", serverAddress);
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            LOGGER.error("Bind server error with address [{}]", serverAddress);
         }
     }
+
+    private ChannelFutureListener reconnectListener = new ChannelFutureListener() {
+        @Override
+        public void operationComplete(ChannelFuture future) throws Exception {
+            if (future.isSuccess()) {
+                if (future.channel().localAddress() instanceof InetSocketAddress) {
+                    serviceRegistry.register(zkPath, zkNode, future.channel().localAddress()); // 注册服务地址
+                } else {
+                    LOGGER.error("Unsupported socket address type:{}", future.channel().localAddress().getClass());
+                }
+                LOGGER.debug("Start server with address [{}] success!", future.channel().localAddress());
+            } else {
+                future.channel().eventLoop().schedule(() -> bind(future.channel().localAddress()), 3, TimeUnit.SECONDS);
+            }
+        }
+    };
 
     public void syncChannelClose() {
         if (futureList.size() > 0) {
@@ -132,5 +142,13 @@ public class RPCServer implements ApplicationContextAware, InitializingBean {
                 }
             });
         }
+    }
+
+    public void setZkPath(String zkPath) {
+        this.zkPath = zkPath;
+    }
+
+    public void setZkNode(String zkNode) {
+        this.zkNode = zkNode;
     }
 }
