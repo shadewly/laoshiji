@@ -1,7 +1,6 @@
 package com.lsfrpc.netty.zookeeper;
 
 import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.slf4j.Logger;
@@ -26,12 +25,14 @@ public class ServiceDiscovery {
 
     private String registryAddress;
 
-    public ServiceDiscovery(String registryAddress, String path) {
+    public ServiceDiscovery(String registryAddress, String... path) {
         this.registryAddress = registryAddress;
 
         ZooKeeper zk = connectServer();
         if (zk != null) {
-            watchNode(zk, path);
+            for (String p : path) {
+                watchNode(zk, p);
+            }
         }
     }
 
