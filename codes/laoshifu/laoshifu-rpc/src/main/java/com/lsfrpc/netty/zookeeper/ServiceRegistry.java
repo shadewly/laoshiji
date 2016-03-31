@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
  * Created by Wang LinYong on 2016-02-17.
  */
 public class ServiceRegistry {
+    private static int ZK_SESSION_TIMEOUT = 10000;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRegistry.class);
 
@@ -56,7 +57,7 @@ public class ServiceRegistry {
     private ZooKeeper connectServer() {
         ZooKeeper zk = null;
         try {
-            zk = new ZooKeeper(registryAddress, Constant.ZK_SESSION_TIMEOUT, event -> {
+            zk = new ZooKeeper(registryAddress, ZK_SESSION_TIMEOUT, event -> {
                 if (event.getState() == Watcher.Event.KeeperState.SyncConnected) {
                     latch.countDown();
                 }

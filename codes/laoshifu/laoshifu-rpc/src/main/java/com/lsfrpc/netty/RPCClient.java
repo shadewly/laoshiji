@@ -160,7 +160,13 @@ public class RPCClient {
             throw new NullPointerException("No connection!");
         }
         ids = socketChannelMap.keySet().toArray(ids);
-        RPCChannel rpcChannel = this.socketChannelMap.get(ids[index.getAndIncrement() % threadNum]);
+        RPCChannel rpcChannel = null;
+        try {
+            rpcChannel = this.socketChannelMap.get(ids[index.getAndIncrement() % threadNum]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            send(request);
+        }
         return rpcChannel.send(request);
     }
 
